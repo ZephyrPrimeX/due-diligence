@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F3F4F8">
-<meta name="description" content="Every card, loan and pay-later plan in one place. Demo with sample data.">
+<meta name="description" content="Every card, loan and pay-later plan in one place. View-only debt tracker.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-title" content="Diligence">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="application-name" content="Due Diligence">
-<meta property="og:title" content="Due Diligence (demo)">
-<meta property="og:description" content="All your debt in one place. Demo, sample data.">
+<meta property="og:title" content="Due Diligence">
+<meta property="og:description" content="Every card, loan and pay-later plan in one place.">
 <meta property="og:image" content="icons/icon-512.png">
 <title>Due Diligence</title>
 <style>
@@ -375,16 +375,103 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .screen.push{padding-bottom:calc(40px + var(--sab))}
 @media (display-mode: standalone) and (max-width:639px){ html,body{overscroll-behavior:none} }
 
+/* ===================== Auth ===================== */
+.auth{position:absolute;inset:0;z-index:60;background:var(--bg);overflow-y:auto;scrollbar-width:none;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.auth::-webkit-scrollbar{display:none}
+.auth.show{opacity:1;visibility:visible}
+.auth::before{content:"";position:absolute;left:-20%;right:-20%;top:-140px;height:420px;background:radial-gradient(60% 60% at 30% 40%,rgba(124,108,255,.22),transparent 70%),radial-gradient(50% 50% at 80% 30%,rgba(94,234,212,.18),transparent 70%);pointer-events:none}
+.au-in{position:relative;min-height:100%;display:flex;flex-direction:column;padding:calc(18px + var(--sat)) calc(24px + var(--sar)) calc(28px + var(--sab)) calc(24px + var(--sal));animation:auIn .45s var(--ease)}
+@keyframes auIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.au-welcome{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:30px}
+.au-logo svg{width:76px;height:76px;border-radius:22px;box-shadow:0 18px 40px -16px rgba(67,56,202,.7);display:block}
+.au-welcome h1{font-size:34px;font-weight:780;letter-spacing:-.04em;margin:22px 0 8px}
+.au-tag{font-size:16px;line-height:1.5;color:var(--text2);margin:0 0 26px;max-width:340px}
+.au-feats{display:grid;gap:10px}
+.au-feats>div{display:flex;align-items:center;gap:12px;background:var(--card);box-shadow:var(--shadow);border-radius:16px;padding:12px 14px;font-size:14px;color:var(--text2)}
+.au-feats .fi{color:var(--accent);flex:none;background:var(--accentSoft);border-radius:10px;width:32px;height:32px;display:grid;place-items:center}
+.au-feats b{color:var(--text);font-weight:650}
+.au-actions{display:grid;gap:10px;padding-top:26px}
+.au-link{color:var(--accent);font-weight:650;font-size:14px;text-decoration:none}
+.au-link.small{justify-self:center;font-size:13px;color:var(--text3);margin-top:6px}
+.au-back{width:40px;height:40px;border-radius:13px;background:var(--card);box-shadow:var(--shadow);display:grid;place-items:center;margin-bottom:18px}
+.au-mini svg{width:44px;height:44px;border-radius:13px;display:block;box-shadow:0 10px 24px -12px rgba(67,56,202,.7)}
+.au-in h2{font-size:26px;font-weight:760;letter-spacing:-.035em;margin:16px 0 6px}
+.au-sub{color:var(--text2);font-size:14.5px;line-height:1.5;margin:0 0 22px}
+.au-sub b{color:var(--text);word-break:break-all}
+.opt-l{font-weight:500;color:var(--text3);margin-left:4px}
+.pw{position:relative}
+.pw input{padding-right:48px!important}
+.eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:var(--text3)}
+.eye:hover,.eye[aria-pressed="true"]{color:var(--accent)}
+.pw-hint{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text3);margin:-4px 4px 14px;transition:color .2s}
+.pw-hint svg{width:16px;height:16px;border-radius:50%;padding:2px;background:var(--track);color:transparent;transition:all .2s}
+.pw-hint.ok{color:var(--good)}
+.pw-hint.ok svg{background:var(--good);color:#fff}
+.au-row{display:flex;justify-content:flex-end;margin:-4px 2px 14px}
+.au-err{display:flex;gap:9px;align-items:flex-start;background:var(--badSoft);color:var(--bad);border-radius:14px;padding:11px 13px;font-size:13.5px;line-height:1.4;margin-bottom:14px;font-weight:550}
+.au-err[hidden]{display:none}
+.au-err svg{flex:none;margin-top:1px}
+.au-err.warn{background:var(--warnSoft);color:var(--warn)}
+.au-fine{font-size:12.5px;color:var(--text3);text-align:center;line-height:1.5;margin:14px 0 0}
+.au-fine a{color:var(--text2);font-weight:600}
+.au-switch{text-align:center;font-size:14px;color:var(--text2);margin:22px 0 0}
+.au-switch button{color:var(--accent);font-weight:680}
+.au-or{display:flex;align-items:center;gap:12px;color:var(--text3);font-size:12px;margin:16px 0 4px;text-transform:uppercase;letter-spacing:.08em}
+.au-or::before,.au-or::after{content:"";flex:1;height:1px;background:var(--line2)}
+.oauth{margin-top:8px}
+.au-center{text-align:center;display:flex;flex-direction:column;align-items:center;padding-top:16%}
+.au-center .btn{width:100%}
+.au-mailic{width:84px;height:84px;border-radius:26px;background:var(--accentSoft);color:var(--accent);display:grid;place-items:center;margin-bottom:6px;animation:pop .6s var(--ease)}
+.au-mailic svg{width:38px;height:38px}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.06)}100%{transform:none;opacity:1}}
+.au-center .au-fine{margin:0 0 22px}
+.au-center .au-err{text-align:left;width:100%}
+.spin-sm{width:16px;height:16px;border-radius:50%;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;display:inline-block;animation:spin .8s linear infinite}
+.spin-sm.big{width:28px;height:28px;border-color:var(--track);border-top-color:var(--accent);margin-top:28px}
+@keyframes spin{to{transform:rotate(360deg)}}
+body.authing .desk-note{opacity:0}
+/* app additions */
+.demo-tag{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);background:var(--accentSoft);border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:2px}
+.toast.bad{background:var(--bad);color:#fff}
+.offbar{position:absolute;left:12px;right:12px;top:calc(8px + var(--sat));z-index:30;display:flex;align-items:center;gap:8px;justify-content:center;background:var(--warn);color:#fff;font-size:12.5px;font-weight:650;border-radius:12px;padding:8px 12px;transform:translateY(-140%);transition:transform .35s var(--ease);box-shadow:var(--shadow)}
+.offbar.show{transform:none}
+.acct-actions{margin-top:6px}
+.acct-actions .danger-btn{margin-top:0;display:flex;align-items:center;justify-content:center;gap:6px}
+.danger-btn.neutral{color:var(--text)}
+.onboard .ob-t{font-size:24px;font-weight:760;letter-spacing:-.03em;line-height:1.2;margin:6px 0 18px;max-width:280px}
+.ob-steps{display:grid;gap:10px}
+.ob-steps>div{display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:550}
+.ob-steps i{font-style:normal;width:26px;height:26px;border-radius:9px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:13px;font-weight:750;flex:none}
+.ob-note{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;font-size:13.5px;color:var(--text2);line-height:1.45;margin-top:18px}
+.ob-note>svg{color:var(--good);flex:none;margin-top:2px}
+.ob-note b{color:var(--text)}
+.empty-card{text-align:center;padding:28px 22px;display:flex;flex-direction:column;align-items:center}
+.empty-card>svg{width:46px;height:46px;padding:11px;border-radius:15px;background:var(--accentSoft);color:var(--accent)}
+.empty-card h3{margin:14px 0 6px;font-size:18px;letter-spacing:-.02em}
+.empty-card p{margin:0 0 18px;color:var(--text2);font-size:14px;line-height:1.5}
+a.row{color:inherit;text-decoration:none}
+.toast{z-index:70}
+.app.is-offline #main .top{padding-top:calc(52px + var(--sat))}
+
 </style>
 </head>
 <body>
 <div class="app">
   <div id="main" class="screen"></div>
   <nav id="tabbar" class="tabbar" aria-label="Main"></nav>
+  <div id="offbar" class="offbar" role="status"></div>
+  <div id="auth" class="auth" aria-live="polite"></div>
   <div id="toast" class="toast" role="status"></div>
 </div>
-<div class="desk-note">Due Diligence demo · sample data · view only</div>
+<div class="desk-note">Due Diligence · view only · your data stays private to your account</div>
+<script src="vendor/supabase.js"></script>
 <script>
+/* Public client config. The publishable key is safe to ship: Row Level Security protects the data. */
+const SUPABASE_URL = "https://vfopqoxyyrhfsvxjldkl.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Hdcb5lpkbKSIBEOFfDRVxg_VK4YSFnQ";
+const SITE_URL = "https://zephyrprimex.github.io/due-diligence/";
+const OAUTH_PROVIDERS = []; // e.g. ["google", "apple"] once configured in Supabase
+
 "use strict";
 /* ---------- utilities ---------- */
 const $ = (s, el = document) => el.querySelector(s);
@@ -499,20 +586,13 @@ function sampleData() {
 }
 
 /* ---------- state & persistence ---------- */
-const KEY = "debtDemo.v1";
 const DEFAULT_SETTINGS = { theme: "light", hide: false, reminders: true, leadDays: 3, time: "09:00", rCards: true, rLoans: true, rBnpl: true, weekly: true, strategy: "avalanche", extra: 0, breakdown: "type" };
-const S = { accounts: [], added: [], removed: [], settings: { ...DEFAULT_SETTINGS }, tab: "home", calMonth: new Date(T.getFullYear(), T.getMonth(), 1), calSel: null, acctFilter: "all" };
+const S = { accounts: [], rows: [], settings: { ...DEFAULT_SETTINGS }, tab: "home", calMonth: new Date(T.getFullYear(), T.getMonth(), 1), calSel: null, acctFilter: "all", user: null, offline: false };
 function revive(a) { if (a.installments) a.installments.forEach(i => i.date = new Date(i.date)); if (a.nextDate) a.nextDate = new Date(a.nextDate); return a; }
-function load() {
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (raw) { const j = JSON.parse(raw); S.added = (j.added || []).map(revive); S.removed = j.removed || []; S.settings = { ...DEFAULT_SETTINGS, ...(j.settings || {}) }; }
-  } catch (e) { /* storage unavailable: run in-memory */ }
-  rebuild();
-}
-function save() { try { localStorage.setItem(KEY, JSON.stringify({ added: S.added, removed: S.removed, settings: S.settings })); } catch (e) {} }
+/* save() persists settings: locally right away, to the cloud debounced (see cloud.js) */
+function save() { if (typeof saveSettings === "function") saveSettings(); }
 function rebuild() {
-  S.accounts = [...sampleData(), ...S.added].filter(a => !S.removed.includes(a.id));
+  S.accounts = S.rows;
   S.accounts.forEach(a => { if (a.type === "bnpl") { a.balance = remaining(a); a.min = monthlyEquiv(a); a.name = a.merchant; a.lender = a.provider; } });
 }
 const remaining = a => a.installments.filter(i => !i.paid).reduce((s, i) => s + i.amount, 0);
@@ -605,7 +685,41 @@ function upcoming() { return events(T, addDays(T, 120)).filter(e => !e.paid); }
 function greeting() { const h = new Date().getHours(); return h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening"; }
 
 /* ---------- HOME ---------- */
+const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+function firstName() {
+  const u = S.user; if (!u) return "there";
+  const n = (u.user_metadata && u.user_metadata.first_name || "").trim();
+  if (n) return n.split(/\s+/)[0];
+  const p = (u.email || "").split("@")[0].split(/[._+-]/)[0];
+  return p ? p[0].toUpperCase() + p.slice(1) : "there";
+}
+const hasSample = () => S.accounts.some(a => a.sample);
+function topBar() {
+  return `<div class="top">
+    <div class="hello">${greeting()}<b>${esc(firstName())}</b>${hasSample() ? `<div class="demo-pill"><i></i>Includes sample data</div>` : ""}</div>
+    <div class="icons"><button class="icon-btn" data-act="add" aria-label="Add account">${ic("plus")}</button><button class="icon-btn" data-act="settings" aria-label="Settings">${ic("gear")}</button></div>
+  </div>`;
+}
+function renderEmptyHome() {
+  return `${topBar()}
+  <div class="stagger">
+  <div class="hero onboard">
+    <div class="lbl">Welcome to Due Diligence</div>
+    <div class="ob-t">Let's put every balance in one place.</div>
+    <div class="ob-steps">
+      <div><i>1</i><span>Add a card, loan or pay-later plan</span></div>
+      <div><i>2</i><span>See what's due and when</span></div>
+      <div><i>3</i><span>Plan your way to debt-free</span></div>
+    </div>
+  </div>
+  <button class="btn" data-act="add">${ic("plus", "sm")} Add your first account</button>
+  <button class="btn ghost" data-act="loadSample" style="margin-top:10px">${ic("spark", "sm")} Load sample data</button>
+  <div class="foot">Sample data is made up, so you can explore first. Remove it anytime in Settings.</div>
+  <div class="card ob-note">${ic("lock", "sm")}<div><b>Private to you.</b> Your accounts are saved to your own Due Diligence login and nobody else can see them. This app never moves money.</div></div>
+  </div>`;
+}
 function renderHome() {
+  if (!S.accounts.length) return renderEmptyHome();
   const t = totals(), od = overdue(), up = upcoming(), nx = up[0];
   const due30 = events(T, addDays(T, 29)).filter(e => !e.paid).reduce((s, e) => s + e.amount, 0) + od.reduce((s, e) => s + e.amount, 0);
   const sim = simulate(S.settings.strategy, S.settings.extra);
@@ -613,16 +727,13 @@ function renderHome() {
   const ins = insights().slice(0, 4);
   const nxDays = nx ? dayDiff(T, nx.date) : 0;
   return `
-  <div class="top">
-    <div class="hello">${greeting()}<b>Kevin</b><div class="demo-pill"><i></i>Demo · sample data</div></div>
-    <div class="icons"><button class="icon-btn" data-act="add" aria-label="Add account">${ic("plus")}</button><button class="icon-btn" data-act="settings" aria-label="Settings">${ic("gear")}</button></div>
-  </div>
+  ${topBar()}
   <div class="stagger">
   <div class="hero">
     <button class="eye" data-act="toggleHide" aria-label="Hide balances">${ic(S.settings.hide ? "eyeoff" : "eye", "sm")}</button>
     <div class="lbl">Total debt</div>
     <div class="big num" data-count="${t.total.toFixed(2)}">${bigMoney(t.total)}</div>
-    <div class="meta">Across ${S.accounts.length} accounts · ${S.accounts.filter(a => a.type === "bnpl").length} pay-later plans</div>
+    <div class="meta">Across ${plural(S.accounts.length, "account")} · ${plural(S.accounts.filter(a => a.type === "bnpl").length, "pay-later plan")}</div>
     <div class="hero-row">
       <div class="glass"><div class="k">Due next 30 days</div><div class="v num">${money(due30)}</div></div>
       <div class="glass"><div class="k">Debt-free by</div><div class="v">${MON[freeDate.getMonth()]} ${freeDate.getFullYear()}</div></div>
@@ -767,8 +878,8 @@ function renderDetail(id) {
      <div class="sec-t">Installment schedule</div>
      <div class="card tight sched">${a.installments.map((i, k) => { const st = status({ ...i }); return `<div class="row"><div class="stamp ${st}">${st === "paid" ? ic("check", "sm") : k + 1}</div><div class="mid"><div class="t">Installment ${k + 1}</div><div class="s">${fDate(i.date)}${i.date.getFullYear() !== T.getFullYear() ? ", " + i.date.getFullYear() : ""}</div></div><div class="r"><div class="t num">${m2(i.amount)}</div><div style="margin-top:3px">${statusChip(st, i.date)}</div></div></div>`; }).join("")}</div>`;
   }
-  const removable = a.id.startsWith("u");
-  return head + `<div class="stagger">${body}</div>` + (removable ? `<button class="danger-btn" data-act="remove" data-id="${a.id}">${ic("trash", "sm")} Remove this account</button>` : `<div class="foot">Read-only view · payments are made with ${esc(a.type === "bnpl" ? a.provider : a.lender)}, not in this app.</div>`);
+  return head + `<div class="stagger">${body}</div>` + `<div class="grid2 acct-actions"><button class="danger-btn neutral" data-act="edit" data-id="${a.id}">${ic("edit", "sm")} Edit</button><button class="danger-btn" data-act="remove" data-id="${a.id}">${ic("trash", "sm")} Remove</button></div>
+    <div class="foot">${a.sample ? "Sample account · " : ""}View only · payments are made with ${esc(a.type === "bnpl" ? a.provider : a.lender)}, not in this app.</div>`;
 }
 function history(a) {
   const out = [];
@@ -828,7 +939,9 @@ function renderTimeline() {
 }
 
 /* ---------- PLANNER ---------- */
+const emptyCard = (title, body) => `<div class="card empty-card">${ic("wallet")}<h3>${title}</h3><p>${body}</p><button class="btn" data-act="add">${ic("plus", "sm")} Add an account</button><button class="link" data-act="loadSample" style="margin:12px auto 0">Or load sample data</button></div>`;
 function renderPlanner() {
+  if (!S.accounts.length) return `<div class="top"><div><h1>Payoff planner</h1><div class="sub">See when you'll be debt-free</div></div></div>${emptyCard("Nothing to plan yet", "Add your debts and we'll map out the fastest, cheapest way to pay them off.")}`;
   const st = S.settings.strategy, ex = S.settings.extra;
   return `<div class="top"><div><h1>Payoff planner</h1><div class="sub">See when you'll be debt-free</div></div></div>
   <div class="stagger">
@@ -917,6 +1030,7 @@ function insCard(x) {
     ${x.act ? `<button class="link go" data-act="${x.act[0] === "detail" ? "detail" : x.act[0] === "tab" ? "tab" : x.act[0] === "filter" ? "gofilter" : "goextra"}" data-id="${x.act[1]}" data-tab="${x.act[1]}" data-v="${x.act[1]}">${x.act[2]} ${ic("right", "sm")}</button>` : ""}</div></div></div>`;
 }
 function renderInsights() {
+  if (!S.accounts.length) return `<div class="top"><div><h1>Insights</h1><div class="sub">Tips based on your accounts</div></div></div>${emptyCard("No insights yet", "Once you add a few accounts, you'll see interest costs, utilization tips and upcoming crunch weeks here.")}`;
   const list = insights();
   return `<div class="top"><div><h1>Insights</h1><div class="sub">${list.length} things worth knowing</div></div></div>
   <div class="stagger">${list.map(insCard).join("")}<div class="foot">Insights update as your balances and plans change.</div></div>`;
@@ -928,6 +1042,11 @@ function renderSettings() {
   const rowI = (icon, bg, t, sub, right) => `<div class="row"><div class="ic" style="background:${bg}">${ic(icon, "sm")}</div><div class="mid"><div class="t">${t}</div>${sub ? `<div class="s">${sub}</div>` : ""}</div>${right}</div>`;
   return `<div class="dh scrolled"><button class="icon-btn" data-act="back" aria-label="Back">${ic("back")}</button><div class="ttl">Settings</div><div style="width:40px"></div></div>
   <div class="stagger" style="padding-top:8px">
+  <div class="sec-t">Account</div>
+  <div class="card tight set">
+    <div class="row"><div class="av" style="background:linear-gradient(135deg,#7C6CFF,#4338CA)">${esc((firstName()[0] || "?").toUpperCase())}</div><div class="mid"><div class="t" id="setEmail">${esc(S.user ? S.user.email : "")}</div><div class="s">${S.offline ? "Offline · showing saved copy" : "Signed in · synced to your account"}</div></div></div>
+    <button class="row" data-act="logout"><div class="ic" style="background:#64748B">${ic("back", "sm")}</div><div class="mid"><div class="t">Log out</div></div>${ic("right", "sm")}</button>
+  </div>
   <div class="sec-t">Appearance</div>
   <div class="card tight set">${rowI("moon", "#4F46E5", "Theme", "", "")}
     <div class="seg">${[["light", "Light"], ["dark", "Dark"], ["auto", "Automatic"]].map(([k, l]) => `<button class="${s.theme === k ? "on" : ""}" data-act="theme" data-v="${k}">${l}</button>`).join("")}</div>
@@ -942,8 +1061,11 @@ function renderSettings() {
     ${rowI("mail", "#8B5CF6", "Weekly summary", "Sunday recap of what's due", tog("weekly"))}</div>
   <div class="sec-t">Data</div>
   <div class="card tight set">${rowI("lock", "#10B981", "View-only access", "This app never moves money or pays bills", "")}
-    <button class="row" data-act="resetAsk"><div class="ic" style="background:#E5484D">${ic("refresh", "sm")}</div><div class="mid"><div class="t" style="color:var(--bad)">Reset demo</div><div class="s">Remove added accounts and restore defaults</div></div></button></div>
-  <div class="foot">Demo · sample data only<br>No real accounts are connected and reminders aren't sent.<br>Your changes are saved in this browser.</div></div>`;
+    ${hasSample() ? `<button class="row" data-act="removeSampleAsk"><div class="ic" style="background:#F59E0B">${ic("refresh", "sm")}</div><div class="mid"><div class="t">Remove sample data</div><div class="s">Keeps the accounts you added yourself</div></div></button>`
+      : `<button class="row" data-act="loadSample"><div class="ic" style="background:#8B5CF6">${ic("spark", "sm")}</div><div class="mid"><div class="t">Load sample data</div><div class="s">Explore the app with made-up accounts</div></div></button>`}
+    <a class="row" href="privacy.html"><div class="ic" style="background:#0EA5E9">${ic("shield", "sm")}</div><div class="mid"><div class="t">Privacy policy</div><div class="s">What we store and how to delete it</div></div>${ic("right", "sm")}</a>
+    <button class="row" data-act="deleteAsk"><div class="ic" style="background:#E5484D">${ic("trash", "sm")}</div><div class="mid"><div class="t" style="color:var(--bad)">Delete account</div><div class="s">Permanently erase your login and all data</div></div></button></div>
+  <div class="foot">Bank linking, email import and screenshot scan are demos for now.<br>Reminders are a preview and aren't sent yet.</div></div>`;
 }
 const fmtTime = t => { const [h, m] = t.split(":").map(Number); return `${(h % 12) || 12}:${String(m).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`; };
 
@@ -970,11 +1092,11 @@ function closeSheet() {
 const sheetHead = (t, back) => `<div class="sheet-h">${back ? `<button class="icon-btn" data-act="sheet" data-v="${back}" aria-label="Back">${ic("back", "sm")}</button>` : ""}<h2>${t}</h2><button class="icon-btn" data-act="closeSheet" aria-label="Close">${ic("x", "sm")}</button></div>`;
 function sheetView(v, d) {
   if (v === "menu") return sheetHead("Add an account") + `<p class="p-text">Bring every balance into one place. Nothing here moves money; it's view only.</p>
-    <button class="opt" data-act="sheet" data-v="connect"><div class="ic" style="background:linear-gradient(135deg,#4F46E5,#7C3AED)">${ic("bank")}</div><div><b>Connect a bank or card</b><span>Securely link cards and loans for automatic balances.</span></div></button>
-    <button class="opt" data-act="sheet" data-v="email"><div class="ic" style="background:linear-gradient(135deg,#F59E0B,#EA580C)">${ic("mail")}</div><div><b>Forward a pay-later email</b><span>Send an Affirm, Klarna, Afterpay, or PayPal confirmation and we'll read the plan.</span></div></button>
-    <button class="opt" data-act="sheet" data-v="scan"><div class="ic" style="background:linear-gradient(135deg,#EC4899,#DB2777)">${ic("camera")}</div><div><b>Scan a screenshot</b><span>Snap the plan screen in any pay-later app.</span></div></button>
+    <button class="opt" data-act="sheet" data-v="connect"><div class="ic" style="background:linear-gradient(135deg,#4F46E5,#7C3AED)">${ic("bank")}</div><div><b>Connect a bank or card <em class="demo-tag">Demo</em></b><span>Preview of automatic linking. Securely link cards and loans for automatic balances.</span></div></button>
+    <button class="opt" data-act="sheet" data-v="email"><div class="ic" style="background:linear-gradient(135deg,#F59E0B,#EA580C)">${ic("mail")}</div><div><b>Forward a pay-later email <em class="demo-tag">Demo</em></b><span>Send an Affirm, Klarna, Afterpay, or PayPal confirmation and we'll read the plan.</span></div></button>
+    <button class="opt" data-act="sheet" data-v="scan"><div class="ic" style="background:linear-gradient(135deg,#EC4899,#DB2777)">${ic("camera")}</div><div><b>Scan a screenshot <em class="demo-tag">Demo</em></b><span>Snap the plan screen in any pay-later app.</span></div></button>
     <button class="opt" data-act="sheet" data-v="manual"><div class="ic" style="background:linear-gradient(135deg,#64748B,#334155)">${ic("edit")}</div><div><b>Enter it manually</b><span>For anything else: store cards, personal loans, family IOUs.</span></div></button>
-    <div class="foot">${ic("lock", "sm")} Demo · no real connections are made</div>`;
+    <div class="foot">${ic("lock", "sm")} Demo flows add sample accounts · manual entries are yours</div>`;
   if (v === "connect") return sheetHead("Choose your bank", "menu") + `<div class="search">${ic("search", "sm")}<input id="bankQ" placeholder="Search 12,000+ institutions" autocomplete="off"></div>
     <div class="banks" id="bankGrid">${bankGrid("")}</div><div class="foot">Sample institutions for the demo</div>`;
   if (v === "login") return sheetHead(esc(d.bank), "connect") + `<div class="center">${bankAv(d.bank, d.color, "lg")}</div>
@@ -995,7 +1117,7 @@ function sheetView(v, d) {
   if (v === "scanning") return sheetHead("Scanning…") + shot(true) + `<p class="p-text center">Reading installments</p>`;
   if (v === "detected") return sheetHead("We found a plan", d.back) + `<div class="success">${ic("check")}</div><p class="p-text center">Here's what we read. Look right?</p>
     <div class="found">${acctPreview(d.acct)}</div><button class="btn" data-act="addPending">Add plan</button><button class="btn ghost" style="margin-top:10px" data-act="sheet" data-v="menu">Not right? Try another way</button>`;
-  if (v === "manual") return sheetHead("Add manually", "menu") + manualForm(d.type || "card");
+  if (v === "manual") return sheetHead(d.edit ? "Edit account" : "Add manually", d.edit ? "" : "menu") + manualForm(d.type || "card", d.edit);
   return "";
 }
 function bankAv(name, color, size = "", txt) { return `<div class="av ${size}" style="background:${grad(color)};margin:0 auto">${esc(txt || name.split(/\s+/).map(w => w[0]).join("").slice(0, 2))}</div>`; }
@@ -1013,23 +1135,30 @@ function acctPreview(a) {
   return `<div class="row">${avatar(a)}<div class="mid"><div class="t">${esc(a.name)}</div><div class="s">${a.type === "bnpl" ? `${esc(a.provider)} · ${a.n} payments of ${m2(a.amount)}` : `${esc(a.lender)} ·· ${esc(a.mask)} · ${a.apr}% APR`}</div></div><div class="r"><div class="t num">${m2(a.balance)}</div><div class="s">${nd ? "Next " + fDate(nd.date) : ""}</div></div></div>`;
 }
 function finalize(a) { if (a.type === "bnpl") { a.balance = remaining(a); a.min = monthlyEquiv(a); a.name = a.merchant; a.lender = a.provider; } return a; }
-const uid = () => "u" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-function manualForm(type) {
-  const f = (id, label, ph, extra = "", pre = "", suf = "") => `<div class="field"><label for="${id}">${label}</label><div class="pre ${suf ? "suf" : ""} ${pre ? "has-pre" : ""}">${pre ? `<span>${pre}</span>` : ""}<input id="${id}" placeholder="${ph}" ${extra}>${suf ? `<span>${suf}</span>` : ""}</div></div>`;
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
+function manualForm(type, e) {
+  const pv = editValues(e);
+  const f = (id, label, ph, extra = "", pre = "", suf = "") => `<div class="field"><label for="${id}">${label}</label><div class="pre ${suf ? "suf" : ""} ${pre ? "has-pre" : ""}">${pre ? `<span>${pre}</span>` : ""}<input id="${id}" placeholder="${ph}" ${extra}${pv[id] !== undefined ? ` value="${esc(pv[id])}"` : ""}>${suf ? `<span>${suf}</span>` : ""}</div></div>`;
   const num = 'inputmode="decimal" autocomplete="off"';
   let body = "";
-  if (type === "bnpl") body = `<div class="field"><label for="mProv">Provider</label><select id="mProv">${["Affirm", "Klarna", "Afterpay", "PayPal Pay in 4", "Zip", "Sezzle", "Other"].map(p => `<option>${p}</option>`).join("")}</select></div>
+  if (type === "bnpl") body = `<div class="field"><label for="mProv">Provider</label><select id="mProv">${["Affirm", "Klarna", "Afterpay", "PayPal Pay in 4", "Zip", "Sezzle", "Other"].map(p => `<option ${pv.mProv === p ? "selected" : ""}>${p}</option>`).join("")}</select></div>
     ${f("mName", "What did you buy?", "e.g. Winter jacket")}
     <div class="grid2">${f("mAmt", "Each payment", "62.50", num, "$")}${f("mLeft", "Payments left", "3", 'inputmode="numeric"')}</div>
-    <div class="grid2"><div class="field"><label for="mFreq">How often</label><select id="mFreq"><option value="biweekly">Every 2 weeks</option><option value="monthly">Monthly</option></select></div>${f("mNext", "Next payment in", "7", 'inputmode="numeric"', "", "days")}</div>`;
+    <div class="grid2"><div class="field"><label for="mFreq">How often</label><select id="mFreq"><option value="biweekly">Every 2 weeks</option><option value="monthly" ${pv.mFreq === "monthly" ? "selected" : ""}>Monthly</option></select></div>${f("mNext", "Next payment in", "7", 'inputmode="numeric"', "", "days")}</div>`;
   else body = `${f("mName", type === "card" ? "Card name" : "Loan name", type === "card" ? "e.g. Store Rewards Card" : "e.g. Personal Loan")}${f("mLender", "Lender", "e.g. Evergreen Bank")}
     <div class="grid2">${f("mBal", "Balance", "2,500", num, "$")}${f("mApr", "APR", "24.99", num, "", "%")}</div>
     <div class="grid2">${f("mMin", type === "card" ? "Minimum payment" : "Monthly payment", "75", num, "$")}${f("mDay", "Due day", "15", 'inputmode="numeric"', "", "th")}</div>
     ${type === "card" ? f("mLimit", "Credit limit", "5,000", num, "$") : f("mOrig", "Original amount (optional)", "10,000", num, "$")}`;
-  return `<div class="seg types">${[["card", "Card"], ["loan", "Loan"], ["bnpl", "Pay later"]].map(([k, l]) => `<button class="${type === k ? "on" : ""}" data-act="mtype" data-v="${k}">${l}</button>`).join("")}</div>
-    <form id="mForm" novalidate>${body}<div id="mErr" style="color:var(--bad);font-size:13px;margin:0 4px 10px;min-height:0"></div><button class="btn" type="submit">Add account</button></form>`;
+  return `${e ? "" : `<div class="seg types">${[["card", "Card"], ["loan", "Loan"], ["bnpl", "Pay later"]].map(([k, l]) => `<button class="${type === k ? "on" : ""}" data-act="mtype" data-v="${k}">${l}</button>`).join("")}</div>`}
+    <form id="mForm" novalidate>${body}<div id="mErr" style="color:var(--bad);font-size:13px;margin:0 4px 10px;min-height:0"></div><button class="btn" type="submit" id="mSubmit">${e ? "Save changes" : "Add account"}</button></form>`;
+}
+function editValues(e) {
+  if (!e) return {};
+  if (e.type === "bnpl") { const left = e.installments.filter(i => !i.paid), nx = left[0]; return { mProv: e.provider, mName: e.merchant, mAmt: e.amount, mLeft: left.length, mFreq: e.freq, mNext: nx ? Math.max(0, dayDiff(T, nx.date)) : 0 }; }
+  return { mName: e.name, mLender: e.lender, mBal: e.balance, mApr: e.apr, mMin: e.min, mDay: e.dueDay, mLimit: e.limit, mOrig: e.original };
 }
 function readManual() {
+  const ed = sheetState.edit;
   const type = sheetState.type || "card", v = id => ($("#" + id) ? $("#" + id).value.trim() : ""), n = id => parseFloat(v(id).replace(/[$,%\s]/g, ""));
   const bad = []; const need = (id, ok) => { const el = $("#" + id); if (!ok) { bad.push(id); el && el.classList.add("err"); } else el && el.classList.remove("err"); };
   const color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
@@ -1037,6 +1166,11 @@ function readManual() {
     need("mName", v("mName")); need("mAmt", n("mAmt") > 0); need("mLeft", n("mLeft") >= 1 && n("mLeft") <= 60); need("mNext", n("mNext") >= 0 && n("mNext") <= 60);
     if (bad.length) return null;
     const left = Math.round(n("mLeft")), freq = v("mFreq"), next = addDays(T, Math.round(n("mNext")));
+    if (ed) { // keep installments already paid, rebuild the rest of the schedule
+      const done = ed.installments.filter(i => i.paid), np = done.length + left;
+      const out = finalize(plan({ ...ed, provider: v("mProv"), merchant: v("mName"), total: done.reduce((s, i) => s + i.amount, 0) + n("mAmt") * left, n: np, paid: done.length, amount: n("mAmt"), freq, nextDate: next }));
+      done.forEach((d0, k) => { out.installments[k].date = d0.date; out.installments[k].amount = d0.amount; }); return finalize(out);
+    }
     return finalize(plan({ id: uid(), provider: v("mProv"), merchant: v("mName"), color: grad(color), total: n("mAmt") * left, n: left, paid: 0, amount: n("mAmt"), freq, nextDate: next, aprShown: 0, addedVia: "Added manually" }));
   }
   need("mName", v("mName")); need("mLender", v("mLender")); need("mBal", n("mBal") > 0); need("mApr", n("mApr") >= 0 && n("mApr") < 100);
@@ -1044,12 +1178,15 @@ function readManual() {
   if (type === "card") need("mLimit", n("mLimit") > 0);
   if (!bad.length && n("mApr") > 0 && n("mMin") <= n("mBal") * n("mApr") / 1200) { bad.push("mMin"); $("#mMin").classList.add("err"); $("#mErr").textContent = "That payment doesn't cover the monthly interest, so the balance would never go down."; return null; }
   if (bad.length) { $("#mErr").textContent = "Please fill in the highlighted fields."; return null; }
-  const a = { id: uid(), type, name: v("mName"), lender: v("mLender"), mask: String(1000 + Math.floor(Math.random() * 9000)), color: grad(color), balance: n("mBal"), apr: n("mApr"), min: n("mMin"), dueDay: Math.min(28, Math.round(n("mDay"))), addedVia: "Added manually" };
+  const a = { ...(ed || {}), id: ed ? ed.id : uid(), type, name: v("mName"), lender: v("mLender"), mask: ed ? ed.mask : String(1000 + Math.floor(Math.random() * 9000)), color: ed ? ed.color : grad(color), balance: n("mBal"), apr: n("mApr"), min: n("mMin"), dueDay: Math.min(28, Math.round(n("mDay"))), addedVia: ed ? ed.addedVia : "Added manually" };
   if (type === "card") a.limit = n("mLimit"); else a.original = Math.max(n("mOrig") || a.balance, a.balance);
   return a;
 }
-function addAccount(a) {
-  S.added.push(a); save(); rebuild(); closeSheet(); S.acctFilter = "all";
+async function addAccount(a) {
+  if (!requireOnline()) return;
+  const btns = $$(".sheet .btn"); btns.forEach(x => x.disabled = true);
+  try { await cloudInsert([a]); } catch (err) { btns.forEach(x => x.disabled = false); toast(friendlyDbError(err), "bad"); return; }
+  S.rows.push(a); cacheWrite(); rebuild(); closeSheet(); S.acctFilter = "all";
   go("accounts"); toast(`${a.name} added`);
   setTimeout(() => { const el = $(`.screen [data-id="${a.id}"]`); if (el) { el.scrollIntoView({ block: "center", behavior: "smooth" }); el.animate([{ background: "var(--accentSoft)" }, { background: "transparent" }], { duration: 1600, easing: "ease-out" }); } }, 450);
 }
@@ -1102,7 +1239,7 @@ function applyTheme() {
   const m = $('meta[name="theme-color"]'); if (m) m.content = dark ? "#0B0C12" : "#F3F4F8";
 }
 let toastT;
-function toast(msg) { const t = $("#toast"); t.innerHTML = `${ic("check", "sm")}${esc(msg)}`; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2200); }
+function toast(msg, tone) { const t = $("#toast"); t.classList.toggle("bad", tone === "bad"); t.innerHTML = `${ic(tone === "bad" ? "alert" : "check", "sm")}${esc(msg)}`; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), tone === "bad" ? 4200 : 2200); }
 function confirmBox(title, text, okLabel, onOk) {
   const bd = document.createElement("div"); bd.className = "backdrop"; bd.style.zIndex = 50;
   const c = document.createElement("div"); c.className = "confirm"; c.setAttribute("role", "alertdialog");
@@ -1127,13 +1264,20 @@ document.addEventListener("click", e => {
     case "bank": openSheet("login", { bank: v, color: b.dataset.c }); break;
     case "connectGo": { const bank = sheetState.bank, color = sheetState.color; openSheet("connecting");
       const steps = $$("#steps div"); steps.forEach((s, i) => setTimeout(() => { s.classList.add("done"); s.querySelector("i").innerHTML = ic("check", "sm"); }, 500 + i * 550));
-      setTimeout(() => { const acct = { id: uid(), type: "card", name: `${bank.split(" ")[0]} Platinum Card`, lender: bank, mask: String(4000 + Math.floor(Math.random() * 5999)), color: grad(color), balance: 1642.18, limit: 5000, apr: 24.74, min: 50, dueDay: 20, addedVia: "Connected" }; openSheet("found", { acct }); sheetState.pending = acct; }, 2300); break; }
-    case "emailGo": openSheet("emailScan"); setTimeout(() => { const acct = finalize(plan({ id: uid(), provider: "Affirm", merchant: "Nova Hybrid Mattress", color: grad("#6366F1"), total: 1196, n: 12, paid: 1, amount: 99.67, freq: "monthly", nextDate: nextMonthly(14), aprShown: 0, addedVia: "From email" })); openSheet("detected", { acct, back: "email" }); sheetState.pending = acct; }, 2000); break;
-    case "scanGo": openSheet("scanning"); setTimeout(() => { const acct = finalize(plan({ id: uid(), provider: "Klarna", merchant: "Atlas Smart Watch", color: grad("#EC4899"), total: 350, n: 4, paid: 1, amount: 87.5, freq: "biweekly", nextDate: addDays(T, 8), aprShown: 0, addedVia: "From screenshot" })); openSheet("detected", { acct, back: "scan" }); sheetState.pending = acct; }, 1900); break;
+      setTimeout(() => { const acct = { id: uid(), type: "card", name: `${bank.split(" ")[0]} Platinum Card`, lender: bank, mask: String(4000 + Math.floor(Math.random() * 5999)), color: grad(color), balance: 1642.18, limit: 5000, apr: 24.74, min: 50, dueDay: 20, addedVia: "Demo connection", sample: true }; openSheet("found", { acct }); sheetState.pending = acct; }, 2300); break; }
+    case "emailGo": openSheet("emailScan"); setTimeout(() => { const acct = finalize(plan({ id: uid(), provider: "Affirm", merchant: "Nova Hybrid Mattress", color: grad("#6366F1"), total: 1196, n: 12, paid: 1, amount: 99.67, freq: "monthly", nextDate: nextMonthly(14), aprShown: 0, addedVia: "Demo email import", sample: true })); openSheet("detected", { acct, back: "email" }); sheetState.pending = acct; }, 2000); break;
+    case "scanGo": openSheet("scanning"); setTimeout(() => { const acct = finalize(plan({ id: uid(), provider: "Klarna", merchant: "Atlas Smart Watch", color: grad("#EC4899"), total: 350, n: 4, paid: 1, amount: 87.5, freq: "biweekly", nextDate: addDays(T, 8), aprShown: 0, addedVia: "Demo screenshot scan", sample: true })); openSheet("detected", { acct, back: "scan" }); sheetState.pending = acct; }, 1900); break;
     case "addPending": if (sheetState.pending) addAccount(sheetState.pending); break;
     case "copy": toast("Address copied"); try { navigator.clipboard && navigator.clipboard.writeText("kevin.bills@duediligence.demo").catch(() => {}); } catch (x) {} break;
     case "mtype": openSheet("manual", { type: v }); break;
-    case "remove": { const a = byId(b.dataset.id); confirmBox("Remove account?", `${esc(a.name)} will be removed from your list.`, "Remove", () => { S.added = S.added.filter(x => x.id !== a.id); save(); rebuild(); pop(); refreshAll(); toast("Account removed"); }); break; }
+    case "remove": { if (!requireOnline()) break; const a = byId(b.dataset.id); confirmBox("Remove account?", `${esc(a.name)} will be removed from your list.`, "Remove", async () => {
+      try { await cloudDelete([a.id]); } catch (err) { toast(friendlyDbError(err), "bad"); return; }
+      S.rows = S.rows.filter(x => x.id !== a.id); cacheWrite(); rebuild(); pop(); refreshAll(); toast("Account removed"); }); break; }
+    case "edit": { if (!requireOnline()) break; const a = byId(b.dataset.id); if (a) openSheet("manual", { type: a.type, edit: a }); break; }
+    case "loadSample": loadSample(); break;
+    case "removeSampleAsk": confirmBox("Remove sample data?", "This deletes the sample accounts. Anything you added yourself stays.", "Remove", removeSample); break;
+    case "logout": confirmBox("Log out?", "You'll need your email and password to sign back in.", "Log out", logout); break;
+    case "deleteAsk": if (!requireOnline()) break; confirmBox("Delete your account?", "This permanently deletes your login and every account, plan and setting you've saved. This can't be undone.", "Delete forever", deleteAccount); break;
     case "filter": S.acctFilter = v; go("accounts", { quiet: true }); break;
     case "gofilter": S.acctFilter = v; go("accounts"); break;
     case "goextra": S.settings.extra = +v; save(); go("planner"); break;
@@ -1148,20 +1292,318 @@ document.addEventListener("click", e => {
     case "theme": S.settings.theme = v; save(); applyTheme(); refreshAll(); break;
     case "tog": S.settings[b.dataset.k] = !S.settings[b.dataset.k]; save(); if (b.dataset.k === "hide") refreshAll(); else { refreshAll(); } if (b.dataset.k === "reminders") toast(S.settings.reminders ? "Reminders on (demo)" : "Reminders off"); break;
     case "lead": S.settings.leadDays = +v; save(); refreshAll(); break;
-    case "resetAsk": confirmBox("Reset the demo?", "This removes accounts you added and restores the original sample data and settings.", "Reset", () => {
-      try { localStorage.removeItem(KEY); } catch (x) {} S.added = []; S.removed = []; S.settings = { ...DEFAULT_SETTINGS }; S.acctFilter = "all"; S.calSel = null; rebuild(); applyTheme(); refreshAll(); toast("Demo reset"); }); break;
   }
 });
 document.addEventListener("input", e => { if (e.target.matches(".field input")) { e.target.classList.remove("err"); const m = $("#mErr"); if (m && !document.querySelector(".field input.err")) m.textContent = ""; } });
 document.addEventListener("change", e => { if (e.target.matches("[data-act=time]")) { S.settings.time = e.target.value; save(); refreshAll(); } });
-document.addEventListener("submit", e => { if (e.target.id === "mForm") { e.preventDefault(); const a = readManual(); if (a) addAccount(a); } });
+document.addEventListener("submit", e => { if (e.target.id === "mForm") { e.preventDefault(); const a = readManual(); if (a) (sheetState.edit ? updateAccount(a) : addAccount(a)); } });
 document.addEventListener("keydown", e => { if (e.key === "Escape") { if ($(".sheet")) closeSheet(); else pop(); } });
 function wireBankSearch() { const q = $("#bankQ"); if (q) q.addEventListener("input", () => { $("#bankGrid").innerHTML = bankGrid(q.value); }); }
 if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { if (S.settings.theme === "auto") { applyTheme(); } });
 
 /* ---------- boot ---------- */
-load(); applyTheme(); go("home");
 window.__demo = { S, simulate, planDebts, insights, events, overdue };
+
+/* ===================== Cloud: Supabase auth + sync ===================== */
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: "implicit", storageKey: "dd-auth" }
+});
+const APP_URL = /^https?:$/.test(location.protocol) ? location.origin + location.pathname.replace(/index\.html$/, "") : SITE_URL;
+const THEME_KEY = "dd.theme";
+const cacheKey = () => "dd.cache." + (S.user ? S.user.id : "none");
+let entered = false, recovering = false;
+
+/* ---- row mapping ---- */
+const ROW_COLS = "id,type,name,lender,is_sample,details,created_at";
+function toRow(a) {
+  const d = JSON.parse(JSON.stringify(a)); delete d.id; delete d.sample;
+  return { id: a.id, type: a.type, name: String(a.type === "bnpl" ? a.merchant : a.name || "Account").slice(0, 120), lender: String((a.type === "bnpl" ? a.provider : a.lender) || "").slice(0, 120), is_sample: !!a.sample, details: d };
+}
+function fromRow(r) { return revive({ ...r.details, id: r.id, type: r.type, sample: !!r.is_sample }); }
+
+/* ---- local cache (offline, read-only) ---- */
+function cacheWrite() {
+  try { localStorage.setItem(cacheKey(), JSON.stringify({ rows: S.rows.map(a => ({ ...a })), settings: S.settings, at: Date.now() })); } catch (x) {}
+}
+function cacheRead() {
+  try { const c = JSON.parse(localStorage.getItem(cacheKey()) || "null"); if (c) { c.rows = c.rows.map(revive); } return c; } catch (x) { return null; }
+}
+
+/* ---- data ---- */
+async function cloudLoad() {
+  const [acc, set] = await Promise.all([
+    sb.from("debt_accounts").select(ROW_COLS).order("created_at", { ascending: true }),
+    sb.from("user_settings").select("settings").maybeSingle()
+  ]);
+  if (acc.error) throw acc.error; if (set.error) throw set.error;
+  S.rows = acc.data.map(fromRow);
+  S.settings = { ...DEFAULT_SETTINGS, ...(set.data ? set.data.settings : {}) };
+}
+async function cloudInsert(list) { const { error } = await sb.from("debt_accounts").insert(list.map(toRow)); if (error) throw error; }
+async function cloudUpdate(a) { const r = toRow(a); delete r.id; const { error } = await sb.from("debt_accounts").update(r).eq("id", a.id); if (error) throw error; }
+async function cloudDelete(ids) { const { error } = await sb.from("debt_accounts").delete().in("id", ids); if (error) throw error; }
+
+let setT = null, setDirty = false;
+function saveSettings() {
+  try { localStorage.setItem(THEME_KEY, S.settings.theme); } catch (x) {}
+  cacheWrite(); setDirty = true; clearTimeout(setT); setT = setTimeout(flushSettings, 700);
+}
+async function flushSettings() {
+  if (!setDirty || !S.user || S.offline) return;
+  setDirty = false;
+  const { error } = await sb.from("user_settings").upsert({ user_id: S.user.id, settings: S.settings });
+  if (error) setDirty = true;
+}
+
+function requireOnline() {
+  if (!S.offline && navigator.onLine !== false) return true;
+  toast("You're offline. Changes are paused until you reconnect.", "bad"); return false;
+}
+function friendlyDbError(err) {
+  const m = (err && (err.message || err.error_description)) || "";
+  if (/fetch|network|Failed to fetch|Load failed/i.test(m) || navigator.onLine === false) return "Couldn't reach the server. Check your connection and try again.";
+  if (/JWT|expired|401/i.test(m)) return "Your session expired. Please sign in again.";
+  if (/limit of 500/i.test(m)) return "You've reached the 500-account limit.";
+  return "Something went wrong saving that. Please try again.";
+}
+
+async function updateAccount(a) {
+  if (!requireOnline()) return;
+  const btn = $("#mSubmit"); if (btn) btn.disabled = true;
+  try { await cloudUpdate(a); } catch (err) { if (btn) btn.disabled = false; toast(friendlyDbError(err), "bad"); return; }
+  S.rows = S.rows.map(x => x.id === a.id ? a : x); cacheWrite(); rebuild(); closeSheet(); refreshAll(); toast("Changes saved");
+}
+async function loadSample() {
+  if (!requireOnline()) return;
+  const list = sampleData().map(a => ({ ...a, id: uid(), sample: true }));
+  try { await cloudInsert(list); } catch (err) { toast(friendlyDbError(err), "bad"); return; }
+  S.rows = S.rows.concat(list); cacheWrite(); rebuild(); refreshAll(); toast("Sample data loaded");
+}
+async function removeSample() {
+  if (!requireOnline()) return;
+  const ids = S.rows.filter(a => a.sample).map(a => a.id); if (!ids.length) return;
+  try { await cloudDelete(ids); } catch (err) { toast(friendlyDbError(err), "bad"); return; }
+  S.rows = S.rows.filter(a => !a.sample); cacheWrite(); rebuild(); refreshAll(); toast("Sample data removed");
+}
+async function logout() {
+  await flushSettings().catch(() => {});
+  try { localStorage.removeItem(cacheKey()); } catch (x) {}
+  await sb.auth.signOut({ scope: S.offline ? "local" : "global" }).catch(() => sb.auth.signOut({ scope: "local" }));
+  leaveApp(); showAuth("welcome"); toastAuth("You've been logged out");
+}
+async function deleteAccount() {
+  const { error } = await sb.rpc("delete_my_account");
+  if (error) { toast(friendlyDbError(error), "bad"); return; }
+  try { localStorage.removeItem(cacheKey()); } catch (x) {}
+  await sb.auth.signOut({ scope: "local" }).catch(() => {});
+  leaveApp(); showAuth("welcome"); toastAuth("Your account and data were deleted");
+}
+
+/* ---- enter / leave the app ---- */
+async function enterApp(user) {
+  S.user = user; entered = true; hideAuth();
+  try { await cloudLoad(); S.offline = false; cacheWrite(); }
+  catch (err) {
+    const net = navigator.onLine === false || /fetch|network|load failed/i.test((err && err.message) || ""), c = cacheRead();
+    if (net) { S.offline = true; S.cacheEmpty = !c; S.rows = c ? c.rows : []; if (c) S.settings = { ...DEFAULT_SETTINGS, ...c.settings }; }
+    else { S.rows = []; toast(friendlyDbError(err), "bad"); }
+  }
+  try { localStorage.setItem(THEME_KEY, S.settings.theme); } catch (x) {}
+  rebuild(); applyTheme(); setOfflineBar(); go("home");
+}
+function leaveApp() {
+  entered = false; S.user = null; S.rows = []; S.accounts = []; S.offline = false; setDirty = false; clearTimeout(setT);
+  closeSheet(); closePushes(true); $("#main").innerHTML = ""; $("#tabbar").innerHTML = ""; setOfflineBar();
+}
+function setOfflineBar() {
+  const b = $("#offbar"); if (!b) return;
+  b.classList.toggle("show", !!(entered && S.offline)); $(".app").classList.toggle("is-offline", !!(entered && S.offline));
+  b.innerHTML = `${ic("alert", "sm")}<span>${S.cacheEmpty ? "You're offline. Connect to load your accounts." : "Offline · showing your last saved copy (read-only)"}</span>`;
+}
+window.addEventListener("online", async () => {
+  if (!entered || !S.offline) { if ($("#auth.show")) renderAuth(); return; }
+  try { await cloudLoad(); S.offline = false; cacheWrite(); rebuild(); setOfflineBar(); refreshAll(); toast("Back online · synced"); flushSettings(); } catch (x) {}
+});
+window.addEventListener("offline", () => { if (entered) { S.offline = true; setOfflineBar(); } else if ($("#auth.show")) renderAuth(); });
+
+/* ===================== Auth screens ===================== */
+const AU = { view: "welcome", email: "", err: "", busy: false, kind: "signup", cool: 0 };
+const LOGO = `<svg viewBox="0 0 1024 1024" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7C6CFF"/><stop offset="1" stop-color="#4338CA"/></linearGradient></defs><rect width="1024" height="1024" rx="230" fill="url(#lg)"/><path d="M200 317h150a195 195 0 0 1 0 390H200z" fill="#fff"/><path d="M290 407h60a105 105 0 0 1 0 210h-60z" fill="url(#lg)"/><path d="M560 317h150a195 195 0 0 1 0 390H560z" fill="#5EEAD4"/><path d="M650 407h60a105 105 0 0 1 0 210h-60z" fill="url(#lg)"/></svg>`;
+const PW_HINT = "At least 8 characters, with a letter and a number";
+const pwOk = p => p.length >= 8 && /[a-z]/i.test(p) && /\d/.test(p);
+const emailOk = e => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
+
+function showAuth(view) { AU.view = view; AU.err = ""; AU.busy = false; renderAuth(); $("#auth").classList.add("show"); document.body.classList.add("authing"); }
+function hideAuth() { $("#auth").classList.remove("show"); document.body.classList.remove("authing"); }
+function toastAuth(m) { toast(m); }
+
+function pwField(id, label, auto, ph) {
+  return `<div class="field"><label for="${id}">${label}</label><div class="pw"><input id="${id}" type="password" autocomplete="${auto}" placeholder="${ph || ""}" required>
+    <button type="button" class="eye" data-au="eye" data-for="${id}" aria-label="Show password" aria-pressed="false">${ic("eye", "sm")}</button></div></div>`;
+}
+function oauthBlock() {
+  if (!OAUTH_PROVIDERS.length) return "";
+  const names = { google: "Google", apple: "Apple" };
+  return `<div class="au-or"><span>or</span></div>` + OAUTH_PROVIDERS.map(p => `<button class="btn ghost oauth" data-au="oauth" data-p="${p}">Continue with ${names[p] || p}</button>`).join("");
+}
+function authHead(title, sub, back = "welcome") {
+  return `<button class="au-back" data-au="${back}" aria-label="Back">${ic("left")}</button>
+    <div class="au-mini">${LOGO}</div><h2>${title}</h2>${sub ? `<p class="au-sub">${sub}</p>` : ""}`;
+}
+const errBox = () => `<div class="au-err" role="alert" ${AU.err ? "" : "hidden"}>${AU.err ? ic("alert", "sm") + `<span>${AU.err}</span>` : ""}</div>`;
+const offNote = () => navigator.onLine === false ? `<div class="au-err warn" role="status">${ic("alert", "sm")}<span>You're offline. Connect to the internet to sign in.</span></div>` : "";
+
+function renderAuth() {
+  const v = AU.view, el = $("#auth");
+  let h = "";
+  if (v === "welcome") h = `<div class="au-welcome">
+      <div class="au-logo">${LOGO}</div>
+      <h1>Due Diligence</h1>
+      <p class="au-tag">Every card, loan and pay-later plan in one place. See what's due, and plan your way to debt-free.</p>
+      <div class="au-feats">
+        <div><i class="fi">${ic("eye", "sm")}</i><span><b>View only.</b> It never moves money.</span></div>
+        <div><i class="fi">${ic("lock", "sm")}</i><span><b>Private.</b> Your data is locked to your login.</span></div>
+        <div><i class="fi">${ic("cal", "sm")}</i><span><b>Never miss a due date.</b> One clear timeline.</span></div>
+      </div></div>
+    <div class="au-actions">${offNote()}
+      <button class="btn" data-au="signup">Create free account</button>
+      <button class="btn ghost" data-au="signin">I already have an account</button>
+      ${oauthBlock()}
+      <a class="au-link small" href="privacy.html">Privacy policy</a></div>`;
+  else if (v === "signup") h = `${authHead("Create your account", "Takes less than a minute.")}
+    <form id="auForm" data-kind="signup" novalidate>${offNote()}
+      <div class="field"><label for="auName">First name <span class="opt-l">optional</span></label><input id="auName" autocomplete="given-name" placeholder="Kevin" maxlength="40"></div>
+      <div class="field"><label for="auEmail">Email</label><input id="auEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com" value="${esc(AU.email)}" required></div>
+      ${pwField("auPw", "Password", "new-password", "Create a password")}
+      <div class="pw-hint" id="pwHint">${ic("check", "sm")}<span>${PW_HINT}</span></div>
+      ${errBox()}
+      <button class="btn" type="submit" ${AU.busy ? "disabled" : ""}>${AU.busy ? `<span class="spin-sm"></span> Creating account…` : "Create account"}</button>
+      <p class="au-fine">By creating an account you agree to our <a href="privacy.html">Privacy Policy</a>.</p>
+      ${oauthBlock()}
+      <p class="au-switch">Already have an account? <button type="button" data-au="signin">Sign in</button></p></form>`;
+  else if (v === "signin") h = `${authHead("Welcome back", "Sign in to see your accounts.")}
+    <form id="auForm" data-kind="signin" novalidate>${offNote()}
+      <div class="field"><label for="auEmail">Email</label><input id="auEmail" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="you@example.com" value="${esc(AU.email)}" required></div>
+      ${pwField("auPw", "Password", "current-password", "Your password")}
+      <div class="au-row"><button type="button" class="au-link" data-au="forgot">Forgot password?</button></div>
+      ${errBox()}
+      <button class="btn" type="submit" ${AU.busy ? "disabled" : ""}>${AU.busy ? `<span class="spin-sm"></span> Signing in…` : "Sign in"}</button>
+      ${oauthBlock()}
+      <p class="au-switch">New here? <button type="button" data-au="signup">Create an account</button></p></form>`;
+  else if (v === "forgot") h = `${authHead("Reset your password", "Enter your email and we'll send you a link to choose a new one.", "signin")}
+    <form id="auForm" data-kind="forgot" novalidate>${offNote()}
+      <div class="field"><label for="auEmail">Email</label><input id="auEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com" value="${esc(AU.email)}" required></div>
+      ${errBox()}
+      <button class="btn" type="submit" ${AU.busy ? "disabled" : ""}>${AU.busy ? `<span class="spin-sm"></span> Sending…` : "Send reset link"}</button></form>`;
+  else if (v === "sent") h = `<div class="au-center">
+      <div class="au-mailic">${ic("mail")}</div>
+      <h2>Check your inbox</h2>
+      <p class="au-sub">${AU.kind === "reset" ? "If an account exists for" : "We sent a confirmation link to"} <b>${esc(AU.email)}</b>${AU.kind === "reset" ? ", you'll get a link to reset your password." : ". Tap it to activate your account. You can open it on any device."}</p>
+      <p class="au-fine">Don't see it? Check spam or promotions. Links expire after an hour.</p>
+      ${errBox()}
+      ${AU.kind === "signup" ? `<button class="btn ghost" data-au="resend" ${AU.cool > 0 ? "disabled" : ""}>${AU.cool > 0 ? `Resend in ${AU.cool}s` : "Resend email"}</button>` : ""}
+      <button class="btn" data-au="signin" style="margin-top:10px">Back to sign in</button></div>`;
+  else if (v === "newpass") h = `<div class="au-mini" style="margin-top:28px">${LOGO}</div><h2>Choose a new password</h2><p class="au-sub">You're almost done. Pick something you haven't used before.</p>
+    <form id="auForm" data-kind="newpass" novalidate>
+      ${pwField("auPw", "New password", "new-password", "New password")}
+      ${pwField("auPw2", "Confirm password", "new-password", "Type it again")}
+      <div class="pw-hint" id="pwHint">${ic("check", "sm")}<span>${PW_HINT}</span></div>
+      ${errBox()}
+      <button class="btn" type="submit" ${AU.busy ? "disabled" : ""}>${AU.busy ? `<span class="spin-sm"></span> Saving…` : "Save new password"}</button></form>`;
+  else if (v === "loading") h = `<div class="au-center" style="padding-top:38%"><div class="au-logo">${LOGO}</div><span class="spin-sm big"></span></div>`;
+  el.innerHTML = `<div class="au-in au-${v}">${h}</div>`;
+}
+
+function friendlyAuthError(err) {
+  const m = ((err && (err.message || err.msg || err.error_description)) || "").toLowerCase(), code = (err && err.code) || "", st = err && err.status;
+  if (navigator.onLine === false || /failed to fetch|network|load failed/.test(m)) return "Can't reach the server. Check your internet connection and try again.";
+  if (code === "invalid_credentials" || /invalid login credentials/.test(m)) return "That email and password don't match. Try again, or reset your password.";
+  if (code === "email_not_confirmed" || /email not confirmed/.test(m)) return "Please confirm your email first. We can send the link again.";
+  if (code === "over_email_send_rate_limit" || st === 429 || /rate limit|too many/.test(m)) return "Too many emails were sent recently. Please wait a few minutes and try again.";
+  if (code === "email_address_not_authorized" || /not authorized/.test(m)) return "New sign-ups are temporarily limited while we finish setting up email. Please try again soon.";
+  if (code === "user_already_exists" || /already registered|already exists/.test(m)) return "An account with this email already exists. Try signing in instead.";
+  if (code === "weak_password" || /password/.test(m) && /least|character|weak/.test(m)) return "Please choose a stronger password: " + PW_HINT.toLowerCase() + ".";
+  if (code === "same_password" || /different from the old/.test(m)) return "Your new password must be different from your old one.";
+  if (code === "email_address_invalid" || /invalid.*email|email.*invalid/.test(m)) return "That email address doesn't look right.";
+  if (code === "signup_disabled") return "Sign-ups are currently closed.";
+  if (/expired|otp/.test(m)) return "That link has expired or was already used. Please request a new one.";
+  return "Something went wrong. Please try again.";
+}
+function setErr(msg) { AU.err = msg; const b = $("#auth .au-err:not(.warn)"); if (b) { b.hidden = !msg; b.innerHTML = msg ? ic("alert", "sm") + `<span>${msg}</span>` : ""; } }
+function setBusy(on) { AU.busy = on; const b = $("#auForm .btn[type=submit]"); if (!b) return; if (on) { b.dataset.l = b.textContent; b.disabled = true; b.innerHTML = `<span class="spin-sm"></span> Please wait…`; } else { b.disabled = false; b.textContent = b.dataset.l || "Continue"; } }
+function startCooldown(s = 60) { AU.cool = s; const tick = () => { AU.cool--; const b = $('[data-au="resend"]'); if (b) { b.disabled = AU.cool > 0; b.textContent = AU.cool > 0 ? `Resend in ${AU.cool}s` : "Resend email"; } if (AU.cool > 0) setTimeout(tick, 1000); }; setTimeout(tick, 1000); }
+
+async function authSubmit(kind) {
+  const val = id => ($("#" + id) ? $("#" + id).value.trim() : ""), raw = id => ($("#" + id) ? $("#" + id).value : "");
+  setErr(""); $$("#auForm input").forEach(i => i.classList.remove("err"));
+  const bad = (id, msg) => { const i = $("#" + id); if (i) { i.classList.add("err"); i.focus(); } setErr(msg); };
+  if (kind !== "newpass") { AU.email = val("auEmail").toLowerCase(); if (!emailOk(AU.email)) return bad("auEmail", "Please enter a valid email address."); }
+  if ((kind === "signup" || kind === "newpass") && !pwOk(raw("auPw"))) return bad("auPw", "Please choose a stronger password: " + PW_HINT.toLowerCase() + ".");
+  if (kind === "signin" && !raw("auPw")) return bad("auPw", "Please enter your password.");
+  if (kind === "newpass" && raw("auPw") !== raw("auPw2")) return bad("auPw2", "The passwords don't match.");
+  setBusy(true);
+  try {
+    if (kind === "signup") {
+      const first = val("auName").slice(0, 40);
+      const { data, error } = await sb.auth.signUp({ email: AU.email, password: raw("auPw"), options: { emailRedirectTo: APP_URL, data: first ? { first_name: first } : {} } });
+      if (error) throw error;
+      if (data.session) return; // auto-confirm projects sign straight in
+      if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) throw { code: "user_already_exists" };
+      AU.kind = "signup"; AU.view = "sent"; AU.err = ""; AU.busy = false; renderAuth(); startCooldown(60);
+    } else if (kind === "signin") {
+      const { error } = await sb.auth.signInWithPassword({ email: AU.email, password: raw("auPw") });
+      if (error) { if (error.code === "email_not_confirmed" || /not confirmed/i.test(error.message)) { AU.kind = "signup"; AU.view = "sent"; AU.busy = false; renderAuth(); setErr(friendlyAuthError(error)); return; } throw error; }
+    } else if (kind === "forgot") {
+      const { error } = await sb.auth.resetPasswordForEmail(AU.email, { redirectTo: APP_URL });
+      if (error) throw error;
+      AU.kind = "reset"; AU.view = "sent"; AU.err = ""; AU.busy = false; renderAuth();
+    } else if (kind === "newpass") {
+      const { data, error } = await sb.auth.updateUser({ password: raw("auPw") });
+      if (error) throw error;
+      recovering = false; history.replaceState(null, "", location.pathname);
+      AU.busy = false; await enterApp(data.user); toast("Password updated");
+    }
+  } catch (err) { setBusy(false); setErr(friendlyAuthError(err)); }
+}
+
+document.addEventListener("submit", e => { if (e.target.id === "auForm") { e.preventDefault(); authSubmit(e.target.dataset.kind); } });
+document.addEventListener("input", e => {
+  if (e.target.id === "auPw" && $("#pwHint")) $("#pwHint").classList.toggle("ok", pwOk(e.target.value));
+  if (e.target.closest && e.target.closest("#auForm")) e.target.classList.remove("err");
+});
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-au]"); if (!b) return;
+  const a = b.dataset.au;
+  if (a === "eye") { const i = $("#" + b.dataset.for), show = i.type === "password"; i.type = show ? "text" : "password"; b.setAttribute("aria-pressed", show); b.setAttribute("aria-label", show ? "Hide password" : "Show password"); b.innerHTML = ic(show ? "eyeoff" : "eye", "sm"); i.focus(); return; }
+  if (a === "resend") { b.disabled = true; const { error } = await sb.auth.resend({ type: "signup", email: AU.email, options: { emailRedirectTo: APP_URL } }); if (error) { setErr(friendlyAuthError(error)); } else { setErr(""); toast("Email sent again"); } startCooldown(60); return; }
+  if (a === "oauth") { const { error } = await sb.auth.signInWithOAuth({ provider: b.dataset.p, options: { redirectTo: APP_URL } }); if (error) setErr(friendlyAuthError(error)); return; }
+  if (["welcome", "signup", "signin", "forgot"].includes(a)) { const em = $("#auEmail"); if (em && em.value.trim()) AU.email = em.value.trim(); showAuth(a); const f = $("#auth input:not([type=hidden])"); if (f && a !== "welcome" && matchMedia("(pointer:fine)").matches) f.focus(); }
+});
+
+/* ---- boot ---- */
+function hashParams() { const h = location.hash.replace(/^#/, ""); return h.includes("=") ? Object.fromEntries(new URLSearchParams(h)) : {}; }
+async function boot() {
+  const hp = hashParams(), qp = Object.fromEntries(new URLSearchParams(location.search));
+  try { S.settings.theme = localStorage.getItem(THEME_KEY) || "light"; } catch (x) {}
+  applyTheme();
+  if (hp.type === "recovery") recovering = true;
+  const linkErr = hp.error_description || qp.error_description;
+  showAuth("loading");
+  sb.auth.onAuthStateChange((event, session) => {
+    if (event === "PASSWORD_RECOVERY") { recovering = true; setTimeout(() => showAuth("newpass"), 0); }
+    else if (event === "SIGNED_IN" && session && !entered && !recovering) setTimeout(() => enterApp(session.user), 0);
+    else if (event === "SIGNED_OUT" && entered) setTimeout(() => { leaveApp(); showAuth("welcome"); }, 0);
+    else if (event === "USER_UPDATED" && session && entered) S.user = session.user;
+  });
+  const { data } = await sb.auth.getSession();
+  if (location.hash.includes("access_token") || linkErr) history.replaceState(null, "", location.pathname);
+  if (recovering && data.session) { showAuth("newpass"); return; }
+  if (data.session) { if (!entered) await enterApp(data.session.user); if (hp.type === "signup") toast("Email confirmed. Welcome!"); return; }
+  showAuth(linkErr ? "signin" : "welcome");
+  if (linkErr) setErr(friendlyAuthError({ message: linkErr + " " + (hp.error_code || "") }));
+}
+boot();
+window.__dd = { sb, S };
 
 </script>
 <script>

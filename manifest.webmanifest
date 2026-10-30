@@ -1,7 +1,7 @@
 {
   "name": "Due Diligence",
   "short_name": "Diligence",
-  "description": "All your debt in one place. Demo with sample data.",
+  "description": "Every card, loan and pay-later plan in one place.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
