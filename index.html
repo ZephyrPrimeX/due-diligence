@@ -510,6 +510,23 @@ button.stamp{cursor:pointer}
 .toast span{flex:1}
 .toast-undo{margin-left:10px;font-weight:750;color:#A5B4FC;padding:2px 4px;font-size:14px}
 [data-theme=dark] .toast-undo{color:#4338CA}
+/* ---- Plaid linking ---- */
+.sandbox-flag{display:flex;align-items:center;gap:8px;background:var(--warnSoft);color:var(--warn);border-radius:12px;padding:9px 12px;font-size:13px;margin-bottom:12px}
+.sandbox-hint code{font-family:ui-monospace,Menlo,monospace;background:var(--bg2);padding:1px 6px;border-radius:6px;color:var(--text)}
+.soon-tag.sandbox{background:var(--warnSoft);color:var(--warn)}
+.plaid-pts{list-style:none;padding:0;margin:14px 0 18px;display:grid;gap:10px}
+.plaid-pts li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text2)}.plaid-pts li .i{flex:none;color:var(--good);margin-top:1px}
+.linked-bar{display:flex;align-items:center;gap:8px;margin:12px 0 4px;background:var(--card);border-radius:14px;padding:8px 8px 8px 10px;box-shadow:var(--shadow)}
+.linked-badge{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--goodSoft);color:var(--good);flex:none}
+.lb-t{flex:1;min-width:0;font-size:12.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-btn.sm{width:34px;height:34px}.spinning .i{animation:ddspin 1s linear infinite}@keyframes ddspin{to{transform:rotate(360deg)}}
+.card.attn{border:1.5px solid var(--bad);background:var(--badSoft);margin:10px 0}.card.attn p{font-size:13.5px;color:var(--text);margin:6px 0 12px;line-height:1.45}
+.attn-h{display:flex;align-items:center;gap:6px;color:var(--bad)}.card.attn .lite{color:var(--text2)}
+.linked-dot{display:inline-flex;vertical-align:-2px;color:var(--good)}.linked-dot.bad{color:var(--bad)}.linked-dot .i{width:14px;height:14px}
+.field.ro input,.field.ro select{opacity:.65;background:var(--bg2)}.field label i{font-style:normal;font-weight:600;color:var(--good);font-size:11px;margin-left:4px}
+.field textarea{width:100%;font:inherit;border-radius:14px;padding:12px;border:1.5px solid var(--line);background:var(--card);color:var(--text);resize:vertical}
+.notes-card p{white-space:pre-wrap;font-size:14px;color:var(--text2);margin:6px 0 0}
+.linked-badge.bad{background:var(--badSoft);color:var(--bad)}
 
 </style>
 </head>
@@ -670,7 +687,7 @@ function normSettings(s) {
 const S = { accounts: [], rows: [], settings: { ...DEFAULT_SETTINGS }, tab: "home", calMonth: new Date(T.getFullYear(), T.getMonth(), 1), calSel: null, acctFilter: "all", user: null, offline: false };
 function revive(a) {
   if (a.installments) a.installments.forEach(i => { i.date = new Date(i.date); if (i.paidOn) i.paidOn = new Date(i.paidOn); });
-  if (a.nextDate) a.nextDate = new Date(a.nextDate);
+  if (a.nextDate) a.nextDate = /^\d{4}-\d{2}-\d{2}$/.test(a.nextDate) ? new Date(+a.nextDate.slice(0, 4), +a.nextDate.slice(5, 7) - 1, +a.nextDate.slice(8, 10)) : new Date(a.nextDate);
   if (a.balUpdated) a.balUpdated = new Date(a.balUpdated);
   if (a.payments) a.payments.forEach(p => { p.date = new Date(p.date); if (p.due) p.due = new Date(p.due); });
   return a;
@@ -883,7 +900,7 @@ function evtRow(e) {
 function renderAccounts() {
   const t = totals(), f = S.acctFilter;
   const groups = ["card", "loan", "bnpl"].filter(k => f === "all" || f === k);
-  const limit = S.accounts.filter(a => a.type === "card").reduce((s, a) => s + a.limit, 0);
+  const limit = S.accounts.filter(a => a.type === "card").reduce((s, a) => s + (a.limit || 0), 0);
   return `
   <div class="top"><div><h1>Accounts</h1><div class="sub">${S.accounts.length} accounts · ${money(t.total)} total</div></div>
     <button class="icon-btn accent" data-act="add" aria-label="Add account">${ic("plus")}</button></div>
@@ -901,12 +918,12 @@ function renderAccounts() {
 function acctRow(a) {
   const nd = nextDue(a);
   let extra = "";
-  if (a.type === "card") { const p = Math.round(a.balance / a.limit * 100); extra = `<div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1"><i style="width:${Math.min(100, p)}%;background:${utilColor(p)}"></i></div><span style="font-size:11.5px;font-weight:700;color:${utilColor(p)};margin-top:8px" class="num">${p}%</span></div>`; }
+  if (a.type === "card" && a.limit > 0) { const p = Math.round(a.balance / a.limit * 100); extra = `<div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1"><i style="width:${Math.min(100, p)}%;background:${utilColor(p)}"></i></div><span style="font-size:11.5px;font-weight:700;color:${utilColor(p)};margin-top:8px" class="num">${p}%</span></div>`; }
   else if (a.type === "loan") { const p = Math.round((1 - a.balance / a.original) * 100); extra = `<div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1"><i style="width:${p}%;background:var(--good)"></i></div><span style="font-size:11.5px;font-weight:650;color:var(--text3);margin-top:8px" class="num">${p}% paid</span></div>`; }
   else { extra = `<div class="dots" style="--c:${solid(a.color)}">${a.installments.map(i => `<i class="${i.paid ? "on" : status({ ...i }) === "late" ? "late" : ""}"></i>`).join("")}</div>`; }
   const late = a.type === "bnpl" && a.installments.some(i => !i.paid && i.date < T);
   return `<button class="row" data-act="detail" data-id="${a.id}" style="align-items:flex-start">${avatar(a)}
-    <div class="mid"><div style="display:flex;justify-content:space-between;gap:10px"><div class="t">${esc(a.name)}</div><div class="t num" style="flex:none">${m2(a.balance)}</div></div>
+    <div class="mid"><div style="display:flex;justify-content:space-between;gap:10px"><div class="t">${esc(a.name)}${isLinked(a) ? ` <span class="linked-dot${(plaidItem(a) || {}).status && plaidItem(a).status !== "ok" ? " bad" : ""}" title="Linked">${ic("bank", "sm")}</span>` : ""}</div><div class="t num" style="flex:none">${m2(a.balance)}</div></div>
     <div class="s2"><span>${a.type === "bnpl" ? `${esc(a.provider)} · ${a.installments.filter(i => i.paid).length} of ${a.n} paid` : `${a.apr.toFixed(2)}% APR · ${a.type === "card" ? "Min " : ""}${money(a.min)}${a.type === "loan" ? "/mo" : ""}`}</span><span style="${late ? "color:var(--bad);font-weight:650" : ""}">${nd ? (late ? "Overdue" : a.type === "bnpl" ? `${m2(nd.amount)} · ${fDate(nd.date)}` : `Due ${fDate(nd.date)}`) : "Paid off"}</span></div>
     ${extra}</div></button>`;
 }
@@ -918,11 +935,11 @@ function renderDetail(id) {
   let body = "";
   const head = `<div class="dh"><button class="icon-btn" data-act="back" aria-label="Back">${ic("back")}</button><div class="ttl">${esc(a.name)}</div><div style="width:40px"></div></div>
    <div class="dhero">${avatar(a, "lg")}<h2>${esc(a.name)}</h2><div class="s">${esc(a.type === "bnpl" ? a.provider : a.lender)}${a.mask ? ` ·· ${esc(a.mask)}` : ""}${a.addedVia ? ` · ${esc(a.addedVia)}` : ""}</div>
-   <div class="big num">${bigMoney(a.balance)}</div><div class="s">${a.type === "bnpl" ? "Left to pay" : a.type === "card" ? "Current balance" : "Principal remaining"}${a.balUpdated ? ` · updated ${fDate(a.balUpdated)}` : ""}</div></div>
+   <div class="big num">${bigMoney(a.balance)}</div><div class="s">${a.type === "bnpl" ? "Left to pay" : a.type === "card" ? "Current balance" : "Principal remaining"}${a.balUpdated && !isLinked(a) ? ` · updated ${fDate(a.balUpdated)}` : ""}</div></div>${linkedBar(a)}
    <div class="quick-acts">${nd ? `<button class="btn" data-act="pay" data-id="${a.id}">${ic("check", "sm")} Mark as paid</button>` : `<div class="paid-off">${ic("check", "sm")} All paid off</div>`}
-    <div class="grid2">${a.type === "bnpl" ? `<button class="btn ghost sm" data-act="edit" data-id="${a.id}">${ic("cal", "sm")} Edit schedule</button>` : `<button class="btn ghost sm" data-act="bal" data-id="${a.id}">${ic("refresh", "sm")} Update balance</button>`}<button class="btn ghost sm" data-act="edit" data-id="${a.id}">${ic("edit", "sm")} Edit details</button></div></div>`;
+    <div class="grid2">${a.type === "bnpl" ? `<button class="btn ghost sm" data-act="edit" data-id="${a.id}">${ic("cal", "sm")} Edit schedule</button>` : (isLinked(a) ? `<button class="btn ghost sm" data-act="plaidSync" data-item="${a.plaidItem}">${ic("refresh", "sm")} Refresh</button>` : `<button class="btn ghost sm" data-act="bal" data-id="${a.id}">${ic("refresh", "sm")} Update balance</button>`)}<button class="btn ghost sm" data-act="edit" data-id="${a.id}">${ic("edit", "sm")} Edit details</button></div></div>`;
   if (a.type === "card") {
-    const p = Math.round(a.balance / a.limit * 100), mi = monthlyInterest(a), sp = singlePayoff(a, a.min);
+    const hasLim = a.limit > 0, p = hasLim ? Math.round(a.balance / a.limit * 100) : 0, mi = monthlyInterest(a), sp = singlePayoff(a, a.min);
     const proj = []; let b = a.balance; for (let k = 0; k < 6; k++) { const i = b * a.apr / 1200; proj.push(i); b = b + i - a.min; }
     const mx = Math.max(...proj);
     body = `<div class="stats">
@@ -930,10 +947,10 @@ function renderDetail(id) {
       <div class="stat"><div class="k">Minimum due</div><div class="v">${m2(a.min)}</div></div>
       <div class="stat"><div class="k">Due date</div><div class="v">${nd ? `${fDate(nd.date)} <small>${inDays(nd.date)}</small>` : "Paid off"}</div></div>
       <div class="stat"><div class="k">Interest / month</div><div class="v" style="color:var(--bad)">${m2(mi)}</div></div></div>
-     <div class="card"><div class="card-h"><h3>Credit utilization</h3><span class="chip ${p >= 75 ? "bad" : p >= 30 ? "warn" : "good"}">${p >= 75 ? "High" : p >= 30 ? "Fair" : "Healthy"}</span></div>
+     ${hasLim ? `<div class="card"><div class="card-h"><h3>Credit utilization</h3><span class="chip ${p >= 75 ? "bad" : p >= 30 ? "warn" : "good"}">${p >= 75 ? "High" : p >= 30 ? "Fair" : "Healthy"}</span></div>
       <div class="util-big"><b class="num" style="color:${utilColor(p)}">${p}%</b><span style="font-size:13px;color:var(--text2)" class="num">${money(a.balance)} of ${money(a.limit)}</span></div>
       <div class="bar lg"><i style="width:${Math.min(100, p)}%;background:${utilColor(p)}"></i></div><div class="scale"><span>0%</span><span>30% ideal</span><span>100%</span></div>
-      <div class="note">Available credit: <b class="num">${money(a.limit - a.balance)}</b>. Getting below 30% (${money(a.limit * .3)}) usually helps your credit score.</div></div>
+      <div class="note">Available credit: <b class="num">${money(a.limit - a.balance)}</b>. Getting below 30% (${money(a.limit * .3)}) usually helps your credit score.</div></div>` : ""}${a.statementBalance != null ? `<div class="note" style="margin:0 0 12px">Last statement balance: <b class="num">${m2(a.statementBalance)}</b>${a.lastPayment && a.lastPayment.amount ? ` · last payment <b class="num">${m2(a.lastPayment.amount)}</b>${a.lastPayment.date ? ` on ${fDate(parseYMD(a.lastPayment.date) || new Date(a.lastPayment.date))}` : ""}` : ""}</div>` : ""}
      <div class="card"><div class="card-h"><h3>Interest cost per month</h3><span style="font-size:12px;color:var(--text3)">at minimum payments</span></div>
       <div class="bars">${proj.map((v, k) => { const d = addMonths(due, k); return `<div class="b"><em class="num">${money(v)}</em><i style="height:${(v / mx * 70).toFixed(0)}px;background:linear-gradient(180deg,#FF7A7F,var(--bad));opacity:${(1 - k * .12).toFixed(2)}"></i><span>${MON[d.getMonth()]}</span></div>`; }).join("")}</div>
       <div class="note">Paying only the minimum, this card takes <b>${duration(sp.months)}</b> to clear and costs <b class="num">${money(sp.interest)}</b> in interest.</div></div>
@@ -971,8 +988,9 @@ function renderDetail(id) {
      <div class="card tight sched">${a.installments.map((i, k) => { const st = status({ ...i }); return `<div class="row"><div class="stamp ${st}">${st === "paid" ? ic("check", "sm") : k + 1}</div><div class="mid"><div class="t">Installment ${k + 1}</div><div class="s">${fDate(i.date)}${i.date.getFullYear() !== T.getFullYear() ? ", " + i.date.getFullYear() : ""}</div></div><div class="r"><div class="t num">${m2(i.amount)}</div><div style="margin-top:3px">${statusChip(st, i.date)}</div></div><button class="inst-tog ${i.paid ? "on" : ""}" data-act="instTog" data-id="${a.id}" data-i="${k}" role="switch" aria-checked="${!!i.paid}" aria-label="Installment ${k + 1} paid">${ic("check", "sm")}</button></div>`; }).join("")}</div>
      <div class="foot" style="margin-top:-4px">Tap the tick to mark an installment paid or unpaid.</div>`;
   }
-  return head + `<div class="stagger">${body}</div>` + `<button class="danger-btn" data-act="remove" data-id="${a.id}">${ic("trash", "sm")} Remove account</button>
-    <div class="foot">${a.sample ? "Sample account · " : ""}Due Diligence only tracks this account. You pay ${esc((a.type === "bnpl" ? a.provider : a.lender) || "your lender")} directly; marking a payment here just records it.</div>`;
+  const notes = a.notes ? `<div class="card notes-card"><div class="card-h"><h3>Notes</h3><button class="link" data-act="edit" data-id="${a.id}">Edit</button></div><p>${esc(a.notes)}</p></div>` : "";
+  return head + `<div class="stagger">${body}${notes}</div>` + (isLinked(a) ? linkedFoot(a) : `<button class="danger-btn" data-act="remove" data-id="${a.id}">${ic("trash", "sm")} Remove account</button>
+    <div class="foot">${a.sample ? "Sample account · " : ""}Due Diligence only tracks this account. You pay ${esc((a.type === "bnpl" ? a.provider : a.lender) || "your lender")} directly; marking a payment here just records it.</div>`);
 }
 function history(a) {
   const ps = (a.payments || []).slice().reverse();
@@ -1098,7 +1116,7 @@ function insights() {
   overdue().forEach(e => out.push({ tone: "bad", icon: "alert", title: `${e.a.provider || e.a.lender} payment is ${-dayDiff(T, e.date)} days late`, body: `${m2(e.amount)} for ${e.a.name} was due ${fDate(e.date)}. Paying it soon can help you avoid a late fee.`, act: ["detail", e.a.id, "View plan"] }));
   const costly = [...cards].sort((a, b) => monthlyInterest(b) - monthlyInterest(a))[0];
   if (costly) out.push({ tone: "bad", icon: "fire", title: `${costly.name} costs you ${money(monthlyInterest(costly))}/mo in interest`, body: `That's about ${money(monthlyInterest(costly) * 12)} a year at ${costly.apr.toFixed(2)}% APR, your most expensive debt. Avalanche pays it off first.`, act: ["detail", costly.id, "See interest"] });
-  cards.filter(a => a.balance / a.limit >= .5).forEach(a => { const p = Math.round(a.balance / a.limit * 100);
+  cards.filter(a => a.limit > 0 && a.balance / a.limit >= .5).forEach(a => { const p = Math.round(a.balance / a.limit * 100);
     out.push({ tone: "warn", icon: "gauge", title: `Utilization on ${a.name} is ${p}%`, body: `Getting it under 30% means paying it down to ${money(a.limit * .3)}, which usually gives your credit score a lift.`, act: ["detail", a.id, "View card"] }); });
   const ends = {};
   bnpl.forEach(a => { const last = a.installments[a.installments.length - 1].date; const k = `${a.provider}|${last.getFullYear()}-${last.getMonth()}`; (ends[k] = ends[k] || []).push(a); });
@@ -1114,7 +1132,7 @@ function insights() {
   if (best && best.w.length >= 3) out.push({ tone: "warn", icon: "cal", title: `Busy week: ${best.w.length} payments ${fDate(best.a)}–${fDate(best.b)}`, body: `${m2(best.w.reduce((s, e) => s + e.amount, 0))} goes out to ${new Set(best.w.map(e => e.a.lender)).size} lenders that week. Worth checking your balance beforehand.`, act: ["tab", "timeline", "Open timeline"] });
   const av = simulate("avalanche", S.settings.extra), sb = simulate("snowball", S.settings.extra);
   if (sb.interest - av.interest > 5) out.push({ tone: "acc", icon: "target", title: `Avalanche saves ${money(sb.interest - av.interest)} over snowball`, body: `Snowball clears your first debt sooner, which some people find motivating. Either way beats minimums only.`, act: ["tab", "planner", "Compare"] });
-  const good = cards.filter(a => a.balance / a.limit < .3).sort((a, b) => a.balance / a.limit - b.balance / b.limit)[0];
+  const good = cards.filter(a => a.limit > 0 && a.balance / a.limit < .3).sort((a, b) => a.balance / a.limit - b.balance / b.limit)[0];
   if (good) out.push({ tone: "good", icon: "shield", title: `${good.name} is at a healthy ${Math.round(good.balance / good.limit * 100)}%`, body: `Keeping this card low helps your overall utilization, which is ${Math.round(cards.reduce((s, a) => s + a.balance, 0) / cards.reduce((s, a) => s + a.limit, 0) * 100)}% across all cards.` });
   const loan = S.accounts.filter(a => a.type === "loan").sort((a, b) => (1 - b.balance / b.original) - (1 - a.balance / a.original))[0];
   if (loan) out.push({ tone: "good", icon: "check", title: `${loan.name.split(" ·")[0]} is ${Math.round((1 - loan.balance / loan.original) * 100)}% paid off`, body: `${money(loan.original - loan.balance)} down, ${money(loan.balance)} to go. Nice steady progress.`, act: ["detail", loan.id, "View loan"] });
@@ -1231,19 +1249,20 @@ function acctPreview(a) {
 function finalize(a) { if (a.type === "bnpl") { a.balance = remaining(a); a.min = monthlyEquiv(a); a.name = a.merchant; a.lender = a.provider; } return a; }
 const uid = () => (crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
 function manualForm(type, e, tk) {
-  const t = e ? null : tplFind(type, tk), pv = editValues(e, t, type);
-  const f = (id, label, ph, extra = "", pre = "", suf = "") => `<div class="field"><label for="${id}">${label}</label><div class="pre ${suf ? "suf" : ""} ${pre ? "has-pre" : ""}">${pre ? `<span>${pre}</span>` : ""}<input id="${id}" placeholder="${ph}" ${extra}${pv[id] !== undefined && pv[id] !== null ? ` value="${esc(pv[id])}"` : ""}>${suf ? `<span>${suf}</span>` : ""}</div></div>`;
+  const t = e ? null : tplFind(type, tk), pv = editValues(e, t, type), lk = e && isLinked(e);
+  const f = (id, label, ph, extra = "", pre = "", suf = "") => `<div class="field${lk && id !== "mName" ? " ro" : ""}"><label for="${id}">${label}${lk && id !== "mName" ? ` <i>from your bank</i>` : ""}</label><div class="pre ${suf ? "suf" : ""} ${pre ? "has-pre" : ""}">${pre ? `<span>${pre}</span>` : ""}<input id="${id}" placeholder="${ph}" ${extra}${lk && id !== "mName" ? " readonly" : ""}${pv[id] !== undefined && pv[id] !== null ? ` value="${esc(pv[id])}"` : ""}>${suf ? `<span>${suf}</span>` : ""}</div></div>`;
   const num = 'inputmode="decimal" autocomplete="off"';
   const isCard = type === "card";
   const kinds = LOAN_KINDS.map(k => `<option value="${k.k}" ${pv.mKind === k.k ? "selected" : ""}>${k.label}</option>`).join("");
   const body = `${t ? `<div class="tpl-chip">${tplAvatar(type, t)}<div><b>${esc(t.label)}</b><span>${esc(t.hint || (isCard ? "Credit card" : "Loan"))}</span></div><button type="button" class="link" data-act="sheet" data-v="menu">Change</button></div>` : ""}
-    ${type === "loan" ? `<div class="field"><label for="mKind">Loan type</label><select id="mKind">${kinds}</select></div>` : ""}
+    ${type === "loan" ? `<div class="field"><label for="mKind">Loan type</label><select id="mKind"${lk ? " disabled" : ""}>${kinds}</select></div>` : ""}
     ${f("mName", isCard ? "Card name" : "Loan name", isCard ? "e.g. Freedom Unlimited" : "e.g. Car loan", 'maxlength="60" autocomplete="off"')}
     ${f("mLender", isCard ? "Issuer" : "Lender", isCard ? "e.g. Target" : "e.g. Evergreen Bank", 'maxlength="60" autocomplete="off"')}
     <div class="grid2">${f("mBal", isCard ? "Current balance" : "Balance left", "2,500", num, "$")}${f("mApr", "APR", t && t.aprPh ? t.aprPh : "24.99", num, "", "%")}</div>
-    <div class="grid2">${f("mMin", isCard ? "Minimum payment" : "Monthly payment", "75", num, "$")}<div class="field"><label for="mDate">Next due date</label><input id="mDate" type="date" value="${pv.mDate || ""}" min="${ymd(addDays(T, -45))}" max="${ymd(addDays(T, 400))}"></div></div>
+    <div class="grid2">${f("mMin", isCard ? "Minimum payment" : "Monthly payment", "75", num, "$")}<div class="field"><label for="mDate">Next due date</label><input id="mDate" type="date"${lk ? " readonly" : ""} value="${pv.mDate || ""}" min="${ymd(addDays(T, -45))}" max="${ymd(addDays(T, 400))}"></div></div>
     ${isCard ? f("mLimit", "Credit limit", "5,000", num, "$") : f("mOrig", "Original amount (optional)", "10,000", num, "$")}
-    <p class="hint">${isCard ? "Find these on your statement or in the card's app. APR is the purchase rate." : "Your lender's app or statement shows the balance, rate and payment."} You can change any of it later.</p>`;
+    <div class="field"><label for="mNotes">Notes (optional)</label><textarea id="mNotes" maxlength="500" rows="2" placeholder="e.g. Autopay on from checking">${esc(pv.mNotes || "")}</textarea></div>
+    <p class="hint">${lk ? `Balance, rate, payment and due date sync from ${esc(e.lender)} every morning, so they can't be edited here. You can rename the account and keep notes.` : isCard ? "Find these on your statement or in the card's app. APR is the purchase rate." : "Your lender's app or statement shows the balance, rate and payment."} You can change any of it later.</p>`;
   return `${e || t ? "" : `<div class="seg types">${[["card", "Card"], ["loan", "Loan"], ["bnpl", "Pay later"]].map(([k, l]) => `<button class="${type === k ? "on" : ""}" data-act="mtype" data-v="${k}">${l}</button>`).join("")}</div>`}
     <form id="mForm" novalidate>${body}<div id="mErr" class="form-err"></div><button class="btn" type="submit" id="mSubmit">${e ? "Save changes" : "Add account"}</button></form>`;
 }
@@ -1255,13 +1274,18 @@ function editValues(e, t, type) {
     else { o.mKind = t.k; o.mName = t.name || ""; if (t.apr !== undefined) o.mApr = t.apr; }
     return o;
   }
-  return { mName: e.name, mLender: e.lender, mBal: e.balance, mApr: e.apr, mMin: e.min, mDate: ymd(cycleStart(e)), mLimit: e.limit, mOrig: e.original, mKind: e.kind || "other" };
+  return { mName: e.name, mLender: e.lender, mBal: e.balance, mApr: e.apr, mMin: e.min, mDate: ymd(cycleStart(e)), mLimit: e.limit, mOrig: e.original, mKind: e.kind || "other", mNotes: e.notes || "" };
 }
 function readManual() {
   const ed = sheetState.edit, t = ed ? null : tplFind(sheetState.type, sheetState.tpl);
   const type = sheetState.type || "card", v = id => ($("#" + id) ? $("#" + id).value.trim() : ""), n = id => parseFloat(v(id).replace(/[$,%\s]/g, ""));
   const bad = []; const need = (id, ok) => { const el = $("#" + id); if (!ok) { bad.push(id); el && el.classList.add("err"); } else el && el.classList.remove("err"); };
   const due = parseYMD(v("mDate"));
+  if (ed && isLinked(ed)) {
+    need("mName", v("mName")); if (bad.length) { $("#mErr").textContent = "Please give the account a name."; return null; }
+    const nm = v("mName").slice(0, 60);
+    return { ...ed, name: nm, notes: v("mNotes").slice(0, 500), renamed: ed.renamed || nm !== ed.name };
+  }
   need("mName", v("mName")); need("mLender", v("mLender") || type === "loan"); need("mBal", n("mBal") >= 0); need("mApr", n("mApr") >= 0 && n("mApr") < 100);
   need("mMin", n("mMin") > 0); need("mDate", due && dayDiff(T, due) >= -45 && dayDiff(T, due) <= 400);
   if (type === "card") need("mLimit", n("mLimit") > 0);
@@ -1272,6 +1296,7 @@ function readManual() {
   const lender = v("mLender") || (LOAN_KINDS.find(k => k.k === kind) || {}).label || "Loan";
   const a = { ...(ed || {}), id: ed ? ed.id : uid(), type, name: v("mName"), lender, color: ed ? ed.color : grad(color), balance: round2(n("mBal")), apr: n("mApr"), min: round2(n("mMin")), nextDate: due, dueDay: due.getDate(), addedVia: ed ? ed.addedVia : "Added manually" };
   if (!ed) a.mask = "";
+  a.notes = v("mNotes").slice(0, 500); if (!a.notes) delete a.notes;
   if (kind) a.kind = kind;
   if (ed && (a.balance !== ed.balance || a.min !== ed.min)) a.balUpdated = T;
   if (type === "card") a.limit = n("mLimit"); else a.original = Math.max(n("mOrig") || (ed && ed.original) || a.balance, a.balance);
@@ -1403,7 +1428,7 @@ if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListen
 window.__demo = { S, simulate, planDebts, insights, events, overdue };
 
 /* ===================== Beta: quick-add, schedule builder, mark as paid, feedback ===================== */
-const APP_VERSION = "bc09904c".indexOf("__") === 0 ? "dev" : "bc09904c";
+const APP_VERSION = "b49ff9e2".indexOf("__") === 0 ? "dev" : "b49ff9e2";
 const pad2 = n => String(n).padStart(2, "0");
 const ymd = d => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
 const parseYMD = s => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); if (!m) return null; const d = new Date(+m[1], +m[2] - 1, +m[3]); return isNaN(d) ? null : d; };
@@ -1457,7 +1482,7 @@ function menuView() {
     <div class="tpl-sec">${ic("card", "sm")} Credit cards</div><div class="tpl-grid">${TPL.card.map(t => tile("card", t)).join("")}</div>
     <div class="tpl-sec">${ic("car", "sm")} Loans &amp; bills</div><div class="tpl-grid">${TPL.loan.map(t => tile("loan", t)).join("")}</div>
     <div class="tpl-sec">${ic("spark", "sm")} Automatic import</div>
-    ${soon("bank", "linear-gradient(135deg,#4F46E5,#7C3AED)", "Connect a bank", "Secure, read-only linking for automatic balances.")}
+    ${S.plaid.enabled ? `<button class="opt" data-act="plaidSheet"><div class="ic" style="background:linear-gradient(135deg,#4F46E5,#7C3AED)">${ic("bank")}</div><div><b>Connect an account <em class="soon-tag sandbox">Sandbox</em></b><span>Banks, credit cards, PayPal and store cards. Read-only, refreshed daily.</span></div></button>` : soon("bank", "linear-gradient(135deg,#4F46E5,#7C3AED)", "Connect a bank", "Secure, read-only linking for automatic balances.")}
     ${soon("mail", "linear-gradient(135deg,#F59E0B,#EA580C)", "Forward an email", "Send a pay-later confirmation and we'll read the plan.")}
     ${soon("camera", "linear-gradient(135deg,#EC4899,#DB2777)", "Scan a screenshot", "Snap the plan screen in any pay-later app.")}
     <div class="foot">${ic("lock", "sm")} View only: nothing here moves money.<br><button class="link" data-act="loadSample" style="margin-top:4px">Just exploring? Load sample data</button></div>`;
@@ -1578,7 +1603,7 @@ function applyPayment(a0, p = {}) {
 function payView(d) {
   const a = byId(d.id); if (!a) return "";
   const who = esc(a.lender || a.provider || "your lender");
-  const note = `<div class="note pay-note">${ic("lock", "sm")} <span>You still pay ${who} directly, in their app or website. Due Diligence only records it here so your balances and reminders stay right.</span></div>`;
+  const note = `<div class="note pay-note">${ic("lock", "sm")} <span>You still pay ${who} directly, in their app or website. Due Diligence only records it here so your balances and reminders stay right.${isLinked(a) ? ` This account is linked, so the next sync with ${who} will update the balance from your bank.` : ""}</span></div>`;
   if (a.type === "bnpl") {
     const idx = a.installments.findIndex(i => !i.paid), i = a.installments[idx];
     return sheetHead("Mark as paid") + `<div class="found">${acctMini(a, `Installment ${idx + 1} of ${a.installments.length} · due ${fDate(i.date)}`)}</div>
@@ -1681,7 +1706,7 @@ function betaCard() {
   return `<div class="card beta-card"><div class="beta-h"><span class="beta-badge">Beta</span><b>Welcome to the beta</b></div>
     <p>Thanks for testing Due Diligence. In your first week, try:</p>
     <ul><li>Quick-add a card, loan or pay-later plan</li><li>Tap <b>Mark as paid</b> after you pay a bill</li><li>Watch for a reminder email. They're <b>on</b>, 3 days before each due date</li></ul>
-    <p class="fine">Accounts are entered by hand for now; bank linking is coming. Change reminders anytime in Settings.</p>
+    <p class="fine">${S.plaid.enabled ? "Account linking is on for you in sandbox mode (test banks only): tap + then Connect an account." : "Accounts are entered by hand for now; bank linking is coming."} Change reminders anytime in Settings.</p>
     <div class="grid2"><button class="btn ghost sm" data-act="feedback">${ic("chat", "sm")} Feedback</button><button class="btn sm" data-act="betaOk">Got it</button></div></div>`;
 }
 
@@ -1691,6 +1716,8 @@ function betaView(v, d) {
   if (v === "pay") return payView(d);
   if (v === "bal") return balView(d);
   if (v === "feedback") return feedbackView(d);
+  if (v === "plaid") return plaidView(d);
+  if (v === "plaidOff") return plaidOffView(d);
   return "";
 }
 document.addEventListener("click", async e => {
@@ -1769,12 +1796,12 @@ const cacheKey = () => "dd.cache." + (S.user ? S.user.id : "none");
 let entered = false, recovering = false;
 
 /* ---- row mapping ---- */
-const ROW_COLS = "id,type,name,lender,is_sample,details,created_at";
+const ROW_COLS = "id,type,name,lender,is_sample,details,created_at,source,plaid_item";
 function toRow(a) {
-  const d = JSON.parse(JSON.stringify(a)); delete d.id; delete d.sample;
+  const d = JSON.parse(JSON.stringify(a)); delete d.id; delete d.sample; delete d.source; delete d.plaidItem;
   return { id: a.id, type: a.type, name: String(a.type === "bnpl" ? a.merchant : a.name || "Account").slice(0, 120), lender: String((a.type === "bnpl" ? a.provider : a.lender) || "").slice(0, 120), is_sample: !!a.sample, details: d };
 }
-function fromRow(r) { return revive({ ...r.details, id: r.id, type: r.type, sample: !!r.is_sample }); }
+function fromRow(r) { return revive({ ...r.details, id: r.id, type: r.type, sample: !!r.is_sample, source: r.source || "manual", plaidItem: r.plaid_item || null }); }
 
 /* ---- local cache (offline, read-only) ---- */
 function cacheWrite() {
@@ -1853,6 +1880,7 @@ async function logout() {
   leaveApp(); showAuth("welcome"); toastAuth("You've been logged out");
 }
 async function deleteAccount() {
+  if (S.plaid && S.plaid.items.length) { try { await fnCall("disconnect", { item: "all", mode: "delete" }); } catch (x) { /* server queues /item/remove as a fallback */ } }
   const { error } = await sb.rpc("delete_my_account");
   if (error) { toast(friendlyDbError(error), "bad"); return; }
   try { localStorage.removeItem(cacheKey()); } catch (x) {}
@@ -1863,7 +1891,7 @@ async function deleteAccount() {
 /* ---- enter / leave the app ---- */
 async function enterApp(user) {
   S.user = user; entered = true; hideAuth();
-  try { await cloudLoad(); S.offline = false; cacheWrite(); }
+  try { await cloudLoad(); S.offline = false; cacheWrite(); await plaidLoad(); }
   catch (err) {
     const net = navigator.onLine === false || /fetch|network|load failed/i.test((err && err.message) || ""), c = cacheRead();
     if (net) { S.offline = true; S.cacheEmpty = !c; S.rows = c ? c.rows : []; if (c) S.settings = normSettings(c.settings); }
@@ -2077,6 +2105,162 @@ async function boot() {
 }
 boot();
 window.__dd = { sb, S };
+
+/* ===================== Plaid account linking (SANDBOX, allowlisted users only) ===================== */
+const PLAID_SRC = "https://cdn.plaid.com/link/v2/stable/link-initialize.js";
+S.plaid = { enabled: false, items: [] };
+let plaidScriptP = null, plaidBusy = false;
+
+async function plaidLoad() {
+  S.plaid = { enabled: false, items: [] };
+  if (!S.user || S.offline) return;
+  try {
+    const [f, it] = await Promise.all([sb.from("feature_access").select("feature").eq("feature", "plaid"), sb.rpc("dd_plaid_items")]);
+    S.plaid.enabled = !f.error && (f.data || []).length > 0;
+    S.plaid.items = it.error ? [] : (it.data || []);
+  } catch (x) { /* feature just stays hidden */ }
+}
+const plaidItem = a => a && a.plaidItem ? S.plaid.items.find(i => i.id === a.plaidItem) || null : null;
+const isLinked = a => !!(a && a.source === "plaid");
+function agoText(d) {
+  if (!d) return "not synced yet";
+  const s = (Date.now() - new Date(d).getTime()) / 1000;
+  if (s < 60) return "just now"; if (s < 3600) return `${Math.floor(s / 60)} min ago`; if (s < 86400) return `${Math.floor(s / 3600)} h ago`;
+  return fDate(new Date(d));
+}
+async function fnCall(name, body) {
+  const { data, error } = await sb.functions.invoke(name, { body: body || {} });
+  if (error) {
+    let msg = ""; try { msg = (await error.context.json()).error || ""; } catch (x) {}
+    const e = new Error(msg || "network"); e.code = msg; throw e;
+  }
+  return data;
+}
+function loadPlaidScript() {
+  if (window.Plaid) return Promise.resolve();
+  if (plaidScriptP) return plaidScriptP;
+  plaidScriptP = new Promise((res, rej) => {
+    const s = document.createElement("script"); s.src = PLAID_SRC; s.async = true;
+    s.onload = () => (window.Plaid ? res() : rej(new Error("plaid")));
+    s.onerror = () => { plaidScriptP = null; s.remove(); rej(new Error("plaid-load")); };
+    document.head.appendChild(s);
+  });
+  return plaidScriptP;
+}
+async function plaidReload() {
+  try { await cloudLoad(); await plaidLoad(); cacheWrite(); rebuild(); refreshAll(); } catch (x) {}
+}
+
+/* ---- sheets ---- */
+function plaidView(d) {
+  if (d.busy) return sheetHead(d.title || "Connecting") + `<div class="center" style="padding:34px 0 26px"><span class="spin-sm big"></span><p class="p-text center" style="margin-top:16px">${esc(d.text || "Importing your accounts…")}</p></div>`;
+  return sheetHead("Connect an account", "menu") + `<div class="sandbox-flag">${ic("alert", "sm")} <b>Sandbox: test banks only</b></div>
+    <p class="p-text">Link a bank, card or loan account and we'll pull its balance, APR, minimum payment and due date automatically, then refresh it every morning.</p>
+    <div class="note sandbox-hint"><b>Testing tips</b><br>Sign in with <code>user_good</code> / <code>pass_good</code>. Try a big bank (e.g. Chase or Wells Fargo), a credit card (Amex, Discover, Capital One), and search <b>PayPal</b> or <b>Walmart</b> (the Walmart card is issued by Capital One).</div>
+    <ul class="plaid-pts"><li>${ic("lock", "sm")} <span>Read-only. Due Diligence can't move money.</span></li><li>${ic("shield", "sm")} <span>Your bank login goes to Plaid, never to us.</span></li><li>${ic("check", "sm")} <span>Disconnect anytime from the account's page.</span></li></ul>
+    <button class="btn" data-act="plaidGo">${ic("bank", "sm")} Continue to Plaid</button>
+    <div class="foot">Connections are powered by Plaid. See their <a href="https://plaid.com/legal/#end-user-privacy-policy" target="_blank" rel="noopener">End User Privacy Policy</a> and our <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</div>`;
+}
+function plaidOffView(d) {
+  const it = S.plaid.items.find(i => i.id === d.item), n = S.rows.filter(a => a.plaidItem === d.item).length;
+  const name = esc(it ? it.institution_name : "this connection");
+  return sheetHead(`Disconnect ${name}?`) + `<p class="p-text">We'll stop syncing and ask Plaid to delete its access. Choose what happens to the ${n === 1 ? "account" : `${n} accounts`} it added:</p>
+    <button class="opt" data-act="plaidOffGo" data-v="keep" data-item="${d.item}"><div class="ic" style="background:linear-gradient(135deg,#10B981,#059669)">${ic("edit")}</div><div><b>Keep as manual</b><span>Balances stay, and you update them by hand from now on.</span></div></button>
+    <button class="opt" data-act="plaidOffGo" data-v="delete" data-item="${d.item}"><div class="ic" style="background:linear-gradient(135deg,#F43F5E,#E11D48)">${ic("trash")}</div><div><b>Delete them</b><span>Removes ${n === 1 ? "the account" : "these accounts"} and ${n === 1 ? "its" : "their"} payment history from Due Diligence.</span></div></button>`;
+}
+
+/* ---- detail page pieces ---- */
+function linkedBar(a) {
+  if (!isLinked(a)) return "";
+  const it = plaidItem(a), bad = it && it.status !== "ok";
+  const inst = esc((it && it.institution_name) || a.lender);
+  const est = (a.est || []).filter(k => k !== "nextDate" || !a.nextDate).map(k => ({ apr: "APR", min: "minimum", nextDate: "due date" }[k])).filter(Boolean);
+  const rolled = (a.est || []).includes("nextDate") && a.nextDate;
+  return `<div class="linked-bar"><span class="linked-badge${bad ? " bad" : ""}">${ic(bad ? "alert" : "bank", "sm")} ${bad ? "Reconnect" : "Linked"}</span><span class="lb-t">${inst} · synced ${agoText((it && it.last_synced_at) || a.balUpdated)}</span>
+      <button class="icon-btn sm" data-act="plaidSync" data-item="${a.plaidItem}" aria-label="Refresh from ${inst}">${ic("refresh", "sm")}</button></div>
+    ${bad ? `<div class="card attn"><div class="attn-h">${ic("alert", "sm")} <b>Needs attention</b></div><p>${inst} needs you to sign in again before we can refresh${it.error_code ? ` <span class="lite">(${esc(it.error_code.replace(/_/g, " ").toLowerCase())})</span>` : ""}. Your last synced numbers are still shown.</p>
+      <button class="btn sm" data-act="plaidFix" data-item="${a.plaidItem}">${ic("refresh", "sm")} Reconnect ${inst}</button></div>` : ""}
+    ${est.length || rolled ? `<div class="note" style="margin-top:0">${est.length ? `${inst} didn't provide the ${est.join(" or ")}; we estimated ${est.length > 1 ? "them" : "it"}. ` : ""}${rolled ? "The due date was rolled forward from the last date the bank reported." : ""}</div>` : ""}`;
+}
+function linkedFoot(a) {
+  const inst = esc(a.lender || "your bank");
+  return `<button class="danger-btn" data-act="plaidOff" data-item="${a.plaidItem}">${ic("bank", "sm")} Disconnect ${inst}</button>
+    <div class="foot">Balance, rate, minimum and due date come from ${inst} through Plaid and refresh every morning. You still pay ${inst} directly.</div>`;
+}
+
+/* ---- actions ---- */
+async function plaidStart(itemId) {
+  if (!requireOnline() || plaidBusy) return;
+  if (!S.plaid.enabled) { toast("Account linking isn't available on your account yet."); return; }
+  plaidBusy = true;
+  const btn = $('[data-act="plaidGo"], [data-act="plaidFix"]'); if (btn) { btn.disabled = true; btn.dataset.html = btn.innerHTML; btn.innerHTML = `<span class="spin-sm"></span> Opening Plaid…`; }
+  const reset = () => { plaidBusy = false; if (btn && btn.isConnected) { btn.disabled = false; btn.innerHTML = btn.dataset.html; } };
+  try {
+    const [, tok] = await Promise.all([loadPlaidScript(), fnCall("create_link_token", itemId ? { item: itemId } : {})]);
+    const h = window.Plaid.create({
+      token: tok.link_token,
+      onSuccess: (pt, meta) => { plaidBusy = false; itemId ? plaidAfterFix(itemId, meta) : plaidAfterLink(pt, meta); },
+      onExit: (err) => { reset(); if (err) toast(err.display_message || "The connection didn't finish. You can try again anytime.", "bad"); },
+    });
+    closeSheet(); reset(); plaidBusy = true; h.open();
+  } catch (e) {
+    reset();
+    const off = navigator.onLine === false || e.message === "plaid-load";
+    toast(off ? "Couldn't reach Plaid. Check your connection and try again." : e.code === "not_enabled" ? "Account linking isn't available on your account yet." : "Couldn't start the connection. Try again in a moment.", "bad");
+  }
+}
+async function plaidAfterLink(publicToken, meta) {
+  const inst = (meta && meta.institution && meta.institution.name) || "your bank";
+  openSheet("plaid", { busy: true, title: `Connecting ${inst}`, text: "Importing your cards and loans…" });
+  try {
+    const r = await fnCall("exchange_public_token", { public_token: publicToken });
+    await plaidReload(); closeSheet(); S.acctFilter = "all"; go("accounts");
+    const name = r.item.institution_name || inst;
+    if (r.added + r.updated === 0) toast(`${name} connected, but it has no cards or loans to track. Checking and savings aren't tracked.`);
+    else toast(`${name} connected · ${r.added} account${r.added === 1 ? "" : "s"} added`);
+  } catch (e) { closeSheet(); toast(e.message === "network" ? "Lost connection while importing. Pull to refresh in a minute." : e.message, "bad"); }
+}
+async function plaidAfterFix(itemId) {
+  toast("Reconnected. Refreshing…");
+  await plaidSync(itemId, true);
+}
+async function plaidSync(itemId, quiet) {
+  if (!requireOnline()) return;
+  const btn = $(`[data-act="plaidSync"][data-item="${itemId}"]`); if (btn) btn.classList.add("spinning");
+  try {
+    const r = await fnCall("sync", { item: itemId });
+    await plaidReload();
+    const x = (r.items || [])[0] || {};
+    if (x.limited) toast("Already up to date");
+    else if (x.status === "needs_reauth") toast("This connection needs you to sign in again.", "bad");
+    else if (x.status === "error") toast("The bank didn't respond. We'll try again tomorrow morning.", "bad");
+    else if (!quiet) toast("Up to date");
+    else toast("Reconnected and up to date");
+  } catch (e) { toast(e.message === "network" ? "Couldn't refresh. Check your connection." : e.message, "bad"); }
+  finally { const b2 = $(`[data-act="plaidSync"][data-item="${itemId}"]`); if (b2) b2.classList.remove("spinning"); }
+}
+async function plaidDisconnect(itemId, mode) {
+  if (!requireOnline()) return;
+  openSheet("plaid", { busy: true, title: "Disconnecting", text: "Removing access at Plaid…" });
+  try {
+    await fnCall("disconnect", { item: itemId, mode });
+    await plaidReload(); closeSheet();
+    if (mode === "delete") { closePushes(); go("accounts"); }
+    toast(mode === "delete" ? "Disconnected and removed" : "Disconnected. Those accounts are manual now");
+  } catch (e) { closeSheet(); toast(e.message === "network" ? "Couldn't disconnect. Check your connection." : e.message, "bad"); }
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  switch (b.dataset.act) {
+    case "plaidSheet": if (requireOnline()) openSheet("plaid", {}); break;
+    case "plaidGo": plaidStart(); break;
+    case "plaidFix": plaidStart(b.dataset.item); break;
+    case "plaidSync": plaidSync(b.dataset.item); break;
+    case "plaidOff": if (requireOnline()) openSheet("plaidOff", { item: b.dataset.item }); break;
+    case "plaidOffGo": plaidDisconnect(b.dataset.item, b.dataset.v); break;
+  }
+});
 
 </script>
 <script>
