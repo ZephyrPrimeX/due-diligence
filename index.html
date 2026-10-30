@@ -453,6 +453,64 @@ a.row{color:inherit;text-decoration:none}
 .toast{z-index:70}
 .app.is-offline #main .top{padding-top:calc(52px + var(--sat))}
 
+/* ===== Beta additions ===== */
+.beta-badge{display:inline-flex;align-items:center;vertical-align:middle;font-size:10px;font-weight:780;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:99px;background:linear-gradient(135deg,#7C6CFF,#4338CA);color:#fff;margin-left:6px;position:relative;top:-2px;line-height:1.2}
+.beta-card{background:linear-gradient(135deg,rgba(124,108,255,.13),rgba(94,234,212,.12)),var(--card)}
+.beta-card .beta-h{display:flex;align-items:center;gap:6px;margin-bottom:8px}.beta-card .beta-h .beta-badge{margin:0;top:0}
+.beta-card .beta-h b{font-size:16.5px;letter-spacing:-.02em}
+.beta-card p{margin:0 0 8px;font-size:13.5px;color:var(--text2);line-height:1.5}
+.beta-card ul{margin:0 0 10px;padding-left:18px;font-size:13.5px;line-height:1.55}.beta-card li{margin-bottom:3px}
+.beta-card .fine{font-size:12.5px;color:var(--text3)}
+.btn.sm{padding:11px;font-size:14px;border-radius:14px}
+.quick-acts{margin:-4px 0 18px;display:grid;gap:10px}
+.quick-acts .grid2 .btn{box-shadow:var(--shadow)}
+.paid-off{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px;border-radius:16px;background:var(--goodSoft);color:var(--good);font-weight:700}
+.tpl-sec{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin:16px 4px 8px}
+.tpl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tpl{display:flex;flex-direction:column;align-items:center;gap:7px;background:var(--card);border-radius:16px;padding:12px 6px 10px;box-shadow:var(--shadow);transition:transform .15s;min-width:0}
+.tpl:active{transform:scale(.96)}.tpl b{font-size:12.5px;font-weight:650;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.tpl .av .i,.tpl-chip .av .i{color:#fff}
+.opt.soon{opacity:.62;cursor:default;box-shadow:none;border:1.5px dashed var(--line2);background:transparent}.opt.soon:active{transform:none}
+.soon-tag{font-style:normal;font-size:10px;font-weight:750;letter-spacing:.04em;text-transform:uppercase;background:var(--bg2);color:var(--text2);padding:2px 7px;border-radius:99px;margin-left:4px;vertical-align:2px}
+.tpl-chip{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:10px 12px;box-shadow:var(--shadow);margin-bottom:14px}
+.tpl-chip div{flex:1;min-width:0}.tpl-chip div b{display:block;font-size:14.5px}.tpl-chip div span{display:block;font-size:12px;color:var(--text2)}
+.hint{font-size:12px;color:var(--text3);line-height:1.45;margin:-2px 4px 12px}
+.form-err{color:var(--bad);font-size:13px;margin:0 4px 10px}.form-err:empty{display:none}
+.field input[type=date]{min-height:48px}
+.field textarea{width:100%;padding:13px 14px;border-radius:14px;border:1.5px solid transparent;background:var(--card);box-shadow:var(--shadow);font:inherit;font-size:15.5px;outline:0;resize:vertical;color:inherit;min-height:120px}
+.field textarea:focus{border-color:var(--accent)}.field textarea.err{border-color:var(--bad)}
+.bsum{padding:13px 16px;margin-bottom:10px}.bsum-t{font-size:15px}.bsum-s{font-size:12.5px;color:var(--text2);margin-top:2px}
+.lite{font-weight:500;color:var(--text3);font-size:12px;text-transform:none;letter-spacing:0;margin-left:6px}
+.bprev-empty{font-size:13px;color:var(--text2);text-align:center;padding:16px}
+.brows .brow{gap:8px;padding:8px 10px}
+.brow input{border:1.5px solid transparent;background:var(--bg2);border-radius:10px;padding:8px 8px;font:inherit;font-size:14px;color:inherit;outline:0;min-width:0}
+.brow input:focus{border-color:var(--accent)}
+.brow .bdate{flex:1.2}.brow .bamt{flex:1;position:relative}.brow .bamt span{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:13px}
+.brow .bamt input{width:100%;padding-left:20px;text-align:right;font-variant-numeric:tabular-nums}
+button.stamp{cursor:pointer}
+.inst-tog{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line2);display:grid;place-items:center;color:transparent;flex:none;margin-left:2px;transition:all .2s}
+.inst-tog.on{background:var(--good);border-color:var(--good);color:#fff}
+.pay-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px}
+.pay-opts button{background:var(--card);border-radius:14px;padding:11px 8px;box-shadow:var(--shadow);border:1.5px solid transparent;text-align:center}
+.pay-opts button.on{border-color:var(--accent);background:var(--accentSoft)}
+.pay-opts b{display:block;font-size:15px}.pay-opts span{display:block;font-size:11.5px;color:var(--text2);margin-top:1px}
+.pay-big{font-size:34px;font-weight:790;letter-spacing:-.04em;text-align:center;margin:4px 0 12px}
+.pay-prev{background:var(--card);border-radius:14px;padding:12px 14px;font-size:13.5px;line-height:1.55;box-shadow:var(--shadow)}
+.pay-note{display:flex;gap:8px;align-items:flex-start}.pay-note .i{flex:none;margin-top:1px}
+.set-l{font-size:12.5px;color:var(--text2);font-weight:600;margin:4px 16px 8px}
+.set-off{opacity:.4;pointer-events:none}
+.lead-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 16px 14px}
+.lead-chips button{padding:10px 8px;border-radius:12px;background:var(--bg2);font-size:13px;font-weight:620;color:var(--text2);border:1.5px solid transparent}
+.lead-chips button.on{background:var(--accentSoft);color:var(--accent);border-color:var(--accent)}
+.set-note{font-size:12px;color:var(--text3);line-height:1.5;padding:4px 16px 14px}
+.fb-ctx{display:flex;gap:10px;align-items:flex-start;background:var(--card);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);margin-bottom:12px;cursor:pointer}
+.fb-ctx input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent);flex:none}
+.fb-ctx b{display:block;font-size:14px}.fb-ctx small{display:block;font-size:12px;color:var(--text2);margin-top:1px}
+.toast.has-act{pointer-events:auto}
+.toast span{flex:1}
+.toast-undo{margin-left:10px;font-weight:750;color:#A5B4FC;padding:2px 4px;font-size:14px}
+[data-theme=dark] .toast-undo{color:#4338CA}
+
 </style>
 </head>
 <body>
@@ -545,26 +603,39 @@ const P = {
   copy: '<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/>',
+  heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+  med: '<rect x="3" y="6" width="18" height="14" rx="3"/><path d="M9 6V4h6v2M12 10v6M9 13h6"/>',
   lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
 };
 const ic = (n, cls = "") => `<svg class="i ${cls}" viewBox="0 0 24 24">${P[n]}</svg>`;
 const avatar = (a, size = "") => `<div class="av ${size}" style="background:${a.color}">${esc(initials(a))}</div>`;
+const INITIALS = { Affirm: "AF", Klarna: "K", Afterpay: "AP", "PayPal Pay in 4": "P4", Zip: "Z", Sezzle: "SZ", Chase: "CH", "Capital One": "C1", Discover: "DI", "American Express": "AX", Amex: "AX", Citi: "CI", "Bank of America": "BA", "Wells Fargo": "WF" };
 function initials(a) {
-  if (a.type === "bnpl") return ({ Affirm: "AF", Klarna: "K", Afterpay: "AP", "PayPal Pay in 4": "P4" })[a.provider] || a.provider.slice(0, 2).toUpperCase();
-  return (a.lender || a.name).split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+  const k = a.type === "bnpl" ? a.provider : a.lender;
+  if (INITIALS[k]) return INITIALS[k];
+  if (a.type === "bnpl") return (a.provider || "?").slice(0, 2).toUpperCase();
+  return (a.lender || a.name || "?").split(/\s+/).filter(Boolean).map(w => w[0]).join("").slice(0, 2).toUpperCase();
 }
 
 /* ---------- sample data ---------- */
 function nextMonthly(day, from = T) {
   const d = new Date(from.getFullYear(), from.getMonth(), Math.min(day, daysIn(from)));
-  return d < from ? new Date(from.getFullYear(), from.getMonth() + 1, Math.min(day, 28)) : d;
+  if (d >= from) return d;
+  const nx = new Date(from.getFullYear(), from.getMonth() + 1, 1);
+  return new Date(nx.getFullYear(), nx.getMonth(), Math.min(day, daysIn(nx)));
 }
+/* same day-of-month k months later, clamped to the month length */
+function shiftMonth(d, k, day) { const b = new Date(d.getFullYear(), d.getMonth() + k, 1); return new Date(b.getFullYear(), b.getMonth(), Math.min(day || d.getDate(), daysIn(b))); }
+const stepDays = f => f === "weekly" ? 7 : 14;
+/* current unpaid cycle of a card or loan */
+const cycleStart = a => a.nextDate || nextMonthly(a.dueDay || 1);
 /* Build a BNPL installment schedule. nextDate = first unpaid installment. */
 function plan(o) {
   const inst = [];
   for (let i = 0; i < o.n; i++) {
     const k = i - o.paid;
-    const date = o.freq === "monthly" ? addMonths(o.nextDate, k) : addDays(o.nextDate, 14 * k);
+    const date = o.freq === "monthly" ? addMonths(o.nextDate, k) : addDays(o.nextDate, stepDays(o.freq) * k);
     inst.push({ date, amount: o.amount, paid: i < o.paid });
   }
   return { type: "bnpl", apr: 0, ...o, installments: inst };
@@ -586,9 +657,24 @@ function sampleData() {
 }
 
 /* ---------- state & persistence ---------- */
-const DEFAULT_SETTINGS = { theme: "light", hide: false, reminders: true, leadDays: 3, time: "09:00", rCards: true, rLoans: true, rBnpl: true, weekly: true, strategy: "avalanche", extra: 0, breakdown: "type" };
+const DEFAULT_SETTINGS = { theme: "light", hide: false, reminders: true, leadDays: [3], summary: "off", rCards: true, rLoans: true, rBnpl: true, strategy: "avalanche", extra: 0, breakdown: "type", betaWelcomed: false };
+function normSettings(s) {
+  const o = { ...DEFAULT_SETTINGS, ...(s || {}) };
+  let l = Array.isArray(o.leadDays) ? o.leadDays : [o.leadDays];
+  l = [...new Set(l.map(Number).filter(n => [1, 3, 5, 7].includes(n)))].sort((a, b) => a - b);
+  o.leadDays = l.length ? l : [3];
+  if (!["off", "daily", "weekly"].includes(o.summary)) o.summary = "off";
+  delete o.weekly; delete o.time;
+  return o;
+}
 const S = { accounts: [], rows: [], settings: { ...DEFAULT_SETTINGS }, tab: "home", calMonth: new Date(T.getFullYear(), T.getMonth(), 1), calSel: null, acctFilter: "all", user: null, offline: false };
-function revive(a) { if (a.installments) a.installments.forEach(i => i.date = new Date(i.date)); if (a.nextDate) a.nextDate = new Date(a.nextDate); return a; }
+function revive(a) {
+  if (a.installments) a.installments.forEach(i => { i.date = new Date(i.date); if (i.paidOn) i.paidOn = new Date(i.paidOn); });
+  if (a.nextDate) a.nextDate = new Date(a.nextDate);
+  if (a.balUpdated) a.balUpdated = new Date(a.balUpdated);
+  if (a.payments) a.payments.forEach(p => { p.date = new Date(p.date); if (p.due) p.due = new Date(p.due); });
+  return a;
+}
 /* save() persists settings: locally right away, to the cloud debounced (see cloud.js) */
 function save() { if (typeof saveSettings === "function") saveSettings(); }
 function rebuild() {
@@ -596,7 +682,7 @@ function rebuild() {
   S.accounts.forEach(a => { if (a.type === "bnpl") { a.balance = remaining(a); a.min = monthlyEquiv(a); a.name = a.merchant; a.lender = a.provider; } });
 }
 const remaining = a => a.installments.filter(i => !i.paid).reduce((s, i) => s + i.amount, 0);
-const monthlyEquiv = a => a.freq === "biweekly" ? a.amount * 26 / 12 : a.amount;
+const monthlyEquiv = a => a.freq === "biweekly" ? a.amount * 26 / 12 : a.freq === "weekly" ? a.amount * 52 / 12 : a.amount;
 const byId = id => S.accounts.find(a => a.id === id);
 const TYPE = { card: { label: "Credit cards", short: "Cards", color: "#6366F1", icon: "card" }, loan: { label: "Loans", short: "Loans", color: "#10B981", icon: "car" }, bnpl: { label: "Buy now, pay later", short: "Pay later", color: "#F59E0B", icon: "bag" } };
 const solid = c => (c.match(/#[0-9a-f]{6}/i) || ["#6366F1"])[0];
@@ -604,19 +690,22 @@ const solid = c => (c.match(/#[0-9a-f]{6}/i) || ["#6366F1"])[0];
 /* ---------- derived data ---------- */
 function nextDue(a) {
   if (a.type === "bnpl") { const i = a.installments.find(x => !x.paid); return i ? { date: i.date, amount: i.amount } : null; }
-  return { date: nextMonthly(a.dueDay), amount: a.min };
+  if (!(a.balance > 0.005)) return null;
+  return { date: cycleStart(a), amount: Math.min(a.min, a.balance) };
 }
 /* All payment events in a date range */
 function events(from, to) {
   const out = [];
   for (const a of S.accounts) {
     if (a.type === "bnpl") {
-      a.installments.forEach((i, idx) => { if (i.date >= from && i.date <= to) out.push({ a, date: i.date, amount: i.amount, paid: i.paid, label: `Installment ${idx + 1} of ${a.n}` }); });
+      a.installments.forEach((i, idx) => { if (i.date >= from && i.date <= to) out.push({ a, date: i.date, amount: i.amount, paid: i.paid, idx, label: `Installment ${idx + 1} of ${a.installments.length}` }); });
     } else {
-      for (let k = -2; k <= 14; k++) {
-        const base = new Date(T.getFullYear(), T.getMonth() + k, 1);
-        const d = new Date(base.getFullYear(), base.getMonth(), Math.min(a.dueDay, daysIn(base)));
-        if (d >= from && d <= to) out.push({ a, date: d, amount: a.min, paid: d < T, label: a.type === "card" ? "Minimum payment" : "Monthly payment" });
+      const label = a.type === "card" ? "Minimum payment" : "Monthly payment";
+      (a.payments || []).forEach(p => { const d = p.due || p.date; if (d >= from && d <= to) out.push({ a, date: d, amount: p.amount, paid: true, label: "Paid" }); });
+      if (a.sample && !(a.payments || []).length) for (let k = -2; k <= -1; k++) { const d = shiftMonth(cycleStart(a), k, a.dueDay); if (d >= from && d <= to) out.push({ a, date: d, amount: a.min, paid: true, label }); }
+      if (a.balance > 0.005) {
+        const start = cycleStart(a);
+        for (let k = 0; k <= 15; k++) { const d = shiftMonth(start, k, a.dueDay); if (d > to) break; if (d >= from) out.push({ a, date: d, amount: Math.min(a.min, a.balance), paid: false, cycle: k, label }); }
       }
     }
   }
@@ -696,13 +785,13 @@ function firstName() {
 const hasSample = () => S.accounts.some(a => a.sample);
 function topBar() {
   return `<div class="top">
-    <div class="hello">${greeting()}<b>${esc(firstName())}</b>${hasSample() ? `<div class="demo-pill"><i></i>Includes sample data</div>` : ""}</div>
-    <div class="icons"><button class="icon-btn" data-act="add" aria-label="Add account">${ic("plus")}</button><button class="icon-btn" data-act="settings" aria-label="Settings">${ic("gear")}</button></div>
+    <div class="hello">${greeting()}<b>${esc(firstName())} <button class="beta-badge" data-act="betaInfo" aria-label="About the beta">Beta</button></b>${hasSample() ? `<div class="demo-pill"><i></i>Includes sample data</div>` : ""}</div>
+    <div class="icons"><button class="icon-btn" data-act="feedback" aria-label="Send feedback">${ic("chat")}</button><button class="icon-btn" data-act="add" aria-label="Add account">${ic("plus")}</button><button class="icon-btn" data-act="settings" aria-label="Settings">${ic("gear")}</button></div>
   </div>`;
 }
 function renderEmptyHome() {
   return `${topBar()}
-  <div class="stagger">
+  <div class="stagger">${betaCard()}
   <div class="hero onboard">
     <div class="lbl">Welcome to Due Diligence</div>
     <div class="ob-t">Let's put every balance in one place.</div>
@@ -715,6 +804,7 @@ function renderEmptyHome() {
   <button class="btn" data-act="add">${ic("plus", "sm")} Add your first account</button>
   <button class="btn ghost" data-act="loadSample" style="margin-top:10px">${ic("spark", "sm")} Load sample data</button>
   <div class="foot">Sample data is made up, so you can explore first. Remove it anytime in Settings.</div>
+  <div class="card ob-note">${ic("bell", "sm")}<div><b>Reminders are on.</b> We'll email you 3 days before each payment is due, around 9 AM Eastern. Change or turn them off anytime in Settings.</div></div>
   <div class="card ob-note">${ic("lock", "sm")}<div><b>Private to you.</b> Your accounts are saved to your own Due Diligence login and nobody else can see them. This app never moves money.</div></div>
   </div>`;
 }
@@ -728,7 +818,7 @@ function renderHome() {
   const nxDays = nx ? dayDiff(T, nx.date) : 0;
   return `
   ${topBar()}
-  <div class="stagger">
+  <div class="stagger">${betaCard()}
   <div class="hero">
     <button class="eye" data-act="toggleHide" aria-label="Hide balances">${ic(S.settings.hide ? "eyeoff" : "eye", "sm")}</button>
     <div class="lbl">Total debt</div>
@@ -805,7 +895,7 @@ function renderAccounts() {
     const extra = k === "card" && limit ? ` · ${Math.round(t.by.card / limit * 100)}% used` : "";
     return `<div><div class="sec-t">${TYPE[k].label}<span class="num">${money(t.by[k])}${extra}</span></div><div class="card tight">${list.map(acctRow).join("")}</div></div>`;
   }).join("")}
-  <button class="opt" data-act="add" style="margin-top:6px"><div class="ic" style="background:var(--accentSoft);color:var(--accent)">${ic("plus")}</div><div><b>Add an account</b><span>Connect a bank, forward a pay-later email, scan a screenshot, or enter it yourself.</span></div></button>
+  <button class="opt" data-act="add" style="margin-top:6px"><div class="ic" style="background:var(--accentSoft);color:var(--accent)">${ic("plus")}</div><div><b>Add an account</b><span>Quick-add a card, loan or pay-later plan in under a minute.</span></div></button>
   </div>`;
 }
 function acctRow(a) {
@@ -824,11 +914,13 @@ function acctRow(a) {
 /* ---------- DETAIL ---------- */
 function renderDetail(id) {
   const a = byId(id); if (!a) return "";
-  const nd = nextDue(a);
+  const nd = nextDue(a), due = nd ? nd.date : a.type === "bnpl" ? null : cycleStart(a);
   let body = "";
   const head = `<div class="dh"><button class="icon-btn" data-act="back" aria-label="Back">${ic("back")}</button><div class="ttl">${esc(a.name)}</div><div style="width:40px"></div></div>
    <div class="dhero">${avatar(a, "lg")}<h2>${esc(a.name)}</h2><div class="s">${esc(a.type === "bnpl" ? a.provider : a.lender)}${a.mask ? ` ·· ${esc(a.mask)}` : ""}${a.addedVia ? ` · ${esc(a.addedVia)}` : ""}</div>
-   <div class="big num">${bigMoney(a.balance)}</div><div class="s">${a.type === "bnpl" ? "Left to pay" : a.type === "card" ? "Current balance" : "Principal remaining"}</div></div>`;
+   <div class="big num">${bigMoney(a.balance)}</div><div class="s">${a.type === "bnpl" ? "Left to pay" : a.type === "card" ? "Current balance" : "Principal remaining"}${a.balUpdated ? ` · updated ${fDate(a.balUpdated)}` : ""}</div></div>
+   <div class="quick-acts">${nd ? `<button class="btn" data-act="pay" data-id="${a.id}">${ic("check", "sm")} Mark as paid</button>` : `<div class="paid-off">${ic("check", "sm")} All paid off</div>`}
+    <div class="grid2">${a.type === "bnpl" ? `<button class="btn ghost sm" data-act="edit" data-id="${a.id}">${ic("cal", "sm")} Edit schedule</button>` : `<button class="btn ghost sm" data-act="bal" data-id="${a.id}">${ic("refresh", "sm")} Update balance</button>`}<button class="btn ghost sm" data-act="edit" data-id="${a.id}">${ic("edit", "sm")} Edit details</button></div></div>`;
   if (a.type === "card") {
     const p = Math.round(a.balance / a.limit * 100), mi = monthlyInterest(a), sp = singlePayoff(a, a.min);
     const proj = []; let b = a.balance; for (let k = 0; k < 6; k++) { const i = b * a.apr / 1200; proj.push(i); b = b + i - a.min; }
@@ -836,24 +928,24 @@ function renderDetail(id) {
     body = `<div class="stats">
       <div class="stat"><div class="k">APR</div><div class="v">${a.apr.toFixed(2)}%</div></div>
       <div class="stat"><div class="k">Minimum due</div><div class="v">${m2(a.min)}</div></div>
-      <div class="stat"><div class="k">Due date</div><div class="v">${fDate(nd.date)} <small>${inDays(nd.date)}</small></div></div>
+      <div class="stat"><div class="k">Due date</div><div class="v">${nd ? `${fDate(nd.date)} <small>${inDays(nd.date)}</small>` : "Paid off"}</div></div>
       <div class="stat"><div class="k">Interest / month</div><div class="v" style="color:var(--bad)">${m2(mi)}</div></div></div>
      <div class="card"><div class="card-h"><h3>Credit utilization</h3><span class="chip ${p >= 75 ? "bad" : p >= 30 ? "warn" : "good"}">${p >= 75 ? "High" : p >= 30 ? "Fair" : "Healthy"}</span></div>
       <div class="util-big"><b class="num" style="color:${utilColor(p)}">${p}%</b><span style="font-size:13px;color:var(--text2)" class="num">${money(a.balance)} of ${money(a.limit)}</span></div>
       <div class="bar lg"><i style="width:${Math.min(100, p)}%;background:${utilColor(p)}"></i></div><div class="scale"><span>0%</span><span>30% ideal</span><span>100%</span></div>
       <div class="note">Available credit: <b class="num">${money(a.limit - a.balance)}</b>. Getting below 30% (${money(a.limit * .3)}) usually helps your credit score.</div></div>
      <div class="card"><div class="card-h"><h3>Interest cost per month</h3><span style="font-size:12px;color:var(--text3)">at minimum payments</span></div>
-      <div class="bars">${proj.map((v, k) => { const d = addMonths(nd.date, k); return `<div class="b"><em class="num">${money(v)}</em><i style="height:${(v / mx * 70).toFixed(0)}px;background:linear-gradient(180deg,#FF7A7F,var(--bad));opacity:${(1 - k * .12).toFixed(2)}"></i><span>${MON[d.getMonth()]}</span></div>`; }).join("")}</div>
+      <div class="bars">${proj.map((v, k) => { const d = addMonths(due, k); return `<div class="b"><em class="num">${money(v)}</em><i style="height:${(v / mx * 70).toFixed(0)}px;background:linear-gradient(180deg,#FF7A7F,var(--bad));opacity:${(1 - k * .12).toFixed(2)}"></i><span>${MON[d.getMonth()]}</span></div>`; }).join("")}</div>
       <div class="note">Paying only the minimum, this card takes <b>${duration(sp.months)}</b> to clear and costs <b class="num">${money(sp.interest)}</b> in interest.</div></div>
      <div class="sec-t">Payment history</div><div class="card tight sched">${history(a).join("")}</div>`;
   } else if (a.type === "loan") {
     const p = Math.round((1 - a.balance / a.original) * 100), sp = singlePayoff(a, a.min);
     const rows = []; let b = a.balance;
-    for (let k = 0; k < 6; k++) { const i = b * a.apr / 1200, pr = Math.min(a.min - i, b); b -= pr; const d = addMonths(nd.date, k); rows.push({ d, i, pr, b }); }
+    for (let k = 0; k < 6 && b > 0.005; k++) { const i = b * a.apr / 1200, pr = Math.max(0, Math.min(a.min - i, b)); b -= pr; const d = addMonths(due, k); rows.push({ d, i, pr, b }); }
     body = `<div class="stats">
       <div class="stat"><div class="k">APR</div><div class="v">${a.apr.toFixed(2)}%</div></div>
       <div class="stat"><div class="k">Monthly payment</div><div class="v">${m2(a.min)}</div></div>
-      <div class="stat"><div class="k">Next due</div><div class="v">${fDate(nd.date)} <small>${inDays(nd.date)}</small></div></div>
+      <div class="stat"><div class="k">Next due</div><div class="v">${nd ? `${fDate(nd.date)} <small>${inDays(nd.date)}</small>` : "Paid off"}</div></div>
       <div class="stat"><div class="k">Interest / month</div><div class="v" style="color:var(--bad)">${m2(monthlyInterest(a))}</div></div></div>
      <div class="card"><div class="card-h"><h3>Progress</h3><span class="chip good">${p}% paid off</span></div>
       <div class="bar lg"><i style="width:${p}%;background:linear-gradient(90deg,#10B981,#34D399)"></i></div>
@@ -870,24 +962,27 @@ function renderDetail(id) {
     body = `<div class="stats">
       <div class="stat"><div class="k">Plan total</div><div class="v">${m2(a.total)}</div></div>
       <div class="stat"><div class="k">APR</div><div class="v">${(a.aprShown || 0).toFixed(a.aprShown % 1 ? 2 : 0)}%${a.aprShown ? "" : ` <small>interest-free</small>`}</div></div>
-      <div class="stat"><div class="k">Installment</div><div class="v">${m2(a.amount)} <small>${a.freq === "monthly" ? "monthly" : "every 2 wks"}</small></div></div>
+      <div class="stat"><div class="k">Installment</div><div class="v">${m2(a.amount)} <small>${FREQ_LABEL[a.freq] || "every 2 wks"}</small></div></div>
       <div class="stat"><div class="k">Final payment</div><div class="v">${fDate(last)} <small>${last.getFullYear() !== T.getFullYear() ? last.getFullYear() : ""}</small></div></div></div>
-     <div class="card"><div class="card-h"><h3>${a.installments.filter(i => i.paid).length} of ${a.n} paid</h3><span style="font-size:13px;color:var(--text2)" class="num">${money(paidAmt, true)} paid</span></div>
+     <div class="card"><div class="card-h"><h3>${a.installments.filter(i => i.paid).length} of ${a.installments.length} paid</h3><span style="font-size:13px;color:var(--text2)" class="num">${money(paidAmt, true)} paid</span></div>
       <div class="dots" style="--c:${solid(a.color)};margin-top:0">${a.installments.map(i => `<i class="${i.paid ? "on" : (!i.paid && i.date < T) ? "late" : ""}" style="height:8px"></i>`).join("")}</div>
       ${a.aprShown && a.principal ? `<div class="note">This plan includes <b class="num">${m2(a.total - a.principal)}</b> of interest, already built into each installment.</div>` : `<div class="note">No interest on this plan as long as each installment is paid on time. Late payments can add fees.</div>`}</div>
      <div class="sec-t">Installment schedule</div>
-     <div class="card tight sched">${a.installments.map((i, k) => { const st = status({ ...i }); return `<div class="row"><div class="stamp ${st}">${st === "paid" ? ic("check", "sm") : k + 1}</div><div class="mid"><div class="t">Installment ${k + 1}</div><div class="s">${fDate(i.date)}${i.date.getFullYear() !== T.getFullYear() ? ", " + i.date.getFullYear() : ""}</div></div><div class="r"><div class="t num">${m2(i.amount)}</div><div style="margin-top:3px">${statusChip(st, i.date)}</div></div></div>`; }).join("")}</div>`;
+     <div class="card tight sched">${a.installments.map((i, k) => { const st = status({ ...i }); return `<div class="row"><div class="stamp ${st}">${st === "paid" ? ic("check", "sm") : k + 1}</div><div class="mid"><div class="t">Installment ${k + 1}</div><div class="s">${fDate(i.date)}${i.date.getFullYear() !== T.getFullYear() ? ", " + i.date.getFullYear() : ""}</div></div><div class="r"><div class="t num">${m2(i.amount)}</div><div style="margin-top:3px">${statusChip(st, i.date)}</div></div><button class="inst-tog ${i.paid ? "on" : ""}" data-act="instTog" data-id="${a.id}" data-i="${k}" role="switch" aria-checked="${!!i.paid}" aria-label="Installment ${k + 1} paid">${ic("check", "sm")}</button></div>`; }).join("")}</div>
+     <div class="foot" style="margin-top:-4px">Tap the tick to mark an installment paid or unpaid.</div>`;
   }
-  return head + `<div class="stagger">${body}</div>` + `<div class="grid2 acct-actions"><button class="danger-btn neutral" data-act="edit" data-id="${a.id}">${ic("edit", "sm")} Edit</button><button class="danger-btn" data-act="remove" data-id="${a.id}">${ic("trash", "sm")} Remove</button></div>
-    <div class="foot">${a.sample ? "Sample account · " : ""}View only · payments are made with ${esc(a.type === "bnpl" ? a.provider : a.lender)}, not in this app.</div>`;
+  return head + `<div class="stagger">${body}</div>` + `<button class="danger-btn" data-act="remove" data-id="${a.id}">${ic("trash", "sm")} Remove account</button>
+    <div class="foot">${a.sample ? "Sample account · " : ""}Due Diligence only tracks this account. You pay ${esc((a.type === "bnpl" ? a.provider : a.lender) || "your lender")} directly; marking a payment here just records it.</div>`;
 }
 function history(a) {
-  const out = [];
-  const seed = a.id.split("").reduce((s, c) => s + c.charCodeAt(0), 0);
+  const ps = (a.payments || []).slice().reverse();
+  if (ps.length) return ps.map(p => `<div class="row"><div class="stamp paid">${ic("check", "sm")}</div><div class="mid"><div class="t">Payment recorded</div><div class="s">Paid ${fDate(p.date)}, ${p.date.getFullYear()}${p.due ? ` · for ${fDate(p.due)} due date` : ""}${p.interest ? ` · ${money(p.interest, true)} interest` : ""}</div></div><div class="r"><div class="t num">${m2(p.amount)}</div></div></div>`);
+  if (!a.sample) return [`<div class="row"><div class="mid"><div class="s" style="margin:0">No payments recorded yet. After you pay ${esc(a.lender || "your lender")}, tap <b>Mark as paid</b> to log it here.</div></div></div>`];
+  const out = [], seed = a.id.split("").reduce((s, c) => s + c.charCodeAt(0), 0);
   for (let k = 1; k <= 5; k++) {
-    const d = addMonths(nextMonthly(a.dueDay), -k);
+    const d = shiftMonth(cycleStart(a), -k, a.dueDay);
     const amt = a.type === "card" ? a.min + ((seed * k * 37) % 5) * 45 : a.min;
-    out.push(`<div class="row"><div class="stamp paid">${ic("check", "sm")}</div><div class="mid"><div class="t">${a.type === "card" ? "Payment received" : "Monthly payment"}</div><div class="s">${fDate(d)}, ${d.getFullYear()} · on time</div></div><div class="r"><div class="t num">${m2(amt)}</div></div></div>`);
+    out.push(`<div class="row"><div class="stamp paid">${ic("check", "sm")}</div><div class="mid"><div class="t">${a.type === "card" ? "Payment received" : "Monthly payment"}</div><div class="s">${fDate(d)}, ${d.getFullYear()} · sample</div></div><div class="r"><div class="t num">${m2(amt)}</div></div></div>`);
   }
   return out;
 }
@@ -1051,23 +1146,27 @@ function renderSettings() {
   <div class="card tight set">${rowI("moon", "#4F46E5", "Theme", "", "")}
     <div class="seg">${[["light", "Light"], ["dark", "Dark"], ["auto", "Automatic"]].map(([k, l]) => `<button class="${s.theme === k ? "on" : ""}" data-act="theme" data-v="${k}">${l}</button>`).join("")}</div>
     ${rowI("eyeoff", "#64748B", "Hide balances", "Blur amounts when others can see your screen", tog("hide"))}</div>
-  <div class="sec-t">Reminders</div>
-  <div class="card tight set">${rowI("bell", "#F43F5E", "Payment reminders", s.reminders ? `${s.leadDays} day${s.leadDays > 1 ? "s" : ""} before, at ${fmtTime(s.time)}` : "Off", tog("reminders"))}
-    <div style="${s.reminders ? "" : "opacity:.4;pointer-events:none"}">
-    <div style="font-size:12.5px;color:var(--text2);font-weight:600;margin:0 16px 8px">Remind me</div>
-    <div class="seg">${[1, 3, 5, 7].map(d => `<button class="${s.leadDays === d ? "on" : ""}" data-act="lead" data-v="${d}">${d} day${d > 1 ? "s" : ""}</button>`).join("")}</div>
-    ${rowI("clock", "#0EA5E9", "Time", "", `<select data-act="time" style="border:0;background:var(--bg2);border-radius:10px;padding:7px 10px;font-weight:620">${["08:00", "09:00", "12:00", "18:00", "20:00"].map(t => `<option value="${t}" ${s.time === t ? "selected" : ""}>${fmtTime(t)}</option>`).join("")}</select>`)}
+  <div class="sec-t" id="remSec">Reminders</div>
+  <div class="card tight set">${rowI("bell", "#F43F5E", "Payment reminder emails", s.reminders ? `${leadText()} · around 9 AM Eastern` : "Off", tog("reminders"))}
+    <div class="${s.reminders ? "" : "set-off"}">
+    <div class="set-l">Remind me</div>
+    <div class="lead-chips" role="group" aria-label="Days before due">${[1, 3, 5, 7].map(d => `<button class="${s.leadDays.includes(d) ? "on" : ""}" data-act="leadT" data-v="${d}" aria-pressed="${s.leadDays.includes(d)}">${d} day${d > 1 ? "s" : ""} before</button>`).join("")}</div>
+    <div class="set-l">Summary email</div>
+    <div class="seg sm" style="margin:0 16px 12px">${[["off", "Off"], ["daily", "Daily"], ["weekly", "Weekly (Mon)"]].map(([k, l]) => `<button class="${s.summary === k ? "on" : ""}" data-act="summary" data-v="${k}">${l}</button>`).join("")}</div>
     ${rowI("card", "#6366F1", "Credit cards", "", tog("rCards"))}${rowI("car", "#10B981", "Loans", "", tog("rLoans"))}${rowI("bag", "#F59E0B", "Pay-later plans", "", tog("rBnpl"))}</div>
-    ${rowI("mail", "#8B5CF6", "Weekly summary", "Sunday recap of what's due", tog("weekly"))}</div>
+    <div class="set-note">Emails go to ${esc(S.user ? S.user.email : "your login email")}. Sample accounts never trigger reminders, and every email has a one-tap unsubscribe.</div></div>
+  <div class="sec-t">Beta</div>
+  <div class="card tight set">
+    <button class="row" data-act="feedback"><div class="ic" style="background:#8B5CF6">${ic("chat", "sm")}</div><div class="mid"><div class="t">Send feedback</div><div class="s">Report a bug or suggest an idea</div></div>${ic("right", "sm")}</button>
+    <button class="row" data-act="betaInfo"><div class="ic" style="background:#0EA5E9">${ic("spark", "sm")}</div><div class="mid"><div class="t">About the beta</div><div class="s">What to try and what's coming</div></div>${ic("right", "sm")}</button></div>
   <div class="sec-t">Data</div>
   <div class="card tight set">${rowI("lock", "#10B981", "View-only access", "This app never moves money or pays bills", "")}
     ${hasSample() ? `<button class="row" data-act="removeSampleAsk"><div class="ic" style="background:#F59E0B">${ic("refresh", "sm")}</div><div class="mid"><div class="t">Remove sample data</div><div class="s">Keeps the accounts you added yourself</div></div></button>`
       : `<button class="row" data-act="loadSample"><div class="ic" style="background:#8B5CF6">${ic("spark", "sm")}</div><div class="mid"><div class="t">Load sample data</div><div class="s">Explore the app with made-up accounts</div></div></button>`}
     <a class="row" href="privacy.html"><div class="ic" style="background:#0EA5E9">${ic("shield", "sm")}</div><div class="mid"><div class="t">Privacy policy</div><div class="s">What we store and how to delete it</div></div>${ic("right", "sm")}</a>
     <button class="row" data-act="deleteAsk"><div class="ic" style="background:#E5484D">${ic("trash", "sm")}</div><div class="mid"><div class="t" style="color:var(--bad)">Delete account</div><div class="s">Permanently erase your login and all data</div></div></button></div>
-  <div class="foot">Bank linking, email import and screenshot scan are demos for now.<br>Reminders are a preview and aren't sent yet.</div></div>`;
+  <div class="foot">Due Diligence beta · v${esc(APP_VERSION)}<br>Bank linking, email import and screenshot scan are coming soon.</div></div>`;
 }
-const fmtTime = t => { const [h, m] = t.split(":").map(Number); return `${(h % 12) || 12}:${String(m).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`; };
 
 /* ---------- ADD ACCOUNT SHEET ---------- */
 const BANKS = [["Northwind Bank", "#4F46E5"], ["Harbor Credit Union", "#0EA5E9"], ["Summit Financial", "#E11D48"], ["Bluebird Card Co.", "#2563EB"], ["Evergreen Bank", "#059669"], ["Crestline Finance", "#10B981"], ["Lakeside Savings", "#0891B2"], ["Copper State Bank", "#C2410C"], ["Meridian Servicing", "#EA580C"]];
@@ -1091,12 +1190,7 @@ function closeSheet() {
 }
 const sheetHead = (t, back) => `<div class="sheet-h">${back ? `<button class="icon-btn" data-act="sheet" data-v="${back}" aria-label="Back">${ic("back", "sm")}</button>` : ""}<h2>${t}</h2><button class="icon-btn" data-act="closeSheet" aria-label="Close">${ic("x", "sm")}</button></div>`;
 function sheetView(v, d) {
-  if (v === "menu") return sheetHead("Add an account") + `<p class="p-text">Bring every balance into one place. Nothing here moves money; it's view only.</p>
-    <button class="opt" data-act="sheet" data-v="connect"><div class="ic" style="background:linear-gradient(135deg,#4F46E5,#7C3AED)">${ic("bank")}</div><div><b>Connect a bank or card <em class="demo-tag">Demo</em></b><span>Preview of automatic linking. Securely link cards and loans for automatic balances.</span></div></button>
-    <button class="opt" data-act="sheet" data-v="email"><div class="ic" style="background:linear-gradient(135deg,#F59E0B,#EA580C)">${ic("mail")}</div><div><b>Forward a pay-later email <em class="demo-tag">Demo</em></b><span>Send an Affirm, Klarna, Afterpay, or PayPal confirmation and we'll read the plan.</span></div></button>
-    <button class="opt" data-act="sheet" data-v="scan"><div class="ic" style="background:linear-gradient(135deg,#EC4899,#DB2777)">${ic("camera")}</div><div><b>Scan a screenshot <em class="demo-tag">Demo</em></b><span>Snap the plan screen in any pay-later app.</span></div></button>
-    <button class="opt" data-act="sheet" data-v="manual"><div class="ic" style="background:linear-gradient(135deg,#64748B,#334155)">${ic("edit")}</div><div><b>Enter it manually</b><span>For anything else: store cards, personal loans, family IOUs.</span></div></button>
-    <div class="foot">${ic("lock", "sm")} Demo flows add sample accounts · manual entries are yours</div>`;
+  if (v === "menu") return sheetHead("Add an account") + menuView();
   if (v === "connect") return sheetHead("Choose your bank", "menu") + `<div class="search">${ic("search", "sm")}<input id="bankQ" placeholder="Search 12,000+ institutions" autocomplete="off"></div>
     <div class="banks" id="bankGrid">${bankGrid("")}</div><div class="foot">Sample institutions for the demo</div>`;
   if (v === "login") return sheetHead(esc(d.bank), "connect") + `<div class="center">${bankAv(d.bank, d.color, "lg")}</div>
@@ -1117,8 +1211,8 @@ function sheetView(v, d) {
   if (v === "scanning") return sheetHead("Scanning…") + shot(true) + `<p class="p-text center">Reading installments</p>`;
   if (v === "detected") return sheetHead("We found a plan", d.back) + `<div class="success">${ic("check")}</div><p class="p-text center">Here's what we read. Look right?</p>
     <div class="found">${acctPreview(d.acct)}</div><button class="btn" data-act="addPending">Add plan</button><button class="btn ghost" style="margin-top:10px" data-act="sheet" data-v="menu">Not right? Try another way</button>`;
-  if (v === "manual") return sheetHead(d.edit ? "Edit account" : "Add manually", d.edit ? "" : "menu") + manualForm(d.type || "card", d.edit);
-  return "";
+  if (v === "manual") return sheetHead(d.edit ? "Edit account" : d.tpl ? `Add ${esc(tplLabel(d.type, d.tpl))}` : "Add manually", d.edit ? "" : "menu") + manualForm(d.type || "card", d.edit, d.tpl);
+  return betaView(v, d) || "";
 }
 function bankAv(name, color, size = "", txt) { return `<div class="av ${size}" style="background:${grad(color)};margin:0 auto">${esc(txt || name.split(/\s+/).map(w => w[0]).join("").slice(0, 2))}</div>`; }
 function bankGrid(q) {
@@ -1136,57 +1230,58 @@ function acctPreview(a) {
 }
 function finalize(a) { if (a.type === "bnpl") { a.balance = remaining(a); a.min = monthlyEquiv(a); a.name = a.merchant; a.lender = a.provider; } return a; }
 const uid = () => (crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
-function manualForm(type, e) {
-  const pv = editValues(e);
-  const f = (id, label, ph, extra = "", pre = "", suf = "") => `<div class="field"><label for="${id}">${label}</label><div class="pre ${suf ? "suf" : ""} ${pre ? "has-pre" : ""}">${pre ? `<span>${pre}</span>` : ""}<input id="${id}" placeholder="${ph}" ${extra}${pv[id] !== undefined ? ` value="${esc(pv[id])}"` : ""}>${suf ? `<span>${suf}</span>` : ""}</div></div>`;
+function manualForm(type, e, tk) {
+  const t = e ? null : tplFind(type, tk), pv = editValues(e, t, type);
+  const f = (id, label, ph, extra = "", pre = "", suf = "") => `<div class="field"><label for="${id}">${label}</label><div class="pre ${suf ? "suf" : ""} ${pre ? "has-pre" : ""}">${pre ? `<span>${pre}</span>` : ""}<input id="${id}" placeholder="${ph}" ${extra}${pv[id] !== undefined && pv[id] !== null ? ` value="${esc(pv[id])}"` : ""}>${suf ? `<span>${suf}</span>` : ""}</div></div>`;
   const num = 'inputmode="decimal" autocomplete="off"';
-  let body = "";
-  if (type === "bnpl") body = `<div class="field"><label for="mProv">Provider</label><select id="mProv">${["Affirm", "Klarna", "Afterpay", "PayPal Pay in 4", "Zip", "Sezzle", "Other"].map(p => `<option ${pv.mProv === p ? "selected" : ""}>${p}</option>`).join("")}</select></div>
-    ${f("mName", "What did you buy?", "e.g. Winter jacket")}
-    <div class="grid2">${f("mAmt", "Each payment", "62.50", num, "$")}${f("mLeft", "Payments left", "3", 'inputmode="numeric"')}</div>
-    <div class="grid2"><div class="field"><label for="mFreq">How often</label><select id="mFreq"><option value="biweekly">Every 2 weeks</option><option value="monthly" ${pv.mFreq === "monthly" ? "selected" : ""}>Monthly</option></select></div>${f("mNext", "Next payment in", "7", 'inputmode="numeric"', "", "days")}</div>`;
-  else body = `${f("mName", type === "card" ? "Card name" : "Loan name", type === "card" ? "e.g. Store Rewards Card" : "e.g. Personal Loan")}${f("mLender", "Lender", "e.g. Evergreen Bank")}
-    <div class="grid2">${f("mBal", "Balance", "2,500", num, "$")}${f("mApr", "APR", "24.99", num, "", "%")}</div>
-    <div class="grid2">${f("mMin", type === "card" ? "Minimum payment" : "Monthly payment", "75", num, "$")}${f("mDay", "Due day", "15", 'inputmode="numeric"', "", "th")}</div>
-    ${type === "card" ? f("mLimit", "Credit limit", "5,000", num, "$") : f("mOrig", "Original amount (optional)", "10,000", num, "$")}`;
-  return `${e ? "" : `<div class="seg types">${[["card", "Card"], ["loan", "Loan"], ["bnpl", "Pay later"]].map(([k, l]) => `<button class="${type === k ? "on" : ""}" data-act="mtype" data-v="${k}">${l}</button>`).join("")}</div>`}
-    <form id="mForm" novalidate>${body}<div id="mErr" style="color:var(--bad);font-size:13px;margin:0 4px 10px;min-height:0"></div><button class="btn" type="submit" id="mSubmit">${e ? "Save changes" : "Add account"}</button></form>`;
+  const isCard = type === "card";
+  const kinds = LOAN_KINDS.map(k => `<option value="${k.k}" ${pv.mKind === k.k ? "selected" : ""}>${k.label}</option>`).join("");
+  const body = `${t ? `<div class="tpl-chip">${tplAvatar(type, t)}<div><b>${esc(t.label)}</b><span>${esc(t.hint || (isCard ? "Credit card" : "Loan"))}</span></div><button type="button" class="link" data-act="sheet" data-v="menu">Change</button></div>` : ""}
+    ${type === "loan" ? `<div class="field"><label for="mKind">Loan type</label><select id="mKind">${kinds}</select></div>` : ""}
+    ${f("mName", isCard ? "Card name" : "Loan name", isCard ? "e.g. Freedom Unlimited" : "e.g. Car loan", 'maxlength="60" autocomplete="off"')}
+    ${f("mLender", isCard ? "Issuer" : "Lender", isCard ? "e.g. Target" : "e.g. Evergreen Bank", 'maxlength="60" autocomplete="off"')}
+    <div class="grid2">${f("mBal", isCard ? "Current balance" : "Balance left", "2,500", num, "$")}${f("mApr", "APR", t && t.aprPh ? t.aprPh : "24.99", num, "", "%")}</div>
+    <div class="grid2">${f("mMin", isCard ? "Minimum payment" : "Monthly payment", "75", num, "$")}<div class="field"><label for="mDate">Next due date</label><input id="mDate" type="date" value="${pv.mDate || ""}" min="${ymd(addDays(T, -45))}" max="${ymd(addDays(T, 400))}"></div></div>
+    ${isCard ? f("mLimit", "Credit limit", "5,000", num, "$") : f("mOrig", "Original amount (optional)", "10,000", num, "$")}
+    <p class="hint">${isCard ? "Find these on your statement or in the card's app. APR is the purchase rate." : "Your lender's app or statement shows the balance, rate and payment."} You can change any of it later.</p>`;
+  return `${e || t ? "" : `<div class="seg types">${[["card", "Card"], ["loan", "Loan"], ["bnpl", "Pay later"]].map(([k, l]) => `<button class="${type === k ? "on" : ""}" data-act="mtype" data-v="${k}">${l}</button>`).join("")}</div>`}
+    <form id="mForm" novalidate>${body}<div id="mErr" class="form-err"></div><button class="btn" type="submit" id="mSubmit">${e ? "Save changes" : "Add account"}</button></form>`;
 }
-function editValues(e) {
-  if (!e) return {};
-  if (e.type === "bnpl") { const left = e.installments.filter(i => !i.paid), nx = left[0]; return { mProv: e.provider, mName: e.merchant, mAmt: e.amount, mLeft: left.length, mFreq: e.freq, mNext: nx ? Math.max(0, dayDiff(T, nx.date)) : 0 }; }
-  return { mName: e.name, mLender: e.lender, mBal: e.balance, mApr: e.apr, mMin: e.min, mDay: e.dueDay, mLimit: e.limit, mOrig: e.original };
+function editValues(e, t, type) {
+  if (!e) {
+    const o = { mDate: ymd(nextMonthly(15)) };
+    if (!t) return o;
+    if (type === "card") { o.mLender = t.lender || ""; o.mName = t.lender ? `${t.label} card` : ""; }
+    else { o.mKind = t.k; o.mName = t.name || ""; if (t.apr !== undefined) o.mApr = t.apr; }
+    return o;
+  }
+  return { mName: e.name, mLender: e.lender, mBal: e.balance, mApr: e.apr, mMin: e.min, mDate: ymd(cycleStart(e)), mLimit: e.limit, mOrig: e.original, mKind: e.kind || "other" };
 }
 function readManual() {
-  const ed = sheetState.edit;
+  const ed = sheetState.edit, t = ed ? null : tplFind(sheetState.type, sheetState.tpl);
   const type = sheetState.type || "card", v = id => ($("#" + id) ? $("#" + id).value.trim() : ""), n = id => parseFloat(v(id).replace(/[$,%\s]/g, ""));
   const bad = []; const need = (id, ok) => { const el = $("#" + id); if (!ok) { bad.push(id); el && el.classList.add("err"); } else el && el.classList.remove("err"); };
-  const color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-  if (type === "bnpl") {
-    need("mName", v("mName")); need("mAmt", n("mAmt") > 0); need("mLeft", n("mLeft") >= 1 && n("mLeft") <= 60); need("mNext", n("mNext") >= 0 && n("mNext") <= 60);
-    if (bad.length) return null;
-    const left = Math.round(n("mLeft")), freq = v("mFreq"), next = addDays(T, Math.round(n("mNext")));
-    if (ed) { // keep installments already paid, rebuild the rest of the schedule
-      const done = ed.installments.filter(i => i.paid), np = done.length + left;
-      const out = finalize(plan({ ...ed, provider: v("mProv"), merchant: v("mName"), total: done.reduce((s, i) => s + i.amount, 0) + n("mAmt") * left, n: np, paid: done.length, amount: n("mAmt"), freq, nextDate: next }));
-      done.forEach((d0, k) => { out.installments[k].date = d0.date; out.installments[k].amount = d0.amount; }); return finalize(out);
-    }
-    return finalize(plan({ id: uid(), provider: v("mProv"), merchant: v("mName"), color: grad(color), total: n("mAmt") * left, n: left, paid: 0, amount: n("mAmt"), freq, nextDate: next, aprShown: 0, addedVia: "Added manually" }));
-  }
-  need("mName", v("mName")); need("mLender", v("mLender")); need("mBal", n("mBal") > 0); need("mApr", n("mApr") >= 0 && n("mApr") < 100);
-  need("mMin", n("mMin") > 0); need("mDay", n("mDay") >= 1 && n("mDay") <= 31);
+  const due = parseYMD(v("mDate"));
+  need("mName", v("mName")); need("mLender", v("mLender") || type === "loan"); need("mBal", n("mBal") >= 0); need("mApr", n("mApr") >= 0 && n("mApr") < 100);
+  need("mMin", n("mMin") > 0); need("mDate", due && dayDiff(T, due) >= -45 && dayDiff(T, due) <= 400);
   if (type === "card") need("mLimit", n("mLimit") > 0);
-  if (!bad.length && n("mApr") > 0 && n("mMin") <= n("mBal") * n("mApr") / 1200) { bad.push("mMin"); $("#mMin").classList.add("err"); $("#mErr").textContent = "That payment doesn't cover the monthly interest, so the balance would never go down."; return null; }
   if (bad.length) { $("#mErr").textContent = "Please fill in the highlighted fields."; return null; }
-  const a = { ...(ed || {}), id: ed ? ed.id : uid(), type, name: v("mName"), lender: v("mLender"), mask: ed ? ed.mask : String(1000 + Math.floor(Math.random() * 9000)), color: ed ? ed.color : grad(color), balance: n("mBal"), apr: n("mApr"), min: n("mMin"), dueDay: Math.min(28, Math.round(n("mDay"))), addedVia: ed ? ed.addedVia : "Added manually" };
-  if (type === "card") a.limit = n("mLimit"); else a.original = Math.max(n("mOrig") || a.balance, a.balance);
+  if (n("mApr") > 0 && n("mBal") > 0 && n("mMin") <= n("mBal") * n("mApr") / 1200 && type === "loan") { $("#mMin").classList.add("err"); $("#mErr").textContent = "That payment doesn't cover the monthly interest, so the balance would never go down."; return null; }
+  const color = t ? t.c : ed ? null : PALETTE[Math.floor(Math.random() * PALETTE.length)];
+  const kind = type === "loan" ? v("mKind") || "other" : undefined;
+  const lender = v("mLender") || (LOAN_KINDS.find(k => k.k === kind) || {}).label || "Loan";
+  const a = { ...(ed || {}), id: ed ? ed.id : uid(), type, name: v("mName"), lender, color: ed ? ed.color : grad(color), balance: round2(n("mBal")), apr: n("mApr"), min: round2(n("mMin")), nextDate: due, dueDay: due.getDate(), addedVia: ed ? ed.addedVia : "Added manually" };
+  if (!ed) a.mask = "";
+  if (kind) a.kind = kind;
+  if (ed && (a.balance !== ed.balance || a.min !== ed.min)) a.balUpdated = T;
+  if (type === "card") a.limit = n("mLimit"); else a.original = Math.max(n("mOrig") || (ed && ed.original) || a.balance, a.balance);
   return a;
 }
 async function addAccount(a) {
   if (!requireOnline()) return;
   const btns = $$(".sheet .btn"); btns.forEach(x => x.disabled = true);
   try { await cloudInsert([a]); } catch (err) { btns.forEach(x => x.disabled = false); toast(friendlyDbError(err), "bad"); return; }
-  S.rows.push(a); cacheWrite(); rebuild(); closeSheet(); S.acctFilter = "all";
+  S.rows.push(a); cacheWrite(); rebuild(); closeSheet(); S.acctFilter = "all"; if (!a.sample) track("account_added");
   go("accounts"); toast(`${a.name} added`);
   setTimeout(() => { const el = $(`.screen [data-id="${a.id}"]`); if (el) { el.scrollIntoView({ block: "center", behavior: "smooth" }); el.animate([{ background: "var(--accentSoft)" }, { background: "transparent" }], { duration: 1600, easing: "ease-out" }); } }, 450);
 }
@@ -1239,7 +1334,12 @@ function applyTheme() {
   const m = $('meta[name="theme-color"]'); if (m) m.content = dark ? "#0B0C12" : "#F3F4F8";
 }
 let toastT;
-function toast(msg, tone) { const t = $("#toast"); t.classList.toggle("bad", tone === "bad"); t.innerHTML = `${ic(tone === "bad" ? "alert" : "check", "sm")}${esc(msg)}`; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), tone === "bad" ? 4200 : 2200); }
+let toastUndo = null;
+function toast(msg, tone, undo) {
+  const t = $("#toast"); toastUndo = undo || null; t.classList.toggle("bad", tone === "bad"); t.classList.toggle("has-act", !!undo);
+  t.innerHTML = `${ic(tone === "bad" ? "alert" : "check", "sm")}<span>${esc(msg)}</span>${undo ? `<button class="toast-undo" data-act="undo">Undo</button>` : ""}`;
+  t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => { t.classList.remove("show"); toastUndo = null; }, tone === "bad" ? 4200 : undo ? 6000 : 2200);
+}
 function confirmBox(title, text, okLabel, onOk) {
   const bd = document.createElement("div"); bd.className = "backdrop"; bd.style.zIndex = 50;
   const c = document.createElement("div"); c.className = "confirm"; c.setAttribute("role", "alertdialog");
@@ -1260,7 +1360,7 @@ document.addEventListener("click", e => {
     case "back": pop(); break;
     case "add": openSheet("menu"); break;
     case "closeSheet": closeSheet(); break;
-    case "sheet": openSheet(v, v === "manual" ? { type: "card" } : {}); if (v === "connect") wireBankSearch(); break;
+    case "sheet": if (v === "connect" || v === "email" || v === "scan") break; openSheet(v, v === "manual" ? { type: "card" } : {}); break;
     case "bank": openSheet("login", { bank: v, color: b.dataset.c }); break;
     case "connectGo": { const bank = sheetState.bank, color = sheetState.color; openSheet("connecting");
       const steps = $$("#steps div"); steps.forEach((s, i) => setTimeout(() => { s.classList.add("done"); s.querySelector("i").innerHTML = ic("check", "sm"); }, 500 + i * 550));
@@ -1269,11 +1369,11 @@ document.addEventListener("click", e => {
     case "scanGo": openSheet("scanning"); setTimeout(() => { const acct = finalize(plan({ id: uid(), provider: "Klarna", merchant: "Atlas Smart Watch", color: grad("#EC4899"), total: 350, n: 4, paid: 1, amount: 87.5, freq: "biweekly", nextDate: addDays(T, 8), aprShown: 0, addedVia: "Demo screenshot scan", sample: true })); openSheet("detected", { acct, back: "scan" }); sheetState.pending = acct; }, 1900); break;
     case "addPending": if (sheetState.pending) addAccount(sheetState.pending); break;
     case "copy": toast("Address copied"); try { navigator.clipboard && navigator.clipboard.writeText("kevin.bills@duediligence.demo").catch(() => {}); } catch (x) {} break;
-    case "mtype": openSheet("manual", { type: v }); break;
+    case "mtype": if (v === "bnpl") openBuilder({}); else openSheet("manual", { type: v }); break;
     case "remove": { if (!requireOnline()) break; const a = byId(b.dataset.id); confirmBox("Remove account?", `${esc(a.name)} will be removed from your list.`, "Remove", async () => {
       try { await cloudDelete([a.id]); } catch (err) { toast(friendlyDbError(err), "bad"); return; }
       S.rows = S.rows.filter(x => x.id !== a.id); cacheWrite(); rebuild(); pop(); refreshAll(); toast("Account removed"); }); break; }
-    case "edit": { if (!requireOnline()) break; const a = byId(b.dataset.id); if (a) openSheet("manual", { type: a.type, edit: a }); break; }
+    case "edit": { if (!requireOnline()) break; const a = byId(b.dataset.id); if (a) { if (a.type === "bnpl") openBuilder({ edit: a }); else openSheet("manual", { type: a.type, edit: a }); } break; }
     case "loadSample": loadSample(); break;
     case "removeSampleAsk": confirmBox("Remove sample data?", "This deletes the sample accounts. Anything you added yourself stays.", "Remove", removeSample); break;
     case "logout": confirmBox("Log out?", "You'll need your email and password to sign back in.", "Log out", logout); break;
@@ -1290,12 +1390,10 @@ document.addEventListener("click", e => {
       $("#stratD").innerHTML = v === "avalanche" ? "<b>Highest interest first.</b> Saves the most money overall." : "<b>Smallest balance first.</b> Quick wins that keep you motivated."; $("#planOut").innerHTML = planOut(); break;
     case "extra": S.settings.extra = +v; $("#extra").value = v; save(); wirePlanner.upd(); break;
     case "theme": S.settings.theme = v; save(); applyTheme(); refreshAll(); break;
-    case "tog": S.settings[b.dataset.k] = !S.settings[b.dataset.k]; save(); if (b.dataset.k === "hide") refreshAll(); else { refreshAll(); } if (b.dataset.k === "reminders") toast(S.settings.reminders ? "Reminders on (demo)" : "Reminders off"); break;
-    case "lead": S.settings.leadDays = +v; save(); refreshAll(); break;
+    case "tog": S.settings[b.dataset.k] = !S.settings[b.dataset.k]; save(); if (b.dataset.k === "hide") refreshAll(); else { refreshAll(); } if (b.dataset.k === "reminders") toast(S.settings.reminders ? `Reminders on · ${leadText()}` : "Reminder emails off"); break;
   }
 });
-document.addEventListener("input", e => { if (e.target.matches(".field input")) { e.target.classList.remove("err"); const m = $("#mErr"); if (m && !document.querySelector(".field input.err")) m.textContent = ""; } });
-document.addEventListener("change", e => { if (e.target.matches("[data-act=time]")) { S.settings.time = e.target.value; save(); refreshAll(); } });
+document.addEventListener("input", e => { if (e.target.matches(".field input, .field textarea")) { e.target.classList.remove("err"); const m = $("#mErr"); if (m && !document.querySelector(".field input.err")) m.textContent = ""; } });
 document.addEventListener("submit", e => { if (e.target.id === "mForm") { e.preventDefault(); const a = readManual(); if (a) (sheetState.edit ? updateAccount(a) : addAccount(a)); } });
 document.addEventListener("keydown", e => { if (e.key === "Escape") { if ($(".sheet")) closeSheet(); else pop(); } });
 function wireBankSearch() { const q = $("#bankQ"); if (q) q.addEventListener("input", () => { $("#bankGrid").innerHTML = bankGrid(q.value); }); }
@@ -1303,6 +1401,363 @@ if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListen
 
 /* ---------- boot ---------- */
 window.__demo = { S, simulate, planDebts, insights, events, overdue };
+
+/* ===================== Beta: quick-add, schedule builder, mark as paid, feedback ===================== */
+const APP_VERSION = "bc09904c".indexOf("__") === 0 ? "dev" : "bc09904c";
+const pad2 = n => String(n).padStart(2, "0");
+const ymd = d => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+const parseYMD = s => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); if (!m) return null; const d = new Date(+m[1], +m[2] - 1, +m[3]); return isNaN(d) ? null : d; };
+const round2 = n => Math.round((+n + Number.EPSILON) * 100) / 100;
+const FREQ_LABEL = { weekly: "weekly", biweekly: "every 2 wks", monthly: "monthly" };
+const leadText = () => { const l = S.settings.leadDays || [3]; return l.length === 1 ? `${l[0]} day${l[0] > 1 ? "s" : ""} before` : `${l.join(", ")} days before`; };
+const cloneAcct = a => revive(JSON.parse(JSON.stringify(a)));
+
+/* ---------- templates (text labels with coloured initials; no real logos) ---------- */
+const TPL = {
+  bnpl: [
+    { k: "Affirm", label: "Affirm", c: "#4A4AF4", n: 6, freq: "monthly", apr: "", hint: "Monthly · may have APR" },
+    { k: "Klarna", label: "Klarna", c: "#E0457B", n: 4, freq: "biweekly", apr: 0, hint: "Pay in 4 · 0% APR" },
+    { k: "Afterpay", label: "Afterpay", c: "#0FA88A", n: 4, freq: "biweekly", apr: 0, hint: "Pay in 4 · 0% APR" },
+    { k: "PayPal Pay in 4", label: "PayPal Pay in 4", short: "PayPal", c: "#003087", n: 4, freq: "biweekly", apr: 0, hint: "Every 2 weeks · 0% APR" },
+    { k: "Zip", label: "Zip", c: "#7C5CFF", n: 4, freq: "biweekly", apr: 0, hint: "Pay in 4 · 0% APR" },
+    { k: "Sezzle", label: "Sezzle", c: "#8333D4", n: 4, freq: "biweekly", apr: 0, hint: "Pay in 4 · 0% APR" },
+    { k: "Other", label: "Other plan", c: "#64748B", n: 4, freq: "biweekly", apr: 0, hint: "Any pay-later plan", init: "+" }
+  ],
+  card: [
+    { k: "Chase", label: "Chase", lender: "Chase", c: "#117ACA" },
+    { k: "Capital One", label: "Capital One", lender: "Capital One", c: "#D03027" },
+    { k: "Discover", label: "Discover", lender: "Discover", c: "#E86A10" },
+    { k: "Amex", label: "Amex", lender: "American Express", c: "#2E77BC", init: "AX" },
+    { k: "Citi", label: "Citi", lender: "Citi", c: "#056DAE" },
+    { k: "Bank of America", label: "Bank of America", short: "BofA", lender: "Bank of America", c: "#C41230" },
+    { k: "Wells Fargo", label: "Wells Fargo", lender: "Wells Fargo", c: "#D71E28" },
+    { k: "Store card", label: "Store card", lender: "", c: "#DB2777", init: "SC", hint: "Target, Amazon, Kohl's…" },
+    { k: "Other", label: "Other card", lender: "", c: "#64748B", init: "+" }
+  ],
+  loan: [
+    { k: "auto", label: "Auto loan", name: "Car loan", c: "#10B981", icon: "car", aprPh: "7.5" },
+    { k: "student", label: "Student loan", name: "Student loan", c: "#F59E0B", icon: "cap", aprPh: "5.5" },
+    { k: "personal", label: "Personal loan", name: "Personal loan", c: "#0EA5E9", icon: "wallet", aprPh: "12" },
+    { k: "mortgage", label: "Mortgage", name: "Mortgage", c: "#6366F1", icon: "home", aprPh: "6.5" },
+    { k: "medical", label: "Medical bill", name: "Medical bill", c: "#EC4899", icon: "med", aprPh: "0", apr: 0 },
+    { k: "other", label: "Other loan", name: "", c: "#64748B", icon: "edit", aprPh: "10" }
+  ]
+};
+const LOAN_KINDS = TPL.loan;
+const tplFind = (type, k) => k ? (TPL[type] || []).find(t => t.k === k) || null : null;
+const tplLabel = (type, k) => { const t = tplFind(type, k); return t ? (type === "card" && t.lender ? `${t.label} card` : t.label) : ""; };
+const tplInit = (type, t) => t.init || INITIALS[t.lender || t.k] || t.label.split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+function tplAvatar(type, t, size = "sm") { return `<span class="av ${size}" style="background:${grad(t.c)}">${type === "loan" ? ic(t.icon, "sm") : esc(tplInit(type, t))}</span>`; }
+
+function menuView() {
+  const tile = (type, t) => `<button class="tpl" data-act="tpl" data-t="${type}" data-k="${esc(t.k)}">${tplAvatar(type, t)}<b>${esc(t.short || t.label)}</b></button>`;
+  const soon = (icon, bg, title, sub) => `<div class="opt soon" aria-disabled="true"><div class="ic" style="background:${bg}">${ic(icon)}</div><div><b>${title} <em class="soon-tag">Coming soon</em></b><span>${sub}</span></div></div>`;
+  return `<p class="p-text">Pick a template and we'll fill in the basics. It takes under a minute, and you can edit anything later.</p>
+    <div class="tpl-sec">${ic("bag", "sm")} Pay later</div><div class="tpl-grid">${TPL.bnpl.map(t => tile("bnpl", t)).join("")}</div>
+    <div class="tpl-sec">${ic("card", "sm")} Credit cards</div><div class="tpl-grid">${TPL.card.map(t => tile("card", t)).join("")}</div>
+    <div class="tpl-sec">${ic("car", "sm")} Loans &amp; bills</div><div class="tpl-grid">${TPL.loan.map(t => tile("loan", t)).join("")}</div>
+    <div class="tpl-sec">${ic("spark", "sm")} Automatic import</div>
+    ${soon("bank", "linear-gradient(135deg,#4F46E5,#7C3AED)", "Connect a bank", "Secure, read-only linking for automatic balances.")}
+    ${soon("mail", "linear-gradient(135deg,#F59E0B,#EA580C)", "Forward an email", "Send a pay-later confirmation and we'll read the plan.")}
+    ${soon("camera", "linear-gradient(135deg,#EC4899,#DB2777)", "Scan a screenshot", "Snap the plan screen in any pay-later app.")}
+    <div class="foot">${ic("lock", "sm")} View only: nothing here moves money.<br><button class="link" data-act="loadSample" style="margin-top:4px">Just exploring? Load sample data</button></div>`;
+}
+
+/* ---------- BNPL schedule builder ---------- */
+function openBuilder(d) {
+  const e = d.edit, t = e ? null : tplFind("bnpl", d.tpl) || TPL.bnpl[0];
+  let b;
+  if (e) {
+    const rows = e.installments.map(i => ({ date: ymd(i.date), amount: i.amount, paid: !!i.paid }));
+    b = { provider: e.provider, merchant: e.merchant, mode: "each", amount: e.amount, n: rows.length, freq: e.freq, first: rows[0] ? rows[0].date : ymd(T), apr: e.aprShown || 0, rows, edited: true };
+  } else {
+    b = { provider: t.k === "Other" ? "" : t.k, merchant: "", mode: "total", amount: "", n: t.n, freq: t.freq, first: ymd(t.freq === "monthly" ? addMonths(T, 1) : T), apr: t.apr, rows: [], edited: false };
+  }
+  openSheet("builder", { edit: e, tpl: t ? t.k : null, b });
+  if (!e) regen(); else paintPreview();
+}
+function buildSchedule(b) {
+  const n = Math.round(+b.n), amt = +b.amount, apr = +b.apr || 0, first = parseYMD(b.first);
+  if (!(n >= 1 && n <= 60) || !(amt > 0) || !first) return [];
+  const step = i => b.freq === "monthly" ? addMonths(first, i) : addDays(first, stepDays(b.freq) * i);
+  let per;
+  if (b.mode === "each") per = amt;
+  else if (apr > 0) { const r = b.freq === "monthly" ? apr / 1200 : apr / 100 * stepDays(b.freq) / 365; per = amt * r / (1 - Math.pow(1 + r, -n)); }
+  else per = amt / n;
+  per = round2(per);
+  const rows = [];
+  for (let i = 0; i < n; i++) rows.push({ date: ymd(step(i)), amount: per, paid: step(i) < T });
+  if (b.mode === "total" && !(apr > 0)) rows[n - 1].amount = round2(amt - per * (n - 1)); // last one absorbs rounding
+  return rows;
+}
+function regen() {
+  const b = sheetState.b, old = b.rows;
+  b.rows = buildSchedule(b);
+  if (b.edited) b.rows.forEach((r, i) => { if (old[i]) r.paid = old[i].paid; });
+  paintPreview();
+}
+function builderView(d) {
+  const b = d.b, e = d.edit, provs = TPL.bnpl.filter(t => t.k !== "Other").map(t => t.k);
+  const opts = [...new Set([...provs, ...(b.provider && !provs.includes(b.provider) ? [b.provider] : [])])];
+  const t = tplFind("bnpl", d.tpl);
+  return sheetHead(e ? "Edit plan" : "Add a pay-later plan", e ? "" : "menu") + `<form id="bForm" novalidate>
+    ${t ? `<div class="tpl-chip">${tplAvatar("bnpl", t)}<div><b>${esc(t.label)}</b><span>${esc(t.hint)}</span></div><button type="button" class="link" data-act="sheet" data-v="menu">Change</button></div>` : ""}
+    <div class="grid2"><div class="field"><label for="bProv">Provider</label><select id="bProv">${opts.map(p => `<option ${b.provider === p ? "selected" : ""}>${esc(p)}</option>`).join("")}<option value="" ${!b.provider ? "selected" : ""}>Other</option></select></div>
+      <div class="field"><label for="bMerch">What did you buy?</label><input id="bMerch" maxlength="60" placeholder="e.g. Winter jacket" value="${esc(b.merchant)}" autocomplete="off"></div></div>
+    <div class="field" id="bProvOtherF" ${b.provider ? "hidden" : ""}><label for="bProvOther">Provider name</label><input id="bProvOther" maxlength="40" placeholder="e.g. Store financing" autocomplete="off"></div>
+    <div class="seg sm" style="margin-bottom:10px">${[["total", "I know the total"], ["each", "I know each payment"]].map(([k, l]) => `<button type="button" class="${b.mode === k ? "on" : ""}" data-act="bMode" data-v="${k}">${l}</button>`).join("")}</div>
+    <div class="grid2"><div class="field"><label for="bAmt" id="bAmtL">${b.mode === "total" ? "Purchase total" : "Each payment"}</label><div class="pre has-pre"><span>$</span><input id="bAmt" inputmode="decimal" autocomplete="off" placeholder="${b.mode === "total" ? "200.00" : "50.00"}" value="${b.amount === "" ? "" : esc(b.amount)}"></div></div>
+      <div class="field"><label for="bN">Number of payments</label><input id="bN" inputmode="numeric" autocomplete="off" value="${esc(b.n)}"></div></div>
+    <div class="field"><label>How often</label><div class="seg sm">${[["weekly", "Weekly"], ["biweekly", "Every 2 weeks"], ["monthly", "Monthly"]].map(([k, l]) => `<button type="button" class="${b.freq === k ? "on" : ""}" data-act="bFreq" data-v="${k}">${l}</button>`).join("")}</div></div>
+    <div class="grid2"><div class="field"><label for="bFirst">First payment due</label><input id="bFirst" type="date" value="${esc(b.first)}"></div>
+      <div class="field"><label for="bApr">APR</label><div class="pre suf"><input id="bApr" inputmode="decimal" autocomplete="off" placeholder="0" value="${b.apr === "" ? "" : esc(b.apr)}"><span>%</span></div></div></div>
+    <div class="sec-t" style="margin:6px 4px 8px">Preview<span class="lite">tap a date or amount to adjust</span></div>
+    <div id="bPrev"></div>
+    <div id="bErr" class="form-err"></div>
+    <button class="btn" type="submit" id="bSave">${e ? "Save plan" : "Add plan"}</button></form>`;
+}
+function paintPreview() {
+  const b = sheetState.b, el = $("#bPrev"); if (!el) return;
+  if (!b.rows.length) { el.innerHTML = `<div class="card bprev-empty">Enter an amount, number of payments and first due date to see the schedule.</div>`; return; }
+  el.innerHTML = `<div class="card bsum" id="bSum"></div><div class="card tight sched brows">${b.rows.map((r, i) => `<div class="row brow">
+      <button type="button" class="stamp ${r.paid ? "paid" : "due"}" data-act="bPaid" data-i="${i}" aria-label="Installment ${i + 1} ${r.paid ? "paid" : "unpaid"}" aria-pressed="${r.paid}">${r.paid ? ic("check", "sm") : i + 1}</button>
+      <input type="date" class="bdate" data-i="${i}" value="${r.date}" aria-label="Installment ${i + 1} date">
+      <div class="pre has-pre bamt"><span>$</span><input class="bamt-i" data-i="${i}" inputmode="decimal" value="${r.amount.toFixed(2)}" aria-label="Installment ${i + 1} amount"></div></div>`).join("")}</div>`;
+  paintSum();
+}
+function paintSum() {
+  const b = sheetState.b, el = $("#bSum"); if (!el) return;
+  const total = round2(b.rows.reduce((s, r) => s + (+r.amount || 0), 0)), left = b.rows.filter(r => !r.paid), last = parseYMD(b.rows[b.rows.length - 1].date);
+  const amts = [...new Set(b.rows.map(r => (+r.amount).toFixed(2)))];
+  const interest = b.mode === "total" && +b.amount > 0 ? round2(total - +b.amount) : 0;
+  el.innerHTML = `<div class="bsum-t">${b.rows.length} payment${b.rows.length > 1 ? "s" : ""} ${amts.length === 1 ? `of <b class="num">${m2(+amts[0])}</b>` : `<span class="lite">(amounts vary)</span>`}</div>
+    <div class="bsum-s num">Total ${m2(total)}${interest > 0.004 ? ` · ${m2(interest)} interest` : ""} · ${left.length ? `${m2(left.reduce((s, r) => s + +r.amount, 0))} left` : "all paid"} · last ${last ? fDate(last) + (last.getFullYear() !== T.getFullYear() ? ", " + last.getFullYear() : "") : "?"}</div>`;
+}
+function readBuilderTop() {
+  const b = sheetState.b, v = id => ($("#" + id) ? $("#" + id).value.trim() : "");
+  b.provider = v("bProv"); b.merchant = v("bMerch"); b.amount = v("bAmt").replace(/[$,\s]/g, ""); b.n = v("bN"); b.first = v("bFirst"); b.apr = v("bApr").replace(/[%\s]/g, "");
+  const of = $("#bProvOtherF"); if (of) of.hidden = !!b.provider;
+}
+function saveBuilder() {
+  readBuilderTop();
+  const b = sheetState.b, ed = sheetState.edit, err = m => { $("#bErr").textContent = m; return null; };
+  const mark = (id, bad) => { const el = $("#" + id); if (el) el.classList.toggle("err", !!bad); return bad; };
+  const provider = (b.provider || ($("#bProvOther") ? $("#bProvOther").value.trim() : "") || "Pay later").slice(0, 40);
+  let bad = false;
+  bad = mark("bMerch", !b.merchant) || bad; bad = mark("bAmt", !(+b.amount > 0)) || bad; bad = mark("bN", !(+b.n >= 1 && +b.n <= 60)) || bad; bad = mark("bFirst", !parseYMD(b.first)) || bad; bad = mark("bApr", !(b.apr === "" || (+b.apr >= 0 && +b.apr < 100))) || bad;
+  if (bad) return err("Please fill in the highlighted fields.");
+  if (!b.rows.length) return err("Add the plan details to build a schedule.");
+  if (b.rows.some(r => !(+r.amount > 0) || !parseYMD(r.date))) return err("Each installment needs a date and an amount above $0.");
+  const inst = b.rows.map(r => ({ date: parseYMD(r.date), amount: round2(+r.amount), paid: !!r.paid })).sort((x, y) => x.date - y.date);
+  const t = tplFind("bnpl", provider) || tplFind("bnpl", sheetState.tpl), nx = inst.find(i => !i.paid);
+  const total = round2(inst.reduce((s, i) => s + i.amount, 0));
+  const a = { ...(ed || {}), id: ed ? ed.id : uid(), type: "bnpl", provider, merchant: b.merchant.slice(0, 60), color: ed ? ed.color : grad(t ? t.c : PALETTE[Math.floor(Math.random() * PALETTE.length)]),
+    total, n: inst.length, paid: inst.filter(i => i.paid).length, amount: nx ? nx.amount : inst[0].amount, freq: b.freq, nextDate: nx ? nx.date : inst[inst.length - 1].date,
+    aprShown: +b.apr || 0, installments: inst, addedVia: ed ? ed.addedVia : "Added manually" };
+  if (b.mode === "total" && +b.apr > 0) a.principal = round2(+b.amount); else if (ed && ed.principal && b.mode !== "total") a.principal = ed.principal; else delete a.principal;
+  return finalize(a);
+}
+
+/* ---------- mark as paid / update balance ---------- */
+function applyPayment(a0, p = {}) {
+  const a = cloneAcct(a0), paidOn = p.date || T;
+  if (a.type === "bnpl") {
+    const idx = p.idx !== undefined ? p.idx : a.installments.findIndex(i => !i.paid); if (idx < 0) return a;
+    const i = a.installments[idx]; i.paid = !i.paid || p.idx === undefined ? true : false; if (i.paid) i.paidOn = paidOn; else delete i.paidOn;
+    a.paid = a.installments.filter(x => x.paid).length; const nx = a.installments.find(x => !x.paid); if (nx) { a.nextDate = nx.date; a.amount = nx.amount; }
+    return finalize(a);
+  }
+  const due = cycleStart(a), amt = round2(p.amount);
+  let interest = 0, principal = amt;
+  if (a.type === "loan" && a.apr > 0) { interest = Math.min(amt, round2(a.balance * a.apr / 1200)); principal = round2(amt - interest); }
+  a.balance = Math.max(0, round2(a.balance - principal));
+  a.nextDate = shiftMonth(due, 1, a.dueDay || due.getDate()); a.dueDay = a.dueDay || due.getDate();
+  a.payments = [...(a.payments || []), { date: paidOn, due, amount: amt, principal, interest }].slice(-60);
+  return a;
+}
+function payView(d) {
+  const a = byId(d.id); if (!a) return "";
+  const who = esc(a.lender || a.provider || "your lender");
+  const note = `<div class="note pay-note">${ic("lock", "sm")} <span>You still pay ${who} directly, in their app or website. Due Diligence only records it here so your balances and reminders stay right.</span></div>`;
+  if (a.type === "bnpl") {
+    const idx = a.installments.findIndex(i => !i.paid), i = a.installments[idx];
+    return sheetHead("Mark as paid") + `<div class="found">${acctMini(a, `Installment ${idx + 1} of ${a.installments.length} · due ${fDate(i.date)}`)}</div>
+      <div class="pay-big num">${m2(i.amount)}</div>
+      <div class="field"><label for="pDate">Date paid</label><input id="pDate" type="date" value="${ymd(T)}" max="${ymd(T)}"></div>
+      <div class="pay-prev" id="pPrev">${bnplAfter(a, idx)}</div>${note}
+      <button class="btn" data-act="payGo" style="margin-top:14px">${ic("check", "sm")} Mark installment ${idx + 1} paid</button>`;
+  }
+  const nd = nextDue(a), full = round2(a.balance), minA = round2(Math.min(a.min, a.balance));
+  const choices = [["min", a.type === "card" ? "Minimum" : "Monthly payment", minA]].concat(a.type === "card" && full > minA ? [["full", "Full balance", full]] : []).concat([["other", "Other amount", null]]);
+  return sheetHead("Mark as paid") + `<div class="found">${acctMini(a, `Due ${fDate(nd.date)} · ${a.type === "card" ? "minimum" : "payment"} ${m2(minA)}`)}</div>
+    <div class="field"><label>How much did you pay?</label><div class="pay-opts">${choices.map(([k, l, v], j) => `<button type="button" class="${j === 0 ? "on" : ""}" data-act="payAmt" data-k="${k}" data-v="${v === null ? "" : v}"><b class="num">${v === null ? "Other" : m2(v)}</b><span>${l}</span></button>`).join("")}</div></div>
+    <div class="field" id="pOtherF" hidden><label for="pAmt">Amount paid</label><div class="pre has-pre"><span>$</span><input id="pAmt" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div>
+    <div class="field"><label for="pDate">Date paid</label><input id="pDate" type="date" value="${ymd(T)}" max="${ymd(T)}"></div>
+    <div class="pay-prev" id="pPrev"></div>${note}
+    <div id="pErr" class="form-err"></div>
+    <button class="btn" data-act="payGo" style="margin-top:14px">${ic("check", "sm")} Mark as paid</button>`;
+}
+function acctMini(a, sub) { return `<div class="row">${avatar(a)}<div class="mid"><div class="t">${esc(a.name)}</div><div class="s">${sub}</div></div><div class="r"><div class="t num">${m2(a.balance)}</div><div class="s">${a.type === "bnpl" ? "left" : "balance"}</div></div></div>`; }
+function bnplAfter(a, idx) {
+  const rest = a.installments.filter((x, k) => !x.paid && k !== idx), left = rest.reduce((s, x) => s + x.amount, 0);
+  return rest.length ? `After this: <b class="num">${m2(left)}</b> left · next ${fDate(rest[0].date)}` : `That's the last one. This plan will be <b>paid off</b>.`;
+}
+function payAmount() {
+  const on = $(".pay-opts button.on"); if (!on) return NaN;
+  if (on.dataset.k === "other") return parseFloat(($("#pAmt").value || "").replace(/[$,\s]/g, ""));
+  return +on.dataset.v;
+}
+function paintPayPrev() {
+  const a = byId(sheetState.id), el = $("#pPrev"); if (!a || !el || a.type === "bnpl") return;
+  const amt = payAmount();
+  if (!(amt > 0)) { el.innerHTML = "Enter the amount you paid."; return; }
+  const n = applyPayment(a, { amount: amt, date: parseYMD($("#pDate").value) || T });
+  const p = n.payments[n.payments.length - 1];
+  el.innerHTML = `Balance <b class="num">${m2(a.balance)}</b> → <b class="num">${m2(n.balance)}</b>${p.interest ? ` <span class="lite">(${m2(p.interest)} interest, ${m2(p.principal)} principal)</span>` : ""}<br>${n.balance > 0.005 ? `Next due date moves to <b>${fDate(n.nextDate)}</b>` : `This account will show as <b>paid off</b>`}${amt > a.balance + (p.interest || 0) + 0.005 ? `<br><span style="color:var(--warn)">That's more than the balance; we'll set it to $0.</span>` : ""}`;
+}
+async function commitAccount(next, prev, msg, evt) {
+  if (!requireOnline()) return false;
+  const btns = $$(".sheet .btn"); btns.forEach(x => x.disabled = true);
+  try { await cloudUpdate(next); } catch (err) { btns.forEach(x => x.disabled = false); toast(friendlyDbError(err), "bad"); return false; }
+  S.rows = S.rows.map(x => x.id === next.id ? next : x); cacheWrite(); rebuild(); closeSheet(); refreshAll();
+  if (evt && !next.sample) track(evt);
+  toast(msg, null, async () => {
+    if (!requireOnline()) return;
+    try { await cloudUpdate(prev); } catch (err) { toast(friendlyDbError(err), "bad"); return; }
+    S.rows = S.rows.map(x => x.id === prev.id ? prev : x); cacheWrite(); rebuild(); refreshAll(); toast("Undone");
+  });
+  return true;
+}
+function balView(d) {
+  const a = byId(d.id); if (!a) return "";
+  return sheetHead("Update balance") + `<div class="found">${acctMini(a, a.balUpdated ? `Last updated ${fDate(a.balUpdated)}` : `${esc(a.lender)} · ${a.apr}% APR`)}</div>
+    <p class="p-text">Copy the current numbers from your ${a.type === "card" ? "card's" : "lender's"} app or latest statement.</p>
+    <div class="grid2"><div class="field"><label for="uBal">${a.type === "card" ? "Current balance" : "Balance left"}</label><div class="pre has-pre"><span>$</span><input id="uBal" inputmode="decimal" autocomplete="off" value="${a.balance.toFixed(2)}"></div></div>
+    <div class="field"><label for="uMin">${a.type === "card" ? "Minimum payment" : "Monthly payment"}</label><div class="pre has-pre"><span>$</span><input id="uMin" inputmode="decimal" autocomplete="off" value="${a.min.toFixed(2)}"></div></div></div>
+    <div id="uErr" class="form-err"></div>
+    <button class="btn" data-act="balGo">Save balance</button>
+    <button class="link" data-act="edit" data-id="${a.id}" style="margin:14px auto 0;display:flex">Edit other details ${ic("right", "sm")}</button>`;
+}
+
+/* ---------- feedback ---------- */
+function screenName() {
+  const top = pushStack[pushStack.length - 1];
+  if (top) return top.dataset.kind === "detail" ? "account detail" : top.dataset.kind;
+  return S.tab || "home";
+}
+function deviceInfo() {
+  const ua = navigator.userAgent || "";
+  const os = /iPhone|iPad|iPod/.test(ua) ? "iOS" : /Android/.test(ua) ? "Android" : /Mac OS X/.test(ua) ? "macOS" : /Windows/.test(ua) ? "Windows" : /Linux/.test(ua) ? "Linux" : "Other";
+  const br = /Edg\//.test(ua) ? "Edge" : /CriOS|Chrome\//.test(ua) ? "Chrome" : /FxiOS|Firefox\//.test(ua) ? "Firefox" : /Safari\//.test(ua) ? "Safari" : "Other";
+  const standalone = !!(window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  return { os, browser: br, installed: standalone, viewport: `${innerWidth}x${innerHeight}` };
+}
+function feedbackView(d) {
+  if (d.done) return sheetHead("Thank you!") + `<div class="success">${ic("check")}</div><p class="p-text center"><b style="color:var(--text);font-size:17px">Feedback sent</b><br>We read every message. If we need more detail, we'll reply to ${esc(S.user ? S.user.email : "your email")}.</p><button class="btn" data-act="closeSheet">Done</button>`;
+  const di = deviceInfo();
+  return sheetHead("Send feedback") + `<p class="p-text">Found a bug, or have an idea? This goes straight to the small team building Due Diligence.</p>
+    <div class="seg" id="fbCat" style="margin-bottom:12px">${[["bug", "Bug"], ["idea", "Idea"], ["other", "Other"]].map(([k, l]) => `<button type="button" class="${(d.cat || "bug") === k ? "on" : ""}" data-act="fbCat" data-v="${k}">${l}</button>`).join("")}</div>
+    <div class="field"><label for="fbMsg">Message</label><textarea id="fbMsg" rows="5" maxlength="2000" placeholder="What happened, or what would make this better?"></textarea></div>
+    <label class="fb-ctx"><input type="checkbox" id="fbCtx" checked><span><b>Include app info</b><small>Version ${esc(APP_VERSION)} · ${esc(di.os)} · ${esc(di.browser)} · screen: ${esc(d.screen || "home")}</small></span></label>
+    <div id="fbErr" class="form-err"></div>
+    <button class="btn" data-act="fbGo">Send feedback</button>
+    <div class="foot">No balances, account details or screenshots are attached.</div>`;
+}
+async function sendFeedback() {
+  const msg = ($("#fbMsg").value || "").trim(), cat = ($("#fbCat .on") || {}).dataset?.v || "bug", errEl = $("#fbErr");
+  if (msg.length < 3) { $("#fbMsg").classList.add("err"); errEl.textContent = "Please write a few words first."; return; }
+  if (!requireOnline()) return;
+  const ctx = $("#fbCtx").checked ? { version: APP_VERSION, ...deviceInfo(), screen: sheetState.screen || "home" } : {};
+  const id = uid(), btn = $('[data-act="fbGo"]'); btn.disabled = true; btn.innerHTML = `<span class="spin-sm"></span> Sending…`;
+  const { error } = await sb.from("feedback").insert({ id, category: cat, message: msg.slice(0, 2000), context: ctx });
+  if (error) { btn.disabled = false; btn.textContent = "Send feedback"; errEl.textContent = /limit/i.test(error.message || "") ? "You've sent a lot of feedback today. Please try again tomorrow." : friendlyDbError(error); return; }
+  try { await sb.functions.invoke("feedback", { body: window.__ddRouteTest ? { id, route_test: true } : { id } }); } catch (x) { /* saved; email can be retried server-side */ }
+  openSheet("feedback", { done: true });
+}
+
+/* ---------- beta welcome ---------- */
+function betaCard() {
+  if (S.settings.betaWelcomed) return "";
+  return `<div class="card beta-card"><div class="beta-h"><span class="beta-badge">Beta</span><b>Welcome to the beta</b></div>
+    <p>Thanks for testing Due Diligence. In your first week, try:</p>
+    <ul><li>Quick-add a card, loan or pay-later plan</li><li>Tap <b>Mark as paid</b> after you pay a bill</li><li>Watch for a reminder email. They're <b>on</b>, 3 days before each due date</li></ul>
+    <p class="fine">Accounts are entered by hand for now; bank linking is coming. Change reminders anytime in Settings.</p>
+    <div class="grid2"><button class="btn ghost sm" data-act="feedback">${ic("chat", "sm")} Feedback</button><button class="btn sm" data-act="betaOk">Got it</button></div></div>`;
+}
+
+/* ---------- views + events ---------- */
+function betaView(v, d) {
+  if (v === "builder") return builderView(d);
+  if (v === "pay") return payView(d);
+  if (v === "bal") return balView(d);
+  if (v === "feedback") return feedbackView(d);
+  return "";
+}
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const act = b.dataset.act, v = b.dataset.v;
+  switch (act) {
+    case "tpl": { const t = b.dataset.t, k = b.dataset.k; if (t === "bnpl") openBuilder({ tpl: k }); else openSheet("manual", { type: t, tpl: k }); break; }
+    case "bMode": readBuilderTop(); sheetState.b.mode = v; $$("[data-act=bMode]").forEach(x => x.classList.toggle("on", x.dataset.v === v)); $("#bAmtL").textContent = v === "total" ? "Purchase total" : "Each payment"; regen(); break;
+    case "bFreq": readBuilderTop(); sheetState.b.freq = v; $$("[data-act=bFreq]").forEach(x => x.classList.toggle("on", x.dataset.v === v)); regen(); break;
+    case "bPaid": { const r = sheetState.b.rows[+b.dataset.i]; r.paid = !r.paid; sheetState.b.edited = true; b.className = `stamp ${r.paid ? "paid" : "due"}`; b.innerHTML = r.paid ? ic("check", "sm") : +b.dataset.i + 1; b.setAttribute("aria-pressed", r.paid); paintSum(); break; }
+    case "pay": { if (!requireOnline()) break; const a = byId(b.dataset.id); if (a && nextDue(a)) { openSheet("pay", { id: a.id }); paintPayPrev(); } break; }
+    case "payAmt": $$(".pay-opts button").forEach(x => x.classList.toggle("on", x === b)); $("#pOtherF").hidden = b.dataset.k !== "other"; if (b.dataset.k === "other") $("#pAmt").focus(); paintPayPrev(); break;
+    case "payGo": {
+      const a = byId(sheetState.id); if (!a) break;
+      const date = parseYMD($("#pDate").value) || T;
+      if (date > T) { toast("The paid date can't be in the future.", "bad"); break; }
+      if (a.type === "bnpl") { const idx = a.installments.findIndex(i => !i.paid); await commitAccount(applyPayment(a, { date }), cloneAcct(a), `Installment ${idx + 1} marked paid`, "payment_marked"); break; }
+      const amt = payAmount(); if (!(amt > 0)) { $("#pErr").textContent = "Enter the amount you paid."; $("#pAmt") && $("#pAmt").classList.add("err"); break; }
+      const n = applyPayment(a, { amount: amt, date });
+      await commitAccount(n, cloneAcct(a), n.balance > 0.005 ? `Payment recorded · next due ${fDate(n.nextDate)}` : "Payment recorded · paid off!", "payment_marked"); break;
+    }
+    case "instTog": {
+      const a = byId(b.dataset.id), i = +b.dataset.i; if (!a) break;
+      const wasPaid = a.installments[i].paid, n = applyPayment(a, { idx: i });
+      await commitAccount(n, cloneAcct(a), wasPaid ? `Installment ${i + 1} marked unpaid` : `Installment ${i + 1} marked paid`, wasPaid ? null : "payment_marked"); break;
+    }
+    case "bal": { if (!requireOnline()) break; const a = byId(b.dataset.id); if (a) openSheet("bal", { id: a.id }); break; }
+    case "balGo": {
+      const a = byId(sheetState.id); if (!a) break;
+      const nb = parseFloat(($("#uBal").value || "").replace(/[$,\s]/g, "")), nm = parseFloat(($("#uMin").value || "").replace(/[$,\s]/g, ""));
+      $("#uBal").classList.toggle("err", !(nb >= 0)); $("#uMin").classList.toggle("err", !(nm > 0));
+      if (!(nb >= 0) || !(nm > 0)) { $("#uErr").textContent = "Please enter a balance and a payment amount."; break; }
+      const n = cloneAcct(a); n.balance = round2(nb); n.min = round2(nm); n.balUpdated = T;
+      if (n.type === "loan" && n.balance > (n.original || 0)) n.original = n.balance;
+      if (n.type === "card" && n.limit && n.balance > n.limit * 3) { $("#uErr").textContent = "That's far above your credit limit. Update the limit in Edit details first."; break; }
+      await commitAccount(n, cloneAcct(a), "Balance updated", "balance_updated"); break;
+    }
+    case "undo": { const fn = toastUndo; toastUndo = null; $("#toast").classList.remove("show"); if (fn) fn(); break; }
+    case "feedback": openSheet("feedback", { screen: screenName() }); break;
+    case "fbCat": $$("#fbCat button").forEach(x => x.classList.toggle("on", x === b)); break;
+    case "fbGo": sendFeedback(); break;
+    case "betaOk": S.settings.betaWelcomed = true; save(); refreshAll(); toast("You're all set. Thanks for testing!"); break;
+    case "betaInfo": closePushes(); S.settings.betaWelcomed = false; go("home"); break;
+    case "leadT": {
+      const d = +v, l = S.settings.leadDays.slice(), has = l.includes(d);
+      if (has && l.length === 1) { toast("Keep at least one, or switch reminders off above."); break; }
+      S.settings.leadDays = (has ? l.filter(x => x !== d) : l.concat(d)).sort((x, y) => x - y); save(); refreshAll(); break;
+    }
+    case "summary": S.settings.summary = v; save(); refreshAll(); toast(v === "off" ? "Summary email off" : v === "daily" ? "Daily summary on" : "Weekly summary on (Mondays)"); break;
+  }
+});
+document.addEventListener("submit", e => {
+  if (e.target.id === "bForm") { e.preventDefault(); const a = saveBuilder(); if (a) (sheetState.edit ? updateAccount(a) : addAccount(a)); }
+});
+document.addEventListener("input", e => {
+  const t = e.target;
+  if (t.closest && t.closest("#bForm")) {
+    t.classList.remove("err"); const be = $("#bErr"); if (be) be.textContent = "";
+    if (t.classList.contains("bamt-i")) { sheetState.b.rows[+t.dataset.i].amount = parseFloat(t.value.replace(/[$,\s]/g, "")) || 0; sheetState.b.edited = true; paintSum(); return; }
+    if (t.classList.contains("bdate")) { sheetState.b.rows[+t.dataset.i].date = t.value; sheetState.b.edited = true; paintSum(); return; }
+    if (["bAmt", "bN", "bFirst", "bApr"].includes(t.id)) { readBuilderTop(); regen(); } else if (t.id === "bMerch") readBuilderTop();
+  }
+  if (t.id === "pAmt" || t.id === "pDate") { t.classList.remove("err"); const pe = $("#pErr"); if (pe) pe.textContent = ""; paintPayPrev(); }
+  if (t.id === "fbMsg") { t.classList.remove("err"); $("#fbErr").textContent = ""; }
+});
+document.addEventListener("change", e => { if (e.target.id === "bProv") readBuilderTop(); });
+window.__beta = { applyPayment, buildSchedule, normSettings, cloneAcct };
 
 /* ===================== Cloud: Supabase auth + sync ===================== */
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
@@ -1337,7 +1792,13 @@ async function cloudLoad() {
   ]);
   if (acc.error) throw acc.error; if (set.error) throw set.error;
   S.rows = acc.data.map(fromRow);
-  S.settings = { ...DEFAULT_SETTINGS, ...(set.data ? set.data.settings : {}) };
+  S.settings = normSettings(set.data ? set.data.settings : {});
+  S.settingsRow = !!set.data;
+}
+/* ---- anonymous usage counts (event names only, never amounts) ---- */
+function track(name) {
+  if (!S.user || S.offline) return;
+  try { sb.from("events").insert({ name }).then(() => {}, () => {}); } catch (x) {}
 }
 async function cloudInsert(list) { const { error } = await sb.from("debt_accounts").insert(list.map(toRow)); if (error) throw error; }
 async function cloudUpdate(a) { const r = toRow(a); delete r.id; const { error } = await sb.from("debt_accounts").update(r).eq("id", a.id); if (error) throw error; }
@@ -1377,7 +1838,7 @@ async function loadSample() {
   if (!requireOnline()) return;
   const list = sampleData().map(a => ({ ...a, id: uid(), sample: true }));
   try { await cloudInsert(list); } catch (err) { toast(friendlyDbError(err), "bad"); return; }
-  S.rows = S.rows.concat(list); cacheWrite(); rebuild(); refreshAll(); toast("Sample data loaded");
+  S.rows = S.rows.concat(list); cacheWrite(); rebuild(); closeSheet(); refreshAll(); toast("Sample data loaded"); track("sample_loaded");
 }
 async function removeSample() {
   if (!requireOnline()) return;
@@ -1405,11 +1866,23 @@ async function enterApp(user) {
   try { await cloudLoad(); S.offline = false; cacheWrite(); }
   catch (err) {
     const net = navigator.onLine === false || /fetch|network|load failed/i.test((err && err.message) || ""), c = cacheRead();
-    if (net) { S.offline = true; S.cacheEmpty = !c; S.rows = c ? c.rows : []; if (c) S.settings = { ...DEFAULT_SETTINGS, ...c.settings }; }
+    if (net) { S.offline = true; S.cacheEmpty = !c; S.rows = c ? c.rows : []; if (c) S.settings = normSettings(c.settings); }
     else { S.rows = []; toast(friendlyDbError(err), "bad"); }
   }
   try { localStorage.setItem(THEME_KEY, S.settings.theme); } catch (x) {}
+  if (!S.offline) {
+    let tz = ""; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (x) {}
+    if ((tz && S.settings.tz !== tz) || !S.settingsRow) { if (tz) S.settings.tz = tz; S.settingsRow = true; setDirty = true; flushSettings(); }
+    const k = "dd.open." + user.id, today = ymd(T);
+    try { if (localStorage.getItem(k) !== today) { localStorage.setItem(k, today); track("app_open"); } } catch (x) {}
+  }
   rebuild(); applyTheme(); setOfflineBar(); go("home");
+  const goTo = new URLSearchParams(location.search).get("go");
+  if (goTo) {
+    history.replaceState(null, "", location.pathname);
+    if (goTo === "reminders" || goTo === "settings") { push("settings"); setTimeout(() => { const el = $("#remSec"), sc = pushStack[pushStack.length - 1]; if (el && sc && goTo === "reminders") sc.scrollTop = el.offsetTop - 70; }, 60); }
+    else if (goTo === "feedback") openSheet("feedback", { screen: "home" });
+  }
 }
 function leaveApp() {
   entered = false; S.user = null; S.rows = []; S.accounts = []; S.offline = false; setDirty = false; clearTimeout(setT);

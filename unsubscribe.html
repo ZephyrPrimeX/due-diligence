@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Reminder emails · Due Diligence</title>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<style>
+:root{--bg:#F3F4F8;--card:#fff;--text:#0E1020;--text2:#5B6072;--accent:#5B5BF0;--good:#12A150;--bad:#E5484D;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--bg:#0B0C12;--card:#171923;--text:#F2F3F8;--text2:#A3A8BA;--accent:#8B8BFF}}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--text);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;padding:24px}
+.card{background:var(--card);border-radius:24px;padding:32px 26px;max-width:420px;width:100%;text-align:center;box-shadow:0 10px 40px -18px rgba(20,20,60,.35)}
+.logo{width:56px;height:56px;margin:0 auto 14px}h1{font-size:22px;letter-spacing:-.03em;margin:0 0 8px}p{color:var(--text2);margin:0 0 18px;font-size:15px}
+.btn{display:block;width:100%;padding:15px;border-radius:16px;border:0;background:var(--accent);color:#fff;font-weight:700;font-size:15.5px;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--accent);margin-top:8px}.btn[disabled]{opacity:.55}
+.ok{color:var(--good)}.err{color:var(--bad)}.small{font-size:13px;margin-top:18px}
+</style>
+</head>
+<body>
+<main class="card" id="c">
+<svg class="logo" viewBox="0 0 1024 1024" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7C6CFF"/><stop offset="1" stop-color="#4338CA"/></linearGradient></defs><rect width="1024" height="1024" rx="230" fill="url(#lg)"/><path d="M200 317h150a195 195 0 0 1 0 390H200z" fill="#fff"/><path d="M290 407h60a105 105 0 0 1 0 210h-60z" fill="url(#lg)"/><path d="M560 317h150a195 195 0 0 1 0 390H560z" fill="#5EEAD4"/><path d="M650 407h60a105 105 0 0 1 0 210h-60z" fill="url(#lg)"/></svg>
+<div id="body"><h1>Turn off reminder emails?</h1>
+<p>You'll stop getting payment reminders and summaries from Due Diligence. Your accounts stay exactly as they are.</p>
+<button class="btn" id="go">Turn off reminders</button>
+<a class="btn ghost" href="./?go=reminders">Keep them, change settings instead</a></div>
+</main>
+<script>
+(function () {
+  var FN = "https://vfopqoxyyrhfsvxjldkl.supabase.co/functions/v1/reminders";
+  var q = new URLSearchParams(location.search), u = q.get("u") || "", t = q.get("t") || "";
+  var body = document.getElementById("body");
+  function show(title, msg, cls, cta) {
+    body.innerHTML = "";
+    var h = document.createElement("h1"); h.textContent = title; if (cls) h.className = cls;
+    var p = document.createElement("p"); p.textContent = msg;
+    body.appendChild(h); body.appendChild(p);
+    if (cta) { var a = document.createElement("a"); a.className = "btn"; a.href = cta[1]; a.textContent = cta[0]; body.appendChild(a); }
+  }
+  if (!/^[0-9a-f-]{36}$/i.test(u) || !t) { show("This link isn't valid", "It may be incomplete. You can turn reminders off in the app under Settings, Reminders.", "err", ["Open Due Diligence", "./?go=reminders"]); return; }
+  document.getElementById("go").addEventListener("click", function () {
+    var b = this; b.disabled = true; b.textContent = "Turning off…";
+    fetch(FN, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "unsubscribe", u: u, t: t }) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (x.ok && x.j && x.j.ok) show("Reminders are off", "You won't get any more reminder or summary emails. Changed your mind? Turn them back on anytime in Settings.", "ok", ["Open Due Diligence", "./?go=reminders"]);
+        else show("This link isn't valid", (x.j && x.j.error) || "It may have expired. You can turn reminders off in the app under Settings, Reminders.", "err", ["Open Due Diligence", "./?go=reminders"]);
+      })
+      .catch(function () { b.disabled = false; b.textContent = "Try again"; });
+  });
+})();
+</script>
+</body>
+</html>

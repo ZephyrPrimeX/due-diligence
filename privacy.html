@@ -40,7 +40,8 @@ a{color:var(--accent)}
 
 <section><h2>The short version</h2>
 <ul>
-<li>Due Diligence only stores what <b>you type in</b>: your email, an optional first name, and the debt accounts and settings you add.</li>
+<li>Due Diligence stores what <b>you type in</b>: your email, an optional first name, and the debt accounts and settings you add. It also keeps simple <b>usage counts</b> (like "an account was added") that never include amounts.</li>
+<li>Payment <b>reminder emails are on</b> by default (3 days before a due date). You can change or switch them off in Settings or from any reminder email.</li>
 <li>We <b>don't sell</b> your data, share it with advertisers, or use it for ads.</li>
 <li>The app is <b>view only</b>. It never connects to your bank, moves money or pays bills.</li>
 <li>You can <b>delete your account and all your data</b> at any time from Settings.</li>
@@ -50,20 +51,25 @@ a{color:var(--accent)}
 <ul>
 <li><b>Account details:</b> your email address, a securely hashed password (we never see the actual password), and a first name if you give one.</li>
 <li><b>Information you enter:</b> account names, lenders, balances, interest rates, minimum payments, due dates, pay-later plans, and app settings such as theme or reminder preferences.</li>
+<li><b>Usage counts:</b> when you sign up, open the app (once a day at most), add an account, mark a payment as paid, update a balance, load sample data or send feedback, we record the event name, the time, and which login it came from. These records <b>never contain balances, amounts, account names or lenders</b>. We use them only to count things like sign-ups and weekly active testers so we can improve the app during the beta.</li>
+<li><b>Feedback you send:</b> your message, the category you pick, and, if you leave "Include app info" ticked, the app version, your device type, browser and the screen you were on.</li>
 <li><b>Basic technical data:</b> our hosting and login provider keeps standard security logs (such as IP address, browser type and sign-in times) to keep the service secure and prevent abuse.</li>
 </ul>
-<p>We do not collect bank logins, card numbers, Social Security numbers, or your contacts. The "connect a bank", "forward an email" and "scan a screenshot" options are demos for now. They only add made-up sample accounts and don't access any real account, inbox or photo.</p></section>
+<p>We do not collect bank logins, card numbers, Social Security numbers, or your contacts. Bank linking, email import and screenshot scanning are marked "Coming soon" and aren't active. Every account in the app is entered by you (or is clearly labelled sample data).</p></section>
 
 <section><h2>How we use it</h2>
-<p>Only to run the app for you: to sign you in, save your accounts, show your totals, timeline, payoff plans and insights, and send account emails such as sign-up confirmation and password reset. We don't use your data for advertising, and we don't sell or rent it to anyone.</p></section>
+<p>Only to run the app for you: to sign you in, save your accounts, show your totals, timeline, payoff plans and insights, send account emails such as sign-up confirmation and password reset, send the payment reminders and summaries you've chosen, and read and reply to feedback you send. We don't use your data for advertising, and we don't sell or rent it to anyone.</p></section>
 
 <section><h2>Where it's stored and who can see it</h2>
-<p>Your data is stored with <b>Supabase</b>, our database and login provider, on servers in the United States. It is encrypted in transit (HTTPS) and at rest. Database rules ensure each signed-in user can only read and change their own rows. The app itself is hosted on GitHub Pages, and account emails (like sign-up confirmation and password reset) are sent through <b>Resend</b>, which receives only your email address and the message itself.</p>
+<p>Your data is stored with <b>Supabase</b>, our database and login provider, on servers in the United States. It is encrypted in transit (HTTPS) and at rest. Database rules ensure each signed-in user can only read and change their own rows. The app itself is hosted on GitHub Pages, and emails (sign-up confirmation, password reset, payment reminders, and feedback you send to our team) go through <b>Resend</b>, which receives your email address and the message itself. Reminder emails include the lender, amount and due date of the payment so you know what's coming.</p>
 <p>A copy of your data is also kept on your own device so the app can show it when you're offline. Logging out removes that copy.</p>
 <p>We only share information if required by law, or with service providers (like Supabase and Resend) who process it on our behalf to run the app.</p></section>
 
+<section><h2>Reminder emails</h2>
+<p>New accounts get reminder emails 3 days before each payment you've entered is due, sent around 9 AM Eastern. In <b>Settings → Reminders</b> you can pick other days (1, 3, 5 or 7 days before), add a daily or weekly summary, choose which account types to include, or switch reminders off. Every reminder email also has an unsubscribe link that turns them off in one step. Sample accounts never trigger reminders.</p></section>
+
 <section><h2>Deleting your data</h2>
-<p>Open <b>Settings → Delete account</b> in the app. This permanently erases your login and every account and setting you've saved, right away. You can also remove individual accounts at any time, or remove the sample data on its own. Backups held by our provider are cycled out on their normal schedule.</p></section>
+<p>Open <b>Settings → Delete account</b> in the app. This permanently erases your login and every account, setting, reminder record and feedback message you've saved, right away. Usage counts are kept only as anonymous totals: the link to your login is removed. You can also remove individual accounts at any time, or remove the sample data on its own. Backups held by our provider are cycled out on their normal schedule.</p></section>
 
 <section><h2>Cookies and local storage</h2>
 <p>We don't use tracking or advertising cookies. The app uses your browser's local storage to keep you signed in, remember your theme, and save an offline copy of your data.</p></section>
